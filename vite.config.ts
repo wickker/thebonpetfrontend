@@ -1,20 +1,19 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react-swc'
-import { defineConfig, UserConfig } from 'vite'
+import { defineConfig, UserConfig, loadEnv } from 'vite'
 
-// https://vite.dev/config/
 export default defineConfig(({ mode }: UserConfig) => {
-  console.log('🟢 Running build')
-  console.log(`🟢 Mode: ${mode}`)
-  console.log(`🟢 Using .env.${mode === 'development' ? 'local' : mode}`)
+  if (!mode) return {}
+
+  const config = loadEnv(mode, process.cwd(), '')
+
+  console.log(`🍀 Mode: ${mode}`)
+  console.log(`🍀 Env: ${config.VITE_ENVIRONMENT}`)
 
   return {
     plugins: [react(), tailwindcss()],
     server: {
       port: 3000,
-    },
-    build: {
-      outDir: 'build',
     },
     resolve: {
       alias: {
