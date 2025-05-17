@@ -14,6 +14,7 @@ export default defineConfig(({ mode }: UserConfig) => {
     plugins: [react(), tailwindcss()],
     server: {
       port: 3000,
+      allowedHosts: ['043b-112-199-166-27.ngrok-free.app'],
     },
     resolve: {
       alias: {
