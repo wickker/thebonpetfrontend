@@ -5,6 +5,7 @@ import {
   ShopifyRefreshTokenResponse,
 } from '@/@types/shopifyCustomerAuth'
 import Config from '@/configs'
+import { ROUTES } from '@/utils/constants'
 
 const shopifyCustomerAuthApi = axios.create({
   baseURL: Config.VITE_SHOPIFY_CUSTOMER_AUTHENTICATION_BASE_URL,
@@ -20,7 +21,10 @@ const getAccessToken = async (
   const body = new URLSearchParams()
   body.append('grant_type', 'authorization_code')
   body.append('client_id', Config.VITE_SHOPIFY_CUSTOMER_ACCOUNT_API_CLIENT_ID)
-  body.append('redirect_uri', Config.VITE_FE_BASE_URL)
+  body.append(
+    'redirect_uri',
+    `${Config.VITE_FE_BASE_URL}${ROUTES.LOGIN_RESOLVE}`
+  )
   body.append('code', request.code)
   body.append('code_verifier', request.code_verifier)
 

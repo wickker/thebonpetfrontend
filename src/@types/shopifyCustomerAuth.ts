@@ -23,7 +23,7 @@ export const ShopifyRefreshTokenResponseSchema = z.object({
 export const AccessTokenStorageSchema = z.object({
   access_token: z.string(),
   expires_at: z.string(),
-  id_token: z.string().optional(),
+  id_token: z.string(),
   refresh_token: z.string(),
 })
 

@@ -1,17 +1,15 @@
 import { useEffect } from 'react'
-import { Outlet, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { DateTime } from 'luxon'
 import {
   AccessTokenStorage,
-  AccessTokenStorageSchema,
   ShopifyAccessTokenRequest,
   ShopifyAccessTokenResponse,
-  ShopifyRefreshTokenResponse,
 } from '@/@types/shopifyCustomerAuth'
+import Config from '@/configs'
 import useShopifyCustomerAuth from '@/hooks/queries/useShopifyCustomerAuth'
 import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
-import { jsonSafeParse } from '@/utils/functions'
 
 const getNonce = (token: string) => decodeJwt(token).payload.nonce
 
@@ -26,31 +24,26 @@ const decodeJwt = (token: string) => {
   }
 }
 
-const ShopifyAuth = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
+const LoginResolve = () => {
+  const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
-  const existingToken = jsonSafeParse<AccessTokenStorage>(
-    localStorage.getItem(LOCAL_STORAGE_KEYS.CUSTOMER_ACCESS_TOKEN) || '',
-    AccessTokenStorageSchema
-  )
-  const { useGetAccessTokenMutation, useRefreshTokenMutation } =
-    useShopifyCustomerAuth()
+  const { useGetAccessTokenMutation } = useShopifyCustomerAuth()
   const getAccessToken = useGetAccessTokenMutation(handleGetAccessTokenSuccess)
-  const refreshToken = useRefreshTokenMutation(handleRefreshTokenSuccess)
-
-  function handleRefreshTokenSuccess(data: ShopifyRefreshTokenResponse) {
-    const accessToken: AccessTokenStorage = {
-      access_token: data.access_token,
-      expires_at: DateTime.now().plus({ seconds: data.expires_in }).toISO(),
-      refresh_token: data.refresh_token,
-    }
-    localStorage.setItem(
-      LOCAL_STORAGE_KEYS.CUSTOMER_ACCESS_TOKEN,
-      JSON.stringify(accessToken)
-    )
-  }
 
   function handleGetAccessTokenSuccess(data: ShopifyAccessTokenResponse) {
+    // check state matches
+    const state = localStorage.getItem(LOCAL_STORAGE_KEYS.STATE)
+    if (!state) {
+      toast.error('No state found') // TODO: Add title
+      return
+    }
+    const paramsState = searchParams.get('state')
+    if (paramsState !== state) {
+      toast.error('Invalid state') // TODO: Add title
+      return
+    }
+
+    // check nonce matches
     const nonce = localStorage.getItem(LOCAL_STORAGE_KEYS.NONCE)
     if (!nonce) {
       toast.error('No nonce found') // TODO: Add title
@@ -73,7 +66,7 @@ const ShopifyAuth = () => {
       JSON.stringify(accessToken)
     )
 
-    setSearchParams({})
+    window.location.href = Config.VITE_FE_BASE_URL
   }
 
   // authenticate user and get access token if code is present
@@ -86,21 +79,11 @@ const ShopifyAuth = () => {
         localStorage.getItem(LOCAL_STORAGE_KEYS.CODE_VERIFIER) || '',
     }
     getAccessToken.mutate(request)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
-  // refresh token if it has expired
-  useEffect(() => {
-    if (!existingToken?.expires_at) return
-    const tokenHasExpired =
-      DateTime.fromISO(existingToken.expires_at) < DateTime.now()
-    if (tokenHasExpired) {
-      refreshToken.mutate(existingToken.refresh_token)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [existingToken])
-
-  return <Outlet />
+  return <></>
 }
 
-export default ShopifyAuth
+export default LoginResolve

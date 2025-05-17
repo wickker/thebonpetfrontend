@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import Config from '@/configs'
-import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
+import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
 
 const generateCodeVerifier = async () => {
   const rando = generateRandomCode()
@@ -64,17 +64,22 @@ const goToAuthorizationRequestUrl = async () => {
     Config.VITE_SHOPIFY_CUSTOMER_ACCOUNT_API_CLIENT_ID
   )
   url.searchParams.append('response_type', 'code')
-  url.searchParams.append('redirect_uri', Config.VITE_FE_BASE_URL)
-  url.searchParams.append('state', await generateState())
+  url.searchParams.append(
+    'redirect_uri',
+    `${Config.VITE_FE_BASE_URL}${ROUTES.LOGIN_RESOLVE}`
+  )
+  const state = await generateState()
   const nonce = await generateNonce(16)
   const verifier = await generateCodeVerifier()
   const challenge = await generateCodeChallenge(verifier)
+  url.searchParams.append('state', state)
   url.searchParams.append('nonce', nonce)
   url.searchParams.append('code_challenge', challenge)
   url.searchParams.append('code_challenge_method', 'S256')
 
   localStorage.setItem(LOCAL_STORAGE_KEYS.CODE_VERIFIER, verifier)
   localStorage.setItem(LOCAL_STORAGE_KEYS.NONCE, nonce)
+  localStorage.setItem(LOCAL_STORAGE_KEYS.STATE, state)
 
   window.location.href = url.toString()
 }

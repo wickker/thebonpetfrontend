@@ -1,1 +1,1 @@
-export { default as ShopifyAuth } from './ShopifyAuth'
+export { default as RefreshTokenRequired } from './RefreshTokenRequired'
