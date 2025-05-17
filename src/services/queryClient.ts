@@ -1,8 +1,13 @@
+import { toast } from 'react-toastify'
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
 const handleError = (err: AxiosError | Error) => {
-  // TODO: 
+  if (err instanceof AxiosError) {
+    toast.error(err.message)
+    return
+  }
+
   console.log('Error : ', err)
 }
 

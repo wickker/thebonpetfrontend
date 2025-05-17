@@ -81,7 +81,7 @@ const goToAuthorizationRequestUrl = async () => {
 
 const Login = () => {
   useEffect(() => {
-    goToAuthorizationRequestUrl()
+    goToAuthorizationRequestUrl() // redirects to shopify-hosted oauth page
   }, [])
 
   return <></>
