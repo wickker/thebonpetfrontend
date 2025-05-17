@@ -5,13 +5,13 @@ import {
   AccessTokenStorage,
   ShopifyRefreshTokenResponse,
 } from '@/@types/shopifyCustomerAuth'
-import useShopifyCustomerAuth from '@/hooks/queries/useShopifyCustomerAuth'
+import useCustomerAuth from '@/hooks/queries/useCustomerAuth'
 import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
-import { getTokenJson } from '@/utils/functions'
+import { getTokenJsonBeta } from '@/utils/functions'
 
 const RefreshTokenRequired = () => {
-  const existingToken = getTokenJson()
-  const { useRefreshTokenMutation } = useShopifyCustomerAuth()
+  const existingToken = getTokenJsonBeta()
+  const { useRefreshTokenMutation } = useCustomerAuth()
   const refreshToken = useRefreshTokenMutation(handleRefreshTokenSuccess)
 
   function handleRefreshTokenSuccess(data: ShopifyRefreshTokenResponse) {

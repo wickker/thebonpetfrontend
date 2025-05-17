@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import { RefreshTokenRequired } from '@/components'
 import { ROUTES } from '@/utils/constants'
 import Home from '@/views/Home'
-import Login from '@/views/Login'
+import Login from '@/views/LoginBeta'
 import LoginResolve from '@/views/LoginResolve'
 
 const App = () => (

@@ -8,7 +8,7 @@ import {
   ShopifyAccessTokenResponse,
 } from '@/@types/shopifyCustomerAuth'
 import Config from '@/configs'
-import useShopifyCustomerAuth from '@/hooks/queries/useShopifyCustomerAuth'
+import useCustomerAuth from '@/hooks/queries/useCustomerAuth'
 import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
 
 const getNonce = (token: string) => decodeJwt(token).payload.nonce
@@ -27,7 +27,7 @@ const decodeJwt = (token: string) => {
 const LoginResolve = () => {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
-  const { useGetAccessTokenMutation } = useShopifyCustomerAuth()
+  const { useGetAccessTokenMutation } = useCustomerAuth()
   const getAccessToken = useGetAccessTokenMutation(handleGetAccessTokenSuccess)
 
   function handleGetAccessTokenSuccess(data: ShopifyAccessTokenResponse) {
@@ -65,6 +65,9 @@ const LoginResolve = () => {
       LOCAL_STORAGE_KEYS.CUSTOMER_ACCESS_TOKEN,
       JSON.stringify(accessToken)
     )
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.CODE_VERIFIER)
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.NONCE)
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.STATE)
 
     window.location.href = Config.VITE_FE_BASE_URL
   }
