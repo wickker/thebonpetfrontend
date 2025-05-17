@@ -14,10 +14,17 @@ export const ShopifyAccessTokenResponseSchema = z.object({
   refresh_token: z.string(),
 })
 
-export const AccessTokenStorageSchema = ShopifyAccessTokenResponseSchema.omit({
-  expires_in: true,
-}).extend({
+export const ShopifyRefreshTokenResponseSchema = z.object({
+  access_token: z.string(),
+  expires_in: z.number(),
+  refresh_token: z.string(),
+})
+
+export const AccessTokenStorageSchema = z.object({
+  access_token: z.string(),
   expires_at: z.string(),
+  id_token: z.string().optional(),
+  refresh_token: z.string(),
 })
 
 export type AccessTokenStorage = z.infer<typeof AccessTokenStorageSchema>
@@ -26,4 +33,7 @@ export type ShopifyAccessTokenRequest = z.infer<
 >
 export type ShopifyAccessTokenResponse = z.infer<
   typeof ShopifyAccessTokenResponseSchema
+>
+export type ShopifyRefreshTokenResponse = z.infer<
+  typeof ShopifyRefreshTokenResponseSchema
 >

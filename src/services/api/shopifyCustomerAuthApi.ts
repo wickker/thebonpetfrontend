@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   ShopifyAccessTokenRequest,
   ShopifyAccessTokenResponse,
+  ShopifyRefreshTokenResponse,
 } from '@/@types/shopifyCustomerAuth'
 import Config from '@/configs'
 
@@ -13,7 +14,7 @@ const shopifyCustomerAuthApi = axios.create({
 })
 
 // POST
-const getAccessToken = (
+const getAccessToken = async (
   request: ShopifyAccessTokenRequest
 ): Promise<ShopifyAccessTokenResponse> => {
   const body = new URLSearchParams()
@@ -28,4 +29,17 @@ const getAccessToken = (
     .then((res) => res.data)
 }
 
-export default { getAccessToken }
+const refreshToken = async (
+  refreshToken: string
+): Promise<ShopifyRefreshTokenResponse> => {
+  const body = new URLSearchParams()
+  body.append('grant_type', 'refresh_token')
+  body.append('refresh_token', refreshToken)
+  body.append('client_id', Config.VITE_SHOPIFY_CUSTOMER_ACCOUNT_API_CLIENT_ID)
+
+  return shopifyCustomerAuthApi
+    .post('/oauth/token', body.toString())
+    .then((res) => res.data)
+}
+
+export default { getAccessToken, refreshToken }

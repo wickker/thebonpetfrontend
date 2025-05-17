@@ -1,5 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
-import { ShopifyAccessTokenResponse } from '@/@types/shopifyCustomerAuth'
+import {
+  ShopifyAccessTokenResponse,
+  ShopifyRefreshTokenResponse,
+} from '@/@types/shopifyCustomerAuth'
 import shopifyCustomerAuthApi from '@/services/api/shopifyCustomerAuthApi'
 
 const useShopifyCustomerAuth = () => {
@@ -12,7 +15,16 @@ const useShopifyCustomerAuth = () => {
       onSuccess,
     })
 
-  return { useGetAccessTokenMutation }
+  const useRefreshTokenMutation = (
+    onSuccess: (data: ShopifyRefreshTokenResponse) => void
+  ) =>
+    useMutation({
+      mutationFn: shopifyCustomerAuthApi.refreshToken,
+      retry: false,
+      onSuccess,
+    })
+
+  return { useGetAccessTokenMutation, useRefreshTokenMutation }
 }
 
 export default useShopifyCustomerAuth
