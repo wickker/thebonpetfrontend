@@ -1,8 +1,6 @@
 import {
-  Customer,
   CustomerAccessTokenCreateInput,
   CustomerAccessTokenCreatePayload,
-  CustomerAccessTokenCreateWithMultipassPayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import {
   ClientResponse,
@@ -18,14 +16,6 @@ const client = createStorefrontApiClient({
 })
 
 // Queries
-const getCustomerDetails = (
-  accessToken: string
-): Promise<ClientResponse<{ customer: Customer }>> =>
-  client.request(Customers.Get, {
-    variables: {
-      customerAccessToken: accessToken,
-    },
-  })
 
 // Mutations
 const createCustomerAccessToken = (
@@ -37,17 +27,6 @@ const createCustomerAccessToken = (
     },
   })
 
-const createCustomerAccessTokenWithMultipass = (
-  token: string
-): Promise<ClientResponse<CustomerAccessTokenCreateWithMultipassPayload>> =>
-  client.request(Customers.CreateAccessTokenWithMultipass, {
-    variables: {
-      multipassToken: token,
-    },
-  })
-
 export default {
-  getCustomerDetails,
   createCustomerAccessToken,
-  createCustomerAccessTokenWithMultipass,
 }
