@@ -3,7 +3,12 @@
 body {
   font-family: Arial, sans-serif;
   font-weight: 400;
-  overflow-y: hidden;
+  overflow-x: hidden;
+
+  /* lg */
+  @media (min-width: 1024px) {
+    overflow-x: auto;
+  }
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -21,4 +26,9 @@ body {
   border-radius: 8px;
 }
 
-@theme {}
+@theme {
+  --color-dark-green: #27413e;
+  --color-cream: #fff7e5;
+  --color-beige: #ebdec1;
+  --color-dark-gray: #121212;
+}
