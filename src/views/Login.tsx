@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { CustomerLoginForm, CustomerLoginFormSchema } from '@/@types/customers'
+import { ButtonPlain } from '@/components'
 
 const defaultFormValues: CustomerLoginForm = {
   email: '',
@@ -70,22 +71,21 @@ const Login = () => {
           <p className='mt-2 h-4 text-xs text-red-500'>
             {errors?.password?.message || ''}
           </p>
-          <div className='mb-6' />
         </form>
 
-        <a className='text-dark-green block text-sm underline hover:cursor-pointer'>
-          Forgot your password?
-        </a>
-
-        <button
-          className='bg-dark-green my-10 w-fit self-center px-8 py-2 text-white hover:cursor-pointer'
+        <ButtonPlain
+          className='my-8 self-center'
           type='submit'
           onClick={handleSubmit(onSubmit)}
         >
           Login
-        </button>
+        </ButtonPlain>
 
-        <p className='text-dark-gray text-center text-sm'>
+        <a className='text-dark-green mt-3 text-center text-sm underline hover:cursor-pointer'>
+          Forgot your password?
+        </a>
+
+        <p className='text-dark-gray mt-3 text-center text-sm'>
           Don't have an account?{' '}
           <a className='text-dark-green underline hover:cursor-pointer'>
             Sign up
