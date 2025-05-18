@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ToastContainer, Slide } from 'react-toastify'
 import { QueryClientProvider } from '@tanstack/react-query'
 import App from '@/App.tsx'
 import queryClient from '@/services/queryClient'
@@ -11,19 +10,5 @@ createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
-    {/* TODO: Change this */}
-    <ToastContainer
-      position='top-center'
-      autoClose={5000}
-      hideProgressBar
-      newestOnTop
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme='colored'
-      transition={Slide}
-    />
   </StrictMode>
 )

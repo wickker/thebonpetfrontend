@@ -1,17 +1,24 @@
 import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { CustomerAccessTokenCreatePayload } from '@shopify/hydrogen-react/storefront-api-types'
+import { ClientResponse } from '@shopify/storefront-api-client'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { CustomerLoginForm, CustomerLoginFormSchema } from '@/@types/customers'
 import { ButtonPlain } from '@/components'
+import useCustomer from '@/hooks/queries/useCustomer'
 
 const defaultFormValues: CustomerLoginForm = {
   email: '',
   password: '',
-}
+} as const
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const { useCreateCustomerAccessTokenMutation } = useCustomer()
+  const createToken = useCreateCustomerAccessTokenMutation(
+    handleCreateTokenSuccess
+  )
   const {
     formState: { errors },
     handleSubmit,
@@ -22,9 +29,13 @@ const Login = () => {
     resolver: zodResolver(CustomerLoginFormSchema),
   })
 
-  const onSubmit = (data: CustomerLoginForm) => {
+  function handleCreateTokenSuccess(
+    data: ClientResponse<CustomerAccessTokenCreatePayload>
+  ) {
     console.log('data : ', data)
   }
+
+  const onSubmit = (data: CustomerLoginForm) => createToken.mutate(data)
 
   const toggleShowPassword = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -77,6 +88,7 @@ const Login = () => {
           className='my-8 self-center'
           type='submit'
           onClick={handleSubmit(onSubmit)}
+          isLoading={createToken.isPending}
         >
           Login
         </ButtonPlain>
