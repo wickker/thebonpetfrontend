@@ -1,7 +1,7 @@
 import CreateAccessToken from './createAccessToken'
 
-const Customers = {
+const Customer = {
   CreateAccessToken,
 }
 
-export default Customers
+export default Customer

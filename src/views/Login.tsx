@@ -39,11 +39,13 @@ const Login = () => {
       toast.error({ message: errors[0].message, title: 'Login Failed' })
       return
     }
+
     if (data.customerAccessToken) {
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
         JSON.stringify(data.customerAccessToken)
       )
+      // TODO: If cart key exists, update cart buyer identity
       reset(defaultFormValues)
       navigate(ROUTES.HOME)
     }

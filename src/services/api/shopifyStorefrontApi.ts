@@ -1,10 +1,12 @@
 import {
+  Cart as CartType,
   CustomerAccessTokenCreateInput,
   CustomerAccessTokenCreatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import Config from '@/configs'
-import Customers from '@/graphql/customers'
+import Cart from '@/graphql/cart'
+import Customer from '@/graphql/customer'
 
 const client = createStorefrontApiClient({
   storeDomain: Config.VITE_SHOPIFY_SHOP_DOMAIN,
@@ -13,13 +15,19 @@ const client = createStorefrontApiClient({
 })
 
 // Queries
+const getCart = (cartId: string): Promise<CartType> =>
+  client
+    .request(Cart.Get, {
+      variables: { cartId },
+    })
+    .then((res) => res.data.cart)
 
 // Mutations
 const createCustomerAccessToken = (
   request: CustomerAccessTokenCreateInput
 ): Promise<CustomerAccessTokenCreatePayload> =>
   client
-    .request(Customers.CreateAccessToken, {
+    .request(Customer.CreateAccessToken, {
       variables: {
         input: request,
       },
@@ -28,4 +36,5 @@ const createCustomerAccessToken = (
 
 export default {
   createCustomerAccessToken,
+  getCart,
 }
