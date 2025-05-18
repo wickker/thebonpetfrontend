@@ -5,7 +5,7 @@ import { CustomerAccessTokenCreatePayload } from '@shopify/hydrogen-react/storef
 import { ClientResponse } from '@shopify/storefront-api-client'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { CustomerLoginForm, CustomerLoginFormSchema } from '@/@types/customers'
-import { ButtonPlain } from '@/components'
+import { ButtonPlain } from '@/components/commons'
 import useCustomer from '@/hooks/queries/useCustomer'
 
 const defaultFormValues: CustomerLoginForm = {
