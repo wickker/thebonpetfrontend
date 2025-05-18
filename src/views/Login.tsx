@@ -2,13 +2,19 @@ import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CustomerAccessTokenCreatePayload } from '@shopify/hydrogen-react/storefront-api-types'
+import {
+  CartBuyerIdentityUpdatePayload,
+  CustomerAccessTokenCreatePayload,
+} from '@shopify/hydrogen-react/storefront-api-types'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
+import { CartStorage } from '@/@types/carts'
 import { CustomerLoginForm, CustomerLoginFormSchema } from '@/@types/customers'
 import { ButtonPlain } from '@/components/commons'
 import { useToastContext } from '@/contexts/useToastContext/context'
+import useCart from '@/hooks/queries/useCart'
 import useCustomer from '@/hooks/queries/useCustomer'
 import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
+import { jsonSafeParse } from '@/utils/functions'
 
 const defaultFormValues: CustomerLoginForm = {
   email: '',
@@ -22,6 +28,10 @@ const Login = () => {
   const { useCreateCustomerAccessTokenMutation } = useCustomer()
   const createToken = useCreateCustomerAccessTokenMutation(
     handleCreateTokenSuccess
+  )
+  const { useUpdateCartBuyerIdentityMutation } = useCart()
+  const updateCartBuyerIdentity = useUpdateCartBuyerIdentityMutation(
+    handleUpdateCartBuyerIdentitySuccess
   )
   const {
     formState: { errors },
@@ -45,10 +55,43 @@ const Login = () => {
         LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
         JSON.stringify(data.customerAccessToken)
       )
-      // TODO: If cart key exists, update cart buyer identity
+      const cart = getCart()
+      if (cart) {
+        updateCartBuyerIdentity.mutate({
+          cartId: cart.cartId,
+          buyerIdentity: {
+            customerAccessToken: data.customerAccessToken.accessToken,
+          },
+        })
+        return
+      }
+
       reset(defaultFormValues)
       navigate(ROUTES.HOME)
     }
+  }
+
+  function handleUpdateCartBuyerIdentitySuccess(
+    data: CartBuyerIdentityUpdatePayload
+  ) {
+    if (data.userErrors && data.userErrors.length > 0) {
+      toast.error({
+        message: data.userErrors[0].message,
+        title: 'Update cart buyer identity failed',
+      })
+      return
+    }
+
+    reset(defaultFormValues)
+    navigate(ROUTES.HOME)
+  }
+
+  const getCart = () => {
+    const cartStr = localStorage.getItem(LOCAL_STORAGE_KEYS.CART)
+    if (!cartStr) return
+    const cart = jsonSafeParse<CartStorage>(cartStr)
+    if (!cart) return
+    return cart
   }
 
   const onSubmit = (data: CustomerLoginForm) => createToken.mutate(data)
@@ -104,7 +147,7 @@ const Login = () => {
           className='my-8 self-center'
           type='submit'
           onClick={handleSubmit(onSubmit)}
-          isLoading={createToken.isPending}
+          isLoading={createToken.isPending || updateCartBuyerIdentity.isPending}
         >
           Login
         </ButtonPlain>

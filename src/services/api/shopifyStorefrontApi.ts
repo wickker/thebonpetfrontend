@@ -1,7 +1,9 @@
 import {
+  CartBuyerIdentityUpdatePayload,
   Cart as CartType,
   CustomerAccessTokenCreateInput,
   CustomerAccessTokenCreatePayload,
+  MutationCartBuyerIdentityUpdateArgs,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import Config from '@/configs'
@@ -34,7 +36,17 @@ const createCustomerAccessToken = (
     })
     .then((res) => res.data.customerAccessTokenCreate)
 
+const updateCartBuyerIdentity = (
+  request: MutationCartBuyerIdentityUpdateArgs
+): Promise<CartBuyerIdentityUpdatePayload> =>
+  client
+    .request(Cart.UpdateBuyerIdentity, {
+      variables: request,
+    })
+    .then((res) => res.data.cartBuyerIdentityUpdate)
+
 export default {
   createCustomerAccessToken,
+  updateCartBuyerIdentity,
   getCart,
 }

@@ -1,5 +1,6 @@
 export const LOCAL_STORAGE_KEYS = {
-  ACCESS_TOKEN: 'tbp_access_token',
+  ACCESS_TOKEN: 'tbp_access_token', // CustomerAccessToken
+  CART: 'tbp_cart', // CartStorage
 } as const
 
 export const ROUTES = {
