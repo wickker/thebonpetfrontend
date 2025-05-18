@@ -1,12 +1,14 @@
 import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CustomerAccessTokenCreatePayload } from '@shopify/hydrogen-react/storefront-api-types'
-import { ClientResponse } from '@shopify/storefront-api-client'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { CustomerLoginForm, CustomerLoginFormSchema } from '@/@types/customers'
 import { ButtonPlain } from '@/components/commons'
+import { useToastContext } from '@/contexts/useToastContext/context'
 import useCustomer from '@/hooks/queries/useCustomer'
+import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
 
 const defaultFormValues: CustomerLoginForm = {
   email: '',
@@ -14,6 +16,8 @@ const defaultFormValues: CustomerLoginForm = {
 } as const
 
 const Login = () => {
+  const { toast } = useToastContext()
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const { useCreateCustomerAccessTokenMutation } = useCustomer()
   const createToken = useCreateCustomerAccessTokenMutation(
@@ -23,16 +27,26 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
     register,
-    // reset,
+    reset,
   } = useForm<CustomerLoginForm>({
     defaultValues: defaultFormValues,
     resolver: zodResolver(CustomerLoginFormSchema),
   })
 
-  function handleCreateTokenSuccess(
-    data: ClientResponse<CustomerAccessTokenCreatePayload>
-  ) {
-    console.log('data : ', data)
+  function handleCreateTokenSuccess(data: CustomerAccessTokenCreatePayload) {
+    const errors = data.customerUserErrors
+    if (errors && errors.length > 0) {
+      toast.error({ message: errors[0].message, title: 'Login Failed' })
+      return
+    }
+    if (data.customerAccessToken) {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+        JSON.stringify(data.customerAccessToken)
+      )
+      reset(defaultFormValues)
+      navigate(ROUTES.HOME)
+    }
   }
 
   const onSubmit = (data: CustomerLoginForm) => createToken.mutate(data)

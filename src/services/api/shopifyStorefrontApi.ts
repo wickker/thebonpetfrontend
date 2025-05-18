@@ -2,10 +2,7 @@ import {
   CustomerAccessTokenCreateInput,
   CustomerAccessTokenCreatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
-import {
-  ClientResponse,
-  createStorefrontApiClient,
-} from '@shopify/storefront-api-client'
+import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import Config from '@/configs'
 import Customers from '@/graphql/customers'
 
@@ -20,12 +17,14 @@ const client = createStorefrontApiClient({
 // Mutations
 const createCustomerAccessToken = (
   request: CustomerAccessTokenCreateInput
-): Promise<ClientResponse<CustomerAccessTokenCreatePayload>> =>
-  client.request(Customers.CreateAccessToken, {
-    variables: {
-      input: request,
-    },
-  })
+): Promise<CustomerAccessTokenCreatePayload> =>
+  client
+    .request(Customers.CreateAccessToken, {
+      variables: {
+        input: request,
+      },
+    })
+    .then((res) => res.data.customerAccessTokenCreate)
 
 export default {
   createCustomerAccessToken,
