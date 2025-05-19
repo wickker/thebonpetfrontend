@@ -2,19 +2,19 @@ import { ButtonHTMLAttributes, ReactNode } from 'react'
 import { RiLoader4Fill } from 'react-icons/ri'
 import { cn } from '@/utils/functions'
 
-interface ButtonPlainProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface PlainProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   className?: string
   isLoading?: boolean
 }
 
-const ButtonPlain = ({
+const Plain = ({
   children,
   className = '',
   isLoading = false,
   disabled,
   ...props
-}: ButtonPlainProps) => {
+}: PlainProps) => {
   return (
     <button
       className={cn(
@@ -31,4 +31,8 @@ const ButtonPlain = ({
   )
 }
 
-export default ButtonPlain
+const Button = {
+  Plain,
+}
+
+export default Button
