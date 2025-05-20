@@ -8,6 +8,8 @@ import {
   CustomerRecoverPayload,
   MutationCartBuyerIdentityUpdateArgs,
   CustomerResetByUrlPayload,
+  CustomerCreatePayload,
+  CustomerCreateInput,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import Config from '@/configs'
@@ -81,7 +83,20 @@ const resetPasswordByUrl = (request: {
     })
     .then((res) => res.data.customerResetByUrl)
 
+// Automatically triggers a 'Customer account confimation' email sent from Shopify
+const createCustomer = (
+  request: CustomerCreateInput
+): Promise<CustomerCreatePayload> =>
+  client
+    .request(Customer.Create, {
+      variables: {
+        input: request,
+      },
+    })
+    .then((res) => res.data.customerCreate)
+
 export default {
+  createCustomer,
   createCustomerAccessToken,
   updateCartBuyerIdentity,
   sendResetPasswordEmail,

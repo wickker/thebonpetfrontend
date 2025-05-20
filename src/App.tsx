@@ -7,6 +7,7 @@ import { useToastContext } from '@/contexts/useToastContext/context'
 import { ROUTES } from '@/utils/constants'
 import Home from '@/views/Home'
 import Login from '@/views/Login'
+import SignUp from './views/SignUp'
 import SubmitNewPassword from './views/SubmitNewPassword'
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
               path={ROUTES.SUBMIT_NEW_PASSWORD}
               element={<SubmitNewPassword />}
             />
+            <Route path={ROUTES.SIGNUP} element={<SignUp />} />
           </Route>
         </Routes>
       </BrowserRouter>

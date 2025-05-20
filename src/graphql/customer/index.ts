@@ -1,3 +1,4 @@
+import Create from './create'
 import CreateAccessToken from './createAccessToken'
 import Get from './get'
 import ResetPasswordByUrl from './resetPasswordByUrl'
@@ -8,6 +9,7 @@ const Customer = {
   CreateAccessToken,
   SendResetPasswordEmail,
   ResetPasswordByUrl,
+  Create,
 }
 
 export default Customer

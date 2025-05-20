@@ -1,5 +1,6 @@
 import {
   CustomerAccessTokenCreatePayload,
+  CustomerCreatePayload,
   CustomerOrdersArgs,
   CustomerRecoverPayload,
   CustomerResetByUrlPayload,
@@ -47,11 +48,21 @@ const useCustomer = () => {
       onSuccess,
     })
 
+  const useCreateCustomerMutation = (
+    onSuccess: (data: CustomerCreatePayload) => void
+  ) =>
+    useMutation({
+      mutationFn: shopifyStorefrontApi.createCustomer,
+      retry: false,
+      onSuccess,
+    })
+
   return {
     useCreateCustomerAccessTokenMutation,
     useSendResetPasswordEmailMutation,
     useGetCustomerQuery,
     useCustomerResetByUrlMutation,
+    useCreateCustomerMutation,
   }
 }
 

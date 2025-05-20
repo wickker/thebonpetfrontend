@@ -10,5 +10,5 @@ export const ROUTES = {
   LOGIN: '/account/login',
   SIGNUP: '/account/register',
   RESET_PASSWORD: '/account/login#recover',
-  SUBMIT_NEW_PASSWORD: '/account/reset/:customerId/:resetToken',
+  SUBMIT_NEW_PASSWORD: '/account/reset/*',
 } as const
