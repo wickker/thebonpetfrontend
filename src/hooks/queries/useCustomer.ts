@@ -6,6 +6,7 @@ import {
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import shopifyStorefrontApi from '@/services/api/shopifyStorefrontApi'
+import { QUERY_KEYS } from '@/utils/queryKeys'
 
 const useCustomer = () => {
   const useCreateCustomerAccessTokenMutation = (
@@ -31,7 +32,7 @@ const useCustomer = () => {
     request: CustomerOrdersArgs
   ) =>
     useQuery({
-      queryKey: ['customer'],
+      queryKey: QUERY_KEYS.GET_CUSTOMER,
       retry: false,
       enabled: !!accessToken,
       queryFn: () => shopifyStorefrontApi.getCustomer(accessToken, request),
