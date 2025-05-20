@@ -74,7 +74,7 @@ const SignUp = () => {
           </p>
           <div className='mb-6' />
 
-          <div className='mb-2 flex items-center justify-between'>
+          <div className='mb-1 flex items-center justify-between'>
             <label className='text-dark-green font-semibold'>First name</label>
             <p className='text-xs text-gray-500'>Optional</p>
           </div>
@@ -84,7 +84,7 @@ const SignUp = () => {
           </p>
           <div className='mb-6' />
 
-          <div className='mb-2 flex items-center justify-between'>
+          <div className='mb-1 flex items-center justify-between'>
             <label className='text-dark-green font-semibold'>Last name</label>
             <p className='text-xs text-gray-500'>Optional</p>
           </div>

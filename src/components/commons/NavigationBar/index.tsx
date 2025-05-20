@@ -46,7 +46,7 @@ const NavigationBar = () => {
       <div className='sticky top-0 z-10 w-full'>
         <div className='bg-green h-8 w-full'></div>
 
-        <div className='bg-cream grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-12'>
+        <div className='bg-cream grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 sm:px-12'>
           <button
             className='text-green text-3xl font-bold hover:cursor-pointer'
             onClick={() => navigate(ROUTES.HOME)}
@@ -54,7 +54,7 @@ const NavigationBar = () => {
             TBP
           </button>
 
-          <div className='mx-auto flex items-center gap-x-14'>
+          <div className='mx-auto hidden items-center gap-x-14 sm:flex'>
             {navigationItems.map((item) => {
               const isSelected = location.pathname === item.route
               return (
@@ -75,7 +75,7 @@ const NavigationBar = () => {
             })}
           </div>
 
-          <div className='flex items-center gap-x-10'>
+          <div className='hidden items-center gap-x-10 sm:flex'>
             <button
               onClick={handleClickUserIcon}
               className='hover:cursor-pointer'
