@@ -22,7 +22,7 @@ const Plain = ({
         disabled && 'opacity-75 hover:cursor-not-allowed',
         className
       )}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       {...props}
     >
       {isLoading && <RiLoader4Fill className='h-5 w-5 animate-spin' />}

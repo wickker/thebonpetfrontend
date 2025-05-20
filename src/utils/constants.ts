@@ -5,7 +5,9 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const ROUTES = {
   HOME: '/',
-  LOGIN: '/login',
-  SIGNUP: '/signup',
-  RESET_PASSWORD: '/reset-password',
+
+  // needs to match Shopify urls for smooth redirects
+  LOGIN: '/account/login',
+  SIGNUP: '/account/register',
+  RESET_PASSWORD: '/account/login#recover',
 } as const

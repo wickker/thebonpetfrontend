@@ -10,7 +10,7 @@ const ToastProvider = ({ children }: PropsWithChildren) => {
     setToasts((prev) => [...prev, { ...content, id, type }])
     setTimeout(() => {
       remove(id)
-    }, 3000)
+    }, 5000)
   }
 
   const remove = (id: string) =>
