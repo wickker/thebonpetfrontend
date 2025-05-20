@@ -15,7 +15,7 @@ import Cart from '@/graphql/cart'
 import Customer from '@/graphql/customer'
 
 const client = createStorefrontApiClient({
-  storeDomain: Config.VITE_SHOPIFY_SHOP_DOMAIN,
+  storeDomain: Config.VITE_SHOPIFY_SHOP_URL,
   apiVersion: Config.VITE_SHOPIFY_STOREFRONT_API_VERSION,
   publicAccessToken: Config.VITE_SHOPIFY_STOREFRONT_API_PUBLIC_TOKEN,
 })
