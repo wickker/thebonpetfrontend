@@ -5,14 +5,13 @@ import {
   CartBuyerIdentityUpdatePayload,
   CustomerAccessTokenCreatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
-import { CartStorage } from '@/@types/carts'
 import { CustomerLoginForm, CustomerLoginFormSchema } from '@/@types/customers'
 import { Button, Input } from '@/components/commons'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
 import useCustomer from '@/hooks/queries/useCustomer'
 import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
-import { jsonSafeParse } from '@/utils/functions'
+import { getCartJsonFromLocalStorage } from '@/utils/functions'
 
 const defaultFormValues: CustomerLoginForm = {
   email: '',
@@ -52,7 +51,7 @@ const Login = () => {
         LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
         JSON.stringify(data.customerAccessToken)
       )
-      const cart = getCart()
+      const cart = getCartJsonFromLocalStorage()
       if (cart) {
         updateCartBuyerIdentity.mutate({
           cartId: cart.cartId,
@@ -81,14 +80,6 @@ const Login = () => {
 
     reset(defaultFormValues)
     navigate(ROUTES.HOME)
-  }
-
-  const getCart = () => {
-    const cartStr = localStorage.getItem(LOCAL_STORAGE_KEYS.CART)
-    if (!cartStr) return
-    const cart = jsonSafeParse<CartStorage>(cartStr)
-    if (!cart) return
-    return cart
   }
 
   const onSubmit = (data: CustomerLoginForm) => createToken.mutate(data)
@@ -124,9 +115,12 @@ const Login = () => {
           Login
         </Button.Plain>
 
-        <a className='text-dark-green mt-3 text-center text-sm underline hover:cursor-pointer'>
+        <button
+          className='text-dark-green mt-3 text-center text-sm underline hover:cursor-pointer'
+          onClick={() => navigate(ROUTES.RESET_PASSWORD)}
+        >
           Forgot your password?
-        </a>
+        </button>
 
         <p className='text-dark-gray mt-3 text-center text-sm'>
           Don't have an account?{' '}

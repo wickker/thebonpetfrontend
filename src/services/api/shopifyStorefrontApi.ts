@@ -1,9 +1,13 @@
 import {
   CartBuyerIdentityUpdatePayload,
   Cart as CartType,
+  Customer as CustomerType,
   CustomerAccessTokenCreateInput,
   CustomerAccessTokenCreatePayload,
+  CustomerOrdersArgs,
+  CustomerRecoverPayload,
   MutationCartBuyerIdentityUpdateArgs,
+  CustomerResetByUrlPayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import Config from '@/configs'
@@ -23,6 +27,19 @@ const getCart = (cartId: string): Promise<CartType> =>
       variables: { cartId },
     })
     .then((res) => res.data.cart)
+
+const getCustomer = (
+  accessToken: string,
+  request: CustomerOrdersArgs
+): Promise<CustomerType> =>
+  client
+    .request(Customer.Get, {
+      variables: {
+        customerAccessToken: accessToken,
+        ...request,
+      },
+    })
+    .then((res) => res.data.customer)
 
 // Mutations
 const createCustomerAccessToken = (
@@ -45,8 +62,30 @@ const updateCartBuyerIdentity = (
     })
     .then((res) => res.data.cartBuyerIdentityUpdate)
 
+const sendResetPasswordEmail = (
+  email: string
+): Promise<CustomerRecoverPayload> =>
+  client
+    .request(Customer.SendResetPasswordEmail, {
+      variables: { email },
+    })
+    .then((res) => res.data.customerRecover)
+
+const resetPasswordByUrl = (request: {
+  password: string
+  resetUrl: string
+}): Promise<CustomerResetByUrlPayload> =>
+  client
+    .request(Customer.ResetPasswordByUrl, {
+      variables: { password: request.password, resetUrl: request.resetUrl },
+    })
+    .then((res) => res.data.customerResetByUrl)
+
 export default {
   createCustomerAccessToken,
   updateCartBuyerIdentity,
+  sendResetPasswordEmail,
+  resetPasswordByUrl,
   getCart,
+  getCustomer,
 }
