@@ -88,9 +88,12 @@ const Login = () => {
 
       <p className='text-dark-gray mt-3 text-center text-sm'>
         Don't have an account?{' '}
-        <a className='text-dark-green underline hover:cursor-pointer'>
+        <button
+          className='text-dark-green underline hover:cursor-pointer'
+          onClick={() => navigate(ROUTES.SIGNUP)}
+        >
           Sign up
-        </a>
+        </button>
       </p>
     </div>
   )
