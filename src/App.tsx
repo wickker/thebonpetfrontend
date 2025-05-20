@@ -43,6 +43,14 @@ const App = () => {
         <Routes>
           <Route element={<NavigationBar />}>
             <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.DOGS} element={<></>} />
+            <Route path={ROUTES.CATS} element={<></>} />
+            <Route path={ROUTES.BLOG} element={<></>} />
+            <Route path={ROUTES.FEEDING_GUIDE} element={<></>} />
+            <Route path={ROUTES.CONTACT} element={<></>} />
+
+            {/* Shopify route matches */}
+            <Route path={ROUTES.ACCOUNT} element={<></>} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route
               path={ROUTES.SUBMIT_NEW_PASSWORD}

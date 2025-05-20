@@ -1,3 +1,4 @@
+import { CustomerAccessToken } from '@shopify/hydrogen-react/storefront-api-types'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { ZodSchema } from 'zod'
@@ -20,7 +21,11 @@ export const jsonSafeParse = <T>(s: string, schema?: ZodSchema) => {
 export const getCartJsonFromLocalStorage = () => {
   const cartStr = localStorage.getItem(LOCAL_STORAGE_KEYS.CART)
   if (!cartStr) return
-  const cart = jsonSafeParse<CartStorage>(cartStr)
-  if (!cart) return
-  return cart
+  return jsonSafeParse<CartStorage>(cartStr)
+}
+
+export const getTokenJsonFromLocalStorage = () => {
+  const tokenStr = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)
+  if (!tokenStr) return
+  return jsonSafeParse<CustomerAccessToken>(tokenStr)
 }
