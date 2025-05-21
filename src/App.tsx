@@ -5,11 +5,12 @@ import { AxiosError } from 'axios'
 import { CheckAuth, NavigationBar } from '@/components/commons'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import { ROUTES } from '@/utils/constants'
+import Account from '@/views/Account'
+import FeedingGuide from '@/views/FeedingGuide'
 import Home from '@/views/Home'
 import Login from '@/views/Login'
-import Account from './views/Account'
-import SignUp from './views/SignUp'
-import SubmitNewPassword from './views/SubmitNewPassword'
+import SignUp from '@/views/SignUp'
+import SubmitNewPassword from '@/views/SubmitNewPassword'
 
 const App = () => {
   const { toast } = useToastContext()
@@ -48,7 +49,7 @@ const App = () => {
               <Route path={ROUTES.DOGS} element={<></>} />
               <Route path={ROUTES.CATS} element={<></>} />
               <Route path={ROUTES.BLOG} element={<></>} />
-              <Route path={ROUTES.FEEDING_GUIDE} element={<></>} />
+              <Route path={ROUTES.FEEDING_GUIDE} element={<FeedingGuide />} />
               <Route path={ROUTES.CONTACT} element={<></>} />
               <Route path={ROUTES.PET_FOOD_CALCULATOR} element={<></>} />
               <Route path={ROUTES.DONATE} element={<></>} />
