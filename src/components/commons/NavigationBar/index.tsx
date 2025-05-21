@@ -57,7 +57,9 @@ const NavigationBar = () => {
       <div className='bg-beige absolute inset-0 opacity-95' />
 
       <div className='sticky top-0 z-10 w-full shadow-lg'>
-        <div className='h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'></div>
+        <div className='h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'>
+          {/* TODO: */}
+        </div>
 
         <div
           className='relative grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 lg:px-12'

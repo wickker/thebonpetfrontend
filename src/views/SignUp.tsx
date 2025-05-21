@@ -53,7 +53,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'>
+    <div className='mx-auto flex max-w-[100dvw] flex-col items-center lg:max-w-6xl'>
       <div className='flex w-[100dvw] flex-col px-4 sm:w-96'>
         <h1 className='text-dark-green py-8 text-center text-4xl font-semibold'>
           Create account

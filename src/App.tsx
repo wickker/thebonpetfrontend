@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { NavigationBar } from '@/components/commons'
+import { CheckAuth, NavigationBar } from '@/components/commons'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import { ROUTES } from '@/utils/constants'
 import Home from '@/views/Home'
@@ -42,24 +42,26 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route element={<NavigationBar />}>
-            <Route path={ROUTES.HOME} element={<Home />} />
-            <Route path={ROUTES.DOGS} element={<></>} />
-            <Route path={ROUTES.CATS} element={<></>} />
-            <Route path={ROUTES.BLOG} element={<></>} />
-            <Route path={ROUTES.FEEDING_GUIDE} element={<></>} />
-            <Route path={ROUTES.CONTACT} element={<></>} />
-            <Route path={ROUTES.PET_FOOD_CALCULATOR} element={<></>} />
-            <Route path={ROUTES.DONATE} element={<></>} />
+          <Route element={<CheckAuth />}>
+            <Route element={<NavigationBar />}>
+              <Route path={ROUTES.HOME} element={<Home />} />
+              <Route path={ROUTES.DOGS} element={<></>} />
+              <Route path={ROUTES.CATS} element={<></>} />
+              <Route path={ROUTES.BLOG} element={<></>} />
+              <Route path={ROUTES.FEEDING_GUIDE} element={<></>} />
+              <Route path={ROUTES.CONTACT} element={<></>} />
+              <Route path={ROUTES.PET_FOOD_CALCULATOR} element={<></>} />
+              <Route path={ROUTES.DONATE} element={<></>} />
 
-            {/* Shopify route matches */}
-            <Route path={ROUTES.ACCOUNT} element={<Account />} />
-            <Route path={ROUTES.LOGIN} element={<Login />} />
-            <Route
-              path={ROUTES.SUBMIT_NEW_PASSWORD}
-              element={<SubmitNewPassword />}
-            />
-            <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+              {/* Shopify route matches */}
+              <Route path={ROUTES.ACCOUNT} element={<Account />} />
+              <Route path={ROUTES.LOGIN} element={<Login />} />
+              <Route
+                path={ROUTES.SUBMIT_NEW_PASSWORD}
+                element={<SubmitNewPassword />}
+              />
+              <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
