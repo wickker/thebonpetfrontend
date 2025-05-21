@@ -8,7 +8,7 @@ const Account = () => {
 
         <div className='text-dark-green my-6 flex items-center gap-x-2'>
           <FaRegUser className='h-4 w-4' />
-          <button className='underline'>Log out</button>
+          <button className='underline hover:cursor-pointer'>Log out</button>
         </div>
 
         <h1 className='text-dark-green mt-8 text-4xl font-semibold'>

@@ -50,19 +50,29 @@ const NavigationBar = () => {
   }
 
   return (
-    <div className='bg-beige flex min-h-[100dvh] min-w-max flex-col'>
-      <div className='sticky top-0 z-10 w-full'>
-        <div className='bg-green h-8 w-full'></div>
+    <div
+      className='relative flex min-h-[100dvh] min-w-max flex-col'
+      style={{ backgroundImage: `url('/background.png')` }}
+    >
+      <div className='bg-beige absolute inset-0 opacity-95' />
 
-        <div className='bg-cream grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 lg:px-12'>
+      <div className='sticky top-0 z-10 w-full shadow-lg'>
+        <div className='h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'></div>
+
+        <div
+          className='relative grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 lg:px-12'
+          style={{ backgroundImage: `url('/background.png')` }}
+        >
+          <div className='bg-cream absolute h-[76px] w-full opacity-97' />
+
           <button
-            className='text-green text-3xl font-bold hover:cursor-pointer'
+            className='text-green z-10 text-3xl font-bold hover:cursor-pointer'
             onClick={() => navigate(ROUTES.HOME)}
           >
             TBP
           </button>
 
-          <div className='mx-auto hidden items-center gap-x-8 lg:flex xl:gap-x-12'>
+          <div className='z-10 mx-auto hidden items-center gap-x-8 lg:flex xl:gap-x-12'>
             {navigationItems.map((item) => {
               const isSelected = location.pathname === item.route
               return (
@@ -83,7 +93,7 @@ const NavigationBar = () => {
             })}
           </div>
 
-          <div className='hidden items-center gap-x-8 lg:flex'>
+          <div className='z-10 hidden items-center gap-x-8 lg:flex'>
             <button
               onClick={handleClickUserIcon}
               className='hover:cursor-pointer'
@@ -102,7 +112,9 @@ const NavigationBar = () => {
         </div>
       </div>
 
-      <Outlet />
+      <div className='isolate'>
+        <Outlet />
+      </div>
     </div>
   )
 }

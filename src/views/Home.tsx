@@ -15,7 +15,9 @@ const Home = () => {
   console.log('Customer : ', getCustomer.data)
 
   return (
-    <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'>{/* TODO: */}</div>
+    <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'>
+      <h1 className='text-[500px] font-bold break-words'>Home</h1>
+    </div>
   )
 }
 

@@ -26,6 +26,15 @@ body {
   border-radius: 8px;
 }
 
+.grid-stack {
+  display: grid;
+}
+
+.grid-stack > * {
+  grid-area: 1 / 1;
+  z-index: 0;
+}
+
 @theme {
   --color-dark-green: #14423d;
   --color-green: #107965;
