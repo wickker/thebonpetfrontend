@@ -14,12 +14,20 @@ const navigationItems = [
     route: ROUTES.CATS,
   },
   {
-    label: 'Blog',
-    route: ROUTES.BLOG,
-  },
-  {
     label: 'Feeding Guide',
     route: ROUTES.FEEDING_GUIDE,
+  },
+  {
+    label: 'Pet Food Calculator',
+    route: ROUTES.PET_FOOD_CALCULATOR,
+  },
+  {
+    label: 'Donate',
+    route: ROUTES.DONATE,
+  },
+  {
+    label: 'Blog',
+    route: ROUTES.BLOG,
   },
   {
     label: 'Contact',
@@ -46,7 +54,7 @@ const NavigationBar = () => {
       <div className='sticky top-0 z-10 w-full'>
         <div className='bg-green h-8 w-full'></div>
 
-        <div className='bg-cream grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 sm:px-12'>
+        <div className='bg-cream grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 lg:px-12'>
           <button
             className='text-green text-3xl font-bold hover:cursor-pointer'
             onClick={() => navigate(ROUTES.HOME)}
@@ -54,7 +62,7 @@ const NavigationBar = () => {
             TBP
           </button>
 
-          <div className='mx-auto hidden items-center gap-x-14 sm:flex'>
+          <div className='mx-auto hidden items-center gap-x-8 lg:flex xl:gap-x-12'>
             {navigationItems.map((item) => {
               const isSelected = location.pathname === item.route
               return (
@@ -75,7 +83,7 @@ const NavigationBar = () => {
             })}
           </div>
 
-          <div className='hidden items-center gap-x-10 sm:flex'>
+          <div className='hidden items-center gap-x-8 lg:flex'>
             <button
               onClick={handleClickUserIcon}
               className='hover:cursor-pointer'

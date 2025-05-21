@@ -9,6 +9,8 @@ export const ROUTES = {
   CATS: '/cats',
   BLOG: '/blog',
   FEEDING_GUIDE: '/feeding-guide',
+  PET_FOOD_CALCULATOR: '/pet-food-calculator',
+  DONATE: '/donate',
   CONTACT: '/contact',
 
   // needs to match Shopify urls for smooth redirects
