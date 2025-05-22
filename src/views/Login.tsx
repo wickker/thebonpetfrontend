@@ -5,7 +5,7 @@ const Login = () => {
   const location = useLocation()
 
   return (
-    <div className='mx-auto flex max-w-[100dvw] flex-col items-center lg:max-w-6xl'>
+    <div className='mx-auto flex w-[100dvw] max-w-6xl flex-col items-center'>
       {location.hash === '#recover' ? <ResetPassword /> : <LoginPage />}
     </div>
   )

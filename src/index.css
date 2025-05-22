@@ -4,11 +4,6 @@ body {
   font-family: Arial, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
-
-  /* lg */
-  @media (min-width: 1024px) {
-    overflow-x: auto;
-  }
 }
 
 .scrollbar::-webkit-scrollbar {
