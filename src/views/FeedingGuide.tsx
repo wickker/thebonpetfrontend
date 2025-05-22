@@ -97,6 +97,14 @@ const FeedingGuide = () => {
           </div>
         </div>
 
+        <div className='mb-6 w-full max-w-xl text-[#7B6D57]'>
+          <p>Applicable for both dog and cat formulas.</p>
+          <p>
+            If your pet is known to have a sensitive stomach, you may extend the
+            transition period following steps 1 and 2.
+          </p>
+        </div>
+
         <div className='my-2 h-[3px] w-full max-w-xl rounded-full bg-[#CCBC9E]' />
 
         <h1 className='text-dark-green mt-2 text-[52px] font-bold'>
@@ -106,7 +114,70 @@ const FeedingGuide = () => {
         <p className='text-dark-green text-xl'>
           A quick and simple way to thaw
         </p>
-        {/* TODO: */}
+
+        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-2'>
+          <div className='grid grid-cols-[auto_1fr] gap-x-1'>
+            <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
+              1
+            </div>
+            <img src='/thaw-1.png' alt='Thaw step 1' />
+          </div>
+
+          <div className='grid grid-cols-[auto_1fr] gap-x-1'>
+            <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
+              2
+            </div>
+            <img src='/thaw-2.png' alt='Thaw step 2' />
+          </div>
+
+          <div className='text-dark-green mb-6 text-sm'>
+            Take out the required amount needed for thawing
+          </div>
+
+          <div className='text-dark-green mb-6 text-sm'>
+            Transfer from freezer to chiller on the night before feeding{' '}
+            <p className='font-bold'>(Do not refreeze)</p>
+          </div>
+
+          <div className='grid grid-cols-[auto_1fr] gap-x-1'>
+            <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
+              3
+            </div>
+            <img src='/thaw-3.png' alt='Thaw step 3' />
+          </div>
+
+          <div className='grid grid-cols-[auto_1fr] gap-x-1'>
+            <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
+              4
+            </div>
+            <img src='/thaw-4.png' alt='Thaw step 4' />
+          </div>
+
+          <div className='text-dark-green mb-4 text-sm'>
+            To achieve room temperature, submerge packet in warm water for 15
+            minutes before serving{' '}
+            <p className='font-bold'>(Do not microwave or cook it)</p>
+          </div>
+
+          <div className='text-dark-green mb-4 text-sm'>
+            Ready to feed!
+            <p className='font-bold'>
+              (Clear the food if unfinished after 30 minutes and do not leave
+              left overs)
+            </p>
+          </div>
+        </div>
+
+        <div className='mb-6 w-full max-w-xl text-[#7B6D57]'>
+          <p>
+            Cooking or microwaving is not recommended as it can affect the
+            nutrient content of the formula.
+          </p>
+          <p>
+            Thawed food can be stored in an airtight container in the chiller at
+            0-4°C for up to 36 hours.
+          </p>
+        </div>
       </div>
     </div>
   )
