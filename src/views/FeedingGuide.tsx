@@ -2,18 +2,12 @@ const FeedingGuide = () => {
   return (
     <div className='flex w-[100dvw] flex-col overflow-x-hidden'>
       <div
-        className='relative grid h-[355px] w-full place-items-center bg-[#03443C] bg-auto bg-bottom'
-        style={{ backgroundImage: `url('/background-feeding-guide.png')` }}
+        className='grid h-[355px] w-full place-items-center bg-[#03443C] bg-auto bg-bottom'
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%), conic-gradient(#02443CCC, #02443CCC), url('/background-feeding-guide.png')`,
+        }}
       >
-        <div
-          className='absolute top-0 h-[355px] w-full opacity-80'
-          style={{
-            backgroundImage:
-              'linear-gradient(0deg, #02443C, #02443C), linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%)',
-          }}
-        />
-
-        <div className='isolate p-4'>
+        <div className='p-4'>
           <h1 className='text-center text-[66px] font-bold text-[#FFF5E3]'>
             THE BON PET
           </h1>
