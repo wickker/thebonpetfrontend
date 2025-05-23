@@ -1,11 +1,16 @@
+import { motion } from 'motion/react'
+
 const FeedingGuide = () => {
   return (
     <div className='flex w-[100dvw] flex-col overflow-x-hidden'>
-      <div
+      <motion.div
         className='grid h-[355px] w-full place-items-center bg-[#03443C] bg-auto bg-bottom'
         style={{
           backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%), conic-gradient(#02443CCC, #02443CCC), url('/background-feeding-guide.png')`,
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ amount: 0.5 }}
       >
         <div className='p-4'>
           <h1 className='text-center text-[66px] font-bold text-[#FFF5E3]'>
@@ -16,7 +21,7 @@ const FeedingGuide = () => {
             Feeding Guide
           </h1>
         </div>
-      </div>
+      </motion.div>
 
       <div className='flex flex-col items-center p-4 text-center'>
         <h1 className='text-dark-green text-[52px] font-bold'>
