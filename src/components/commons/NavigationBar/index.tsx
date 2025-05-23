@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { BsCart2 } from 'react-icons/bs'
-import { FaRegUser, FaUser } from 'react-icons/fa6'
+import { Footer } from '@/components/commons'
 import { ROUTES } from '@/utils/constants'
 import { cn, getTokenJsonFromLocalStorage } from '@/utils/functions'
 
@@ -75,15 +74,31 @@ const NavigationBar = () => {
           </button>
 
           <div className='z-10 mx-auto hidden items-center gap-x-8 lg:flex xl:gap-x-12'>
-            {navigationItems.map((item) => {
+            {navigationItems.map((item, index) => {
               const isSelected = location.pathname === item.route
               return (
                 <button
-                  className='text-green flex flex-col items-center font-semibold hover:cursor-pointer'
+                  className='text-green flex flex-col items-center font-bold hover:cursor-pointer'
                   key={item.label}
                   onClick={() => navigate(item.route)}
                 >
-                  {item.label}
+                  <div className='flex items-center gap-x-1'>
+                    {index === 0 && (
+                      <img
+                        src='/icons/dog.png'
+                        alt='Dog icon'
+                        className='h-5 w-5'
+                      />
+                    )}
+                    {index === 1 && (
+                      <img
+                        src='/icons/cat.png'
+                        alt='Cat icon'
+                        className='h-5 w-5'
+                      />
+                    )}
+                    {item.label}
+                  </div>
                   <div
                     className={cn(
                       'h-[2px] w-full max-w-0 rounded-full transition-all',
@@ -100,15 +115,14 @@ const NavigationBar = () => {
               onClick={handleClickUserIcon}
               className='hover:cursor-pointer'
             >
-              {isLoggedIn ? (
-                <FaUser className='text-green h-5 w-5' />
-              ) : (
-                <FaRegUser className='text-green h-5 w-5' />
-              )}
+              <img src='/icons/user.png' alt='User' className='h-5 w-5' />
             </button>
 
-            <button className='hover:cursor-pointer'>
-              <BsCart2 className='text-green h-6 w-6' />
+            <button className='relative hover:cursor-pointer'>
+              <img src='/icons/cart.png' alt='Cart' className='h-5 w-5' />
+              <div className='bg-green absolute right-[-8px] bottom-[-6px] grid h-4 w-4 place-items-center rounded-full text-[8px] text-white'>
+                0
+              </div>
             </button>
           </div>
         </div>
@@ -116,6 +130,7 @@ const NavigationBar = () => {
 
       <div className='isolate'>
         <Outlet />
+        <Footer />
       </div>
     </div>
   )

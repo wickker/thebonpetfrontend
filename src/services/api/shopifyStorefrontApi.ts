@@ -90,7 +90,10 @@ const createCustomer = (
   client
     .request(Customer.Create, {
       variables: {
-        input: request,
+        input: {
+          ...request,
+          acceptsMarketing: true,
+        },
       },
     })
     .then((res) => res.data.customerCreate)

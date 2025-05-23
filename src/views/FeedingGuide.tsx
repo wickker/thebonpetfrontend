@@ -33,7 +33,7 @@ const FeedingGuide = () => {
           Transition from old to new food over a week
         </p>
 
-        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-10'>
+        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-10 sm:gap-x-14'>
           <div className='grid grid-cols-[auto_1fr] gap-x-1'>
             <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
               1
@@ -115,7 +115,7 @@ const FeedingGuide = () => {
           A quick and simple way to thaw
         </p>
 
-        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-2'>
+        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-2 sm:gap-x-14'>
           <div className='grid grid-cols-[auto_1fr] gap-x-1'>
             <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
               1

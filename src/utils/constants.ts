@@ -12,6 +12,9 @@ export const ROUTES = {
   PET_FOOD_CALCULATOR: '/pet-food-calculator',
   DONATE: '/donate',
   CONTACT: '/contact',
+  REFUND_POLICY: '/refund-policy',
+  PRIVACY_POLICY: '/privacy-policy',
+  TERMS_OF_SERVICE: '/terms-of-service',
 
   // needs to match Shopify urls for smooth redirects
   LOGIN: '/account/login',
