@@ -129,7 +129,9 @@ const NavigationBar = () => {
       </div>
 
       <div className='isolate'>
-        <Outlet />
+        <div className='min-h-[calc(100dvh-306px-76px-32px)]'>
+          <Outlet />
+        </div>
         <Footer />
       </div>
     </div>

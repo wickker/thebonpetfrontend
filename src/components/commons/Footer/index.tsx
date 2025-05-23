@@ -1,4 +1,8 @@
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { EmailForm, EmailFormSchema } from '@/@types/customers'
 import { ROUTES } from '@/utils/constants'
+// import { RiLoader4Fill } from 'react-icons/ri'
 
 const footerItems = {
   Company: [
@@ -54,8 +58,23 @@ const footerItems = {
 } as const
 
 const Footer = () => {
+  const {
+    formState: { isDirty },
+    handleSubmit,
+    register,
+  } = useForm<EmailForm>({
+    defaultValues: {
+      email: '',
+    },
+    resolver: zodResolver(EmailFormSchema),
+  })
+
+  const onSubmit = (data: EmailForm) => {
+    console.log('data : ', data) // TODO:
+  }
+
   return (
-    <div className='grid w-full grid-cols-[1fr_1fr_1fr_1fr_auto] gap-x-12 bg-[#03453D] p-12'>
+    <div className='grid h-[306px] w-full grid-cols-[1fr_1fr_1fr_1fr_auto] gap-x-12 bg-[#03453D] p-12'>
       <div className='flex flex-col gap-y-2 text-2xl font-bold text-white'>
         TBP
         <div className='flex items-center gap-x-3'>
@@ -92,9 +111,13 @@ const Footer = () => {
         <div key={key} className='flex flex-col gap-y-2 text-white'>
           <p className='text-xl font-bold'>{key}</p>
           {items.map((item) => (
-            <button key={item.label} className='text-left opacity-65'>
+            <a
+              key={item.label}
+              className='cursor-pointer text-left opacity-65'
+              href={item.link}
+            >
               {item.label}
-            </button>
+            </a>
           ))}
         </div>
       ))}
@@ -107,22 +130,26 @@ const Footer = () => {
         </div>
 
         <div className='mt-2 flex w-full items-center gap-x-2'>
-          <div className='relative h-[40px] w-full rounded-full px-4 py-2 outline-none'>
-            <div className='absolute top-0 left-0 z-0 h-full w-full rounded-full bg-white opacity-40' />
-            <input
-              type='text'
-              placeholder='Email address'
-              className='isolate w-full text-sm text-white outline-none'
-            />
-          </div>
+          <input
+            {...register('email')}
+            type='text'
+            placeholder='Email address'
+            className='h-[40px] w-full rounded-full bg-white/40 px-4 py-2 outline-none'
+          />
 
-          <button className='h-[40px] cursor-pointer rounded-full border border-[#ffffff33] px-4 py-2 text-white disabled:cursor-not-allowed'>
+          <button
+            className='hover:bg-dark-gray/10 flex h-[40px] cursor-pointer items-center gap-x-2 rounded-full border border-[#ffffff33] px-4 py-2 text-white disabled:cursor-not-allowed disabled:hover:bg-transparent'
+            type='submit'
+            onClick={handleSubmit(onSubmit)}
+            disabled={!isDirty}
+          >
+            {/* <RiLoader4Fill className='animate-spin' /> */}
             Subscribe
           </button>
         </div>
       </div>
 
-      <div className='col-span-full my-3 h-[2px] rounded-full bg-white opacity-20' />
+      <div className='col-span-full my-4 h-[2px] rounded-full bg-white opacity-20' />
 
       <div className='col-span-full text-center text-sm text-white opacity-65'>
         © TheBonPet 2025
