@@ -11,11 +11,10 @@ type TileProps = {
 
 const Tile = ({ line }: TileProps) => {
   const { unitPrice, originalUnitPrice } = getUnitPrice(line)
-  console.log(unitPrice, originalUnitPrice)
   const variantName = line.merchandise.title.includes('g')
     ? line.merchandise.title
     : `${line.merchandise.title}g`
-  const subscription = line.sellingPlanAllocation
+  const subscriptionName = line.sellingPlanAllocation
     ? ` | ${line.sellingPlanAllocation.sellingPlan.name}`
     : ''
 
@@ -40,7 +39,7 @@ const Tile = ({ line }: TileProps) => {
           <div className='text-dark-green flex flex-col text-sm'>
             <p>
               {variantName}
-              {subscription}
+              {subscriptionName}
             </p>
           </div>
           <button className='cursor-pointer'>

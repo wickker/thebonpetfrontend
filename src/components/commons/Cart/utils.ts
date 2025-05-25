@@ -1,4 +1,5 @@
 import {
+  Cart,
   CartLine,
   ComponentizableCartLine,
 } from '@shopify/hydrogen-react/storefront-api-types'
@@ -28,4 +29,9 @@ export const getUnitPrice = (line: CartLine | ComponentizableCartLine) => {
     originalUnitPrice: '',
     currency: line.merchandise.price.currencyCode,
   }
+}
+
+export const hasSubscription = (cart?: Cart) => {
+  if (!cart) return false
+  return cart.lines.edges.some((line) => line.node.sellingPlanAllocation)
 }

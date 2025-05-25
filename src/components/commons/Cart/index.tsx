@@ -7,6 +7,7 @@ import { useCartActions, useIsCartOpen } from '@/store/useCartStore'
 import { ROUTES } from '@/utils/constants'
 import { getCartJsonFromLocalStorage } from '@/utils/functions'
 import Tile from './Tile'
+import { hasSubscription } from './utils'
 
 const Cart = () => {
   const cart = getCartJsonFromLocalStorage()
@@ -14,8 +15,6 @@ const Cart = () => {
   const { closeCart } = useCartActions()
   const { useGetCartQuery } = useCart()
   const getCart = useGetCartQuery(cart?.cartId)
-
-  console.log('Cart : ', getCart.data)
 
   return createPortal(
     <AnimatePresence>
@@ -30,7 +29,7 @@ const Cart = () => {
             backgroundImage: `linear-gradient(var(--color-cream-98), var(--color-cream-98)), url('/background.png')`,
           }}
         >
-          <div className='text-dark-green mb-4 flex items-center justify-between p-4 text-3xl font-bold'>
+          <div className='text-dark-green flex items-center justify-between p-4 text-3xl font-bold'>
             CART
             <button onClick={closeCart} className='cursor-pointer'>
               <IoCloseOutline className='h-10 w-10' />
@@ -71,22 +70,27 @@ const Cart = () => {
                 {getCart.data?.cost.totalAmount.currencyCode}
               </p>
             </div>
+
             <Button.Plain className='w-full justify-center'>
               Checkout
             </Button.Plain>
-            <p className='text-dark-green text-center text-xs'>
-              One or more of the items in your cart is a recurring or deferred
-              purchase. By continuing, you agree to the{' '}
-              <a
-                href={ROUTES.CANCELLATION_POLICY}
-                target='_blank'
-                className='cursor-pointer underline'
-              >
-                cancellation policy
-              </a>{' '}
-              and authorize The Bon Pet to charge your payment method at the
-              prices, frequency and dates listed on this page until the order is
-            </p>
+
+            {hasSubscription(getCart.data) && (
+              <p className='text-dark-green text-center text-xs'>
+                One or more of the items in your cart is a recurring or deferred
+                purchase. By continuing, you agree to the{' '}
+                <a
+                  href={ROUTES.CANCELLATION_POLICY}
+                  target='_blank'
+                  className='cursor-pointer underline'
+                >
+                  cancellation policy
+                </a>{' '}
+                and authorize The Bon Pet to charge your payment method at the
+                prices, frequency and dates listed on this page until the order
+                is
+              </p>
+            )}
           </div>
         </motion.div>
       )}
