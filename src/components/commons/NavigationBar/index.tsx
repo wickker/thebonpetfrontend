@@ -1,5 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { Footer } from '@/components/commons'
+import { Cart, Footer } from '@/components/commons'
+import { useCartActions } from '@/store/useCartStore'
 import { ROUTES } from '@/utils/constants'
 import { cn, getTokenJsonFromLocalStorage } from '@/utils/functions'
 
@@ -37,6 +38,7 @@ const navigationItems = [
 const NavigationBar = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { openCart } = useCartActions()
   const customerToken = getTokenJsonFromLocalStorage()
   const isLoggedIn = !!customerToken
 
@@ -118,7 +120,10 @@ const NavigationBar = () => {
               <img src='/icons/user.png' alt='User' className='h-5 w-5' />
             </button>
 
-            <button className='relative hover:cursor-pointer'>
+            <button
+              className='relative hover:cursor-pointer'
+              onClick={openCart}
+            >
               <img src='/icons/cart.png' alt='Cart' className='h-5 w-5' />
               <div className='bg-green absolute right-[-8px] bottom-[-6px] grid h-4 w-4 place-items-center rounded-full text-[8px] text-white'>
                 0
@@ -133,6 +138,8 @@ const NavigationBar = () => {
       </div>
 
       <Footer />
+
+      <Cart />
     </div>
   )
 }

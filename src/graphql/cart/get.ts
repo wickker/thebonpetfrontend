@@ -14,6 +14,16 @@ query ($cartId: ID!) {
         node {
           id
           quantity
+          cost {
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+            totalAmount {
+              amount
+              currencyCode
+            }
+          }
           merchandise {
             ... on ProductVariant {
               id
@@ -84,13 +94,16 @@ query ($cartId: ID!) {
       }
     }
     buyerIdentity {
-      email
-      phone
       customer {
         id
+        email
+        phone
+        firstName
+        lastName
       }
     }
     totalQuantity
+    note
   }
 }
 `
