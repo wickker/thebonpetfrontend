@@ -52,7 +52,7 @@ const Cart = () => {
               Order special instructions
             </label>
             <textarea
-              className='text-dark-gray focus:border-dark-green block w-full border border-[#90988F] px-3 py-2 outline-none hover:border-[2px] focus:border-[2px]'
+              className='text-dark-gray focus:border-dark-green block min-h-[66px] w-full border border-[#90988F] px-3 py-2 outline-none hover:border-[2px] focus:border-[2px]'
               rows={2}
             />
           </div>

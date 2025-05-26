@@ -1,35 +1,59 @@
+import { useCallback, useState } from 'react'
 import { DateTime } from 'luxon'
-import { DATE_FORMAT, DatePickerHandler } from './dateSelect'
+import CalendarCells from './CalendarCells'
+import { DATE_FORMAT } from './dateSelect'
+import MonthToggler from './MonthToggler'
 
-const daysOfWeek = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+type DateSelectProps = {
+  date?: string
+  onSelectDate?: () => void
+}
 
-const DateSelect = () => {
-  const now = DateTime.now()
-  const { cells: cellRows } = new DatePickerHandler(
-    now.month,
-    now.year,
-    now.toFormat(DATE_FORMAT)
-  )
-  const cells = cellRows.flatMap((row) => row)
+const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
+  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_FORMAT)
+  const [selectedDate, setSelectedDate] = useState(date || now)
+  const selectedDateTime = DateTime.fromFormat(selectedDate, DATE_FORMAT)
+  const [month, setMonth] = useState(selectedDateTime.month)
+  const [year, setYear] = useState(selectedDateTime.year)
+
+  const handleGoToNextMonth = useCallback(() => {
+    if (month + 1 > 12) {
+      setMonth(1)
+      setYear((prev) => prev + 1)
+      return
+    }
+    setMonth((prev) => prev + 1)
+  }, [month])
+
+  const handleGoToPreviousMonth = useCallback(() => {
+    if (month - 1 < 1) {
+      setMonth(12)
+      setYear((prev) => prev - 1)
+      return
+    }
+    setMonth((prev) => prev - 1)
+  }, [month])
+
+  const handleSelectDate = (date: DateTime) => {
+    setSelectedDate(date.toFormat(DATE_FORMAT))
+    onSelectDate?.()
+  }
 
   return (
-    <div>
-      <div className='grid w-fit grid-cols-7 justify-items-center gap-2 bg-white p-4'>
-        {daysOfWeek.map((day) => {
-          return (
-            <div key={day} className='font-bold'>
-              {day}
-            </div>
-          )
-        })}
-        {cells.map((cell) => {
-          return (
-            <button key={cell.dateTime.toFormat(DATE_FORMAT)}>
-              {cell.dateTime.day}
-            </button>
-          )
-        })}
-      </div>
+    <div className='text-dark-green flex w-fit flex-col gap-y-2 p-4'>
+      <MonthToggler
+        month={month}
+        year={year}
+        onNext={handleGoToNextMonth}
+        onPrevious={handleGoToPreviousMonth}
+      />
+
+      <CalendarCells
+        month={month}
+        year={year}
+        selectedDate={selectedDate}
+        onSelectDate={handleSelectDate}
+      />
     </div>
   )
 }
