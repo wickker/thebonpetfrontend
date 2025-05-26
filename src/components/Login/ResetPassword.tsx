@@ -70,7 +70,7 @@ const ResetPassword = () => {
       </Button.Plain>
 
       <button
-        className='text-dark-green mt-3 cursor-pointer text-center text-sm underline'
+        className='text-dark-green mt-3 mb-8 cursor-pointer text-center text-sm underline'
         onClick={() => navigate(ROUTES.LOGIN)}
       >
         Go back to login

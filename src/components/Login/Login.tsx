@@ -86,7 +86,7 @@ const Login = () => {
         Forgot your password?
       </button>
 
-      <p className='text-dark-gray mt-3 text-center text-sm'>
+      <p className='text-dark-gray mt-3 mb-8 text-center text-sm'>
         Don't have an account?{' '}
         <button
           className='text-dark-green cursor-pointer underline'
