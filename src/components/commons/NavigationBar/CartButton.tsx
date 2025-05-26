@@ -7,13 +7,17 @@ const CartButton = () => {
   const cart = getCartJsonFromLocalStorage()
   const { useGetCartQuery } = useCart()
   const getCart = useGetCartQuery(cart?.cartId)
-  const hasCart = cart && getCart.data && getCart.isSuccess
+  const showCartCount =
+    cart &&
+    getCart.data &&
+    getCart.isSuccess &&
+    getCart.data.lines.edges.length > 0
 
   return (
     <button className='relative cursor-pointer' onClick={openCart}>
       <img src='/icons/cart.png' alt='Cart' className='h-5 w-5' />
 
-      {hasCart && (
+      {showCartCount && (
         <div className='bg-green absolute right-[-8px] bottom-[-6px] grid h-4 w-4 place-items-center rounded-full text-[8px] text-white'>
           {getCart.data.lines.edges.length}
         </div>

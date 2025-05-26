@@ -1,3 +1,5 @@
+import { Fragment } from 'react/jsx-runtime'
+
 const TileSkeleton = () => {
   return (
     <div className='grid grid-cols-[auto_1fr] gap-x-3'>
@@ -25,10 +27,10 @@ const TileSkeleton = () => {
 
 const Skeleton = () => {
   return Array.from({ length: 6 }).map((_, index) => (
-    <>
-      <TileSkeleton key={index} />
+    <Fragment key={index}>
+      <TileSkeleton />
       <div className='my-4 flex h-[1px] w-full shrink-0 animate-pulse rounded-full bg-neutral-300' />
-    </>
+    </Fragment>
   ))
 }
 

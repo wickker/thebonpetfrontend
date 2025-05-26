@@ -20,7 +20,7 @@ const CheckoutNotice = ({ cart }: CheckoutNoticeProps) => {
           cancellation policy
         </a>{' '}
         and authorize The Bon Pet to charge your payment method at the prices,
-        frequency and dates listed on this page until the order is
+        frequency and dates listed on this page.
       </p>
     )
   }

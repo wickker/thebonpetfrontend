@@ -5,6 +5,7 @@ import {
 import { IoTrashOutline } from 'react-icons/io5'
 import { Button } from '@/components/commons'
 import { getUnitPrice } from './utils'
+
 type TileProps = {
   line: CartLine | ComponentizableCartLine
 }
