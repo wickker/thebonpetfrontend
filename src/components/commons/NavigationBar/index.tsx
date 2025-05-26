@@ -1,44 +1,12 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { Cart, Footer } from '@/components/commons'
-import { useCartActions } from '@/store/useCartStore'
 import { ROUTES } from '@/utils/constants'
-import { cn, getTokenJsonFromLocalStorage } from '@/utils/functions'
-
-const navigationItems = [
-  {
-    label: 'Dogs',
-    route: ROUTES.DOGS,
-  },
-  {
-    label: 'Cats',
-    route: ROUTES.CATS,
-  },
-  {
-    label: 'Feeding Guide',
-    route: ROUTES.FEEDING_GUIDE,
-  },
-  {
-    label: 'Pet Food Calculator',
-    route: ROUTES.PET_FOOD_CALCULATOR,
-  },
-  {
-    label: 'Donate',
-    route: ROUTES.DONATE,
-  },
-  {
-    label: 'Blog',
-    route: ROUTES.BLOG,
-  },
-  {
-    label: 'Contact',
-    route: ROUTES.CONTACT,
-  },
-] as const
+import { getTokenJsonFromLocalStorage } from '@/utils/functions'
+import DesktopHeader from './DesktopHeader'
+import MobileHeader from './MobileHeader'
 
 const NavigationBar = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const { openCart } = useCartActions()
   const customerToken = getTokenJsonFromLocalStorage()
   const isLoggedIn = !!customerToken
 
@@ -52,88 +20,24 @@ const NavigationBar = () => {
 
   return (
     <div
-      className='flex min-h-[100dvh] min-w-max flex-col'
+      className='flex min-h-[100dvh] min-w-full flex-col'
       style={{
         backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
       }}
     >
       <div className='sticky top-0 z-10 w-full shadow-lg'>
-        <div className='h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'>
+        <div className='hidden h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)] lg:block'>
           {/* TODO: */}
         </div>
 
-        <div
-          className='grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 lg:px-12'
-          style={{
-            backgroundImage: `linear-gradient(var(--color-cream-98), var(--color-cream-98)), url('/background.png')`,
-          }}
-        >
-          <button
-            className='text-green text-3xl font-bold hover:cursor-pointer'
-            onClick={() => navigate(ROUTES.HOME)}
-          >
-            TBP
-          </button>
+        {/* Displays at widths >= lg */}
+        <DesktopHeader onClickUserIcon={handleClickUserIcon} />
 
-          <div className='mx-auto hidden items-center gap-x-8 lg:flex xl:gap-x-12'>
-            {navigationItems.map((item, index) => {
-              const isSelected = location.pathname === item.route
-              return (
-                <button
-                  className='text-green flex flex-col items-center font-bold hover:cursor-pointer'
-                  key={item.label}
-                  onClick={() => navigate(item.route)}
-                >
-                  <div className='flex items-center gap-x-1'>
-                    {index === 0 && (
-                      <img
-                        src='/icons/dog.png'
-                        alt='Dog icon'
-                        className='h-5 w-5'
-                      />
-                    )}
-                    {index === 1 && (
-                      <img
-                        src='/icons/cat.png'
-                        alt='Cat icon'
-                        className='h-5 w-5'
-                      />
-                    )}
-                    {item.label}
-                  </div>
-                  <div
-                    className={cn(
-                      'h-[2px] w-full max-w-0 rounded-full transition-all',
-                      isSelected && 'bg-green max-w-full'
-                    )}
-                  />
-                </button>
-              )
-            })}
-          </div>
-
-          <div className='hidden items-center gap-x-8 lg:flex'>
-            <button
-              onClick={handleClickUserIcon}
-              className='hover:cursor-pointer'
-            >
-              <img src='/icons/user.png' alt='User' className='h-5 w-5' />
-            </button>
-
-            <button
-              className='relative hover:cursor-pointer'
-              onClick={openCart}
-            >
-              <img src='/icons/cart.png' alt='Cart' className='h-5 w-5' />
-              <div className='bg-green absolute right-[-8px] bottom-[-6px] grid h-4 w-4 place-items-center rounded-full text-[8px] text-white'>
-                0
-              </div>
-            </button>
-          </div>
-        </div>
+        {/* Displays at widths < lg */}
+        <MobileHeader />
       </div>
 
-      <div className='min-h-[calc(100dvh-306px-76px-32px)]'>
+      <div className='min-h-[calc(100dvh-76px-766px)] lg:min-h-[calc(100dvh-306px-76px-32px)]'>
         <Outlet />
       </div>
 
