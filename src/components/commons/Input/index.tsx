@@ -41,7 +41,7 @@ const Password = ({
         type={showPassword ? 'text' : 'password'}
         className='h-full w-full outline-none'
       />
-      <button className='hover:cursor-pointer' onClick={toggleShowPassword}>
+      <button className='cursor-pointer' onClick={toggleShowPassword}>
         {showPassword ? (
           <FaRegEyeSlash className='text-dark-green h-6 w-6' />
         ) : (

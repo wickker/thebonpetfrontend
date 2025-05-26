@@ -14,13 +14,11 @@ import { DATE_FORMAT } from './dateSelect'
 import MonthToggler from './MonthToggler'
 
 type DateSelectProps = {
-  date?: string
-  onSelectDate?: (date: string) => void
+  selectedDate: string
+  onSelectDate: (date: string) => void
 }
 
-const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
-  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_FORMAT)
-  const [selectedDate, setSelectedDate] = useState(date || now)
+const DateSelect = ({ selectedDate, onSelectDate }: DateSelectProps) => {
   const selectedDateTime = DateTime.fromFormat(selectedDate, DATE_FORMAT)
   const [month, setMonth] = useState(selectedDateTime.month)
   const [year, setYear] = useState(selectedDateTime.year)
@@ -45,14 +43,13 @@ const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
   }, [month])
 
   const handleSelectDate = (date: DateTime) => {
-    setSelectedDate(date.toFormat(DATE_FORMAT))
-    onSelectDate?.(date.toFormat(DATE_FORMAT))
+    onSelectDate(date.toFormat(DATE_FORMAT))
     setIsOpen(false)
   }
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <button
           className={cn(
             'text-dark-gray focus:border-dark-green grid h-[45px] w-full cursor-pointer grid-cols-[auto_1fr_auto] items-center gap-x-2 border border-[#90988F] px-3 py-2 text-left outline-none hover:border-[2px] focus:border-[2px]',

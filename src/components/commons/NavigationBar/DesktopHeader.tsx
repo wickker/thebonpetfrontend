@@ -20,7 +20,7 @@ const DesktopHeader = ({ onClickUserIcon }: DesktopHeaderProps) => {
       }}
     >
       <button
-        className='text-green text-3xl font-bold hover:cursor-pointer'
+        className='text-green cursor-pointer text-3xl font-bold'
         onClick={() => navigate(ROUTES.HOME)}
       >
         TBP
@@ -32,7 +32,7 @@ const DesktopHeader = ({ onClickUserIcon }: DesktopHeaderProps) => {
 
           return (
             <button
-              className='text-green flex flex-col items-center font-bold hover:cursor-pointer'
+              className='text-green flex cursor-pointer flex-col items-center font-bold'
               key={item.label}
               onClick={() => navigate(item.route)}
             >
@@ -65,7 +65,7 @@ const DesktopHeader = ({ onClickUserIcon }: DesktopHeaderProps) => {
       </div>
 
       <div className='flex items-center gap-x-8'>
-        <button onClick={onClickUserIcon} className='hover:cursor-pointer'>
+        <button onClick={onClickUserIcon} className='cursor-pointer'>
           <img src='/icons/user.png' alt='User' className='h-5 w-5' />
         </button>
 

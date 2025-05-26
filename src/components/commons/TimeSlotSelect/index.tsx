@@ -16,28 +16,24 @@ const timeSlots = [
 ] as const
 
 type TimeSlotSelectProps = {
-  timeSlot?: string
-  onSelectTimeSlot?: (timeSlot: string) => void
+  selectedTimeSlot: string
+  onSelectTimeSlot: (timeSlot: string) => void
 }
 
 const TimeSlotSelect = ({
-  timeSlot,
+  selectedTimeSlot,
   onSelectTimeSlot,
 }: TimeSlotSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(
-    timeSlot || timeSlots[0]
-  )
 
   const handleSelectTimeSlot = (timeSlot: string) => {
-    setSelectedTimeSlot(timeSlot)
-    onSelectTimeSlot?.(timeSlot)
+    onSelectTimeSlot(timeSlot)
     setIsOpen(false)
   }
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <button
           className={cn(
             'text-dark-gray focus:border-dark-green grid h-[45px] w-full cursor-pointer grid-cols-[auto_1fr_auto] items-center gap-x-2 border border-[#90988F] px-3 py-2 text-left outline-none hover:border-[2px] focus:border-[2px]',

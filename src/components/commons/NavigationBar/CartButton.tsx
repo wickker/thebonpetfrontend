@@ -10,7 +10,7 @@ const CartButton = () => {
   const hasCart = cart && getCart.data && getCart.isSuccess
 
   return (
-    <button className='relative hover:cursor-pointer' onClick={openCart}>
+    <button className='relative cursor-pointer' onClick={openCart}>
       <img src='/icons/cart.png' alt='Cart' className='h-5 w-5' />
 
       {hasCart && (

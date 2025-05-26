@@ -37,7 +37,7 @@ const NavigationBar = () => {
         <MobileHeader />
       </div>
 
-      <div className='min-h-[calc(100dvh-76px-766px)] lg:min-h-[calc(100dvh-306px-76px-32px)]'>
+      <div className='min-h-[calc(100dvh-76px-766px)] lg:min-h-[calc(100dvh-330px-76px-32px)]'>
         <Outlet />
       </div>
 
