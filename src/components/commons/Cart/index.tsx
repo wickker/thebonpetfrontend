@@ -43,7 +43,7 @@ const Cart = () => {
               return (
                 <>
                   <Tile key={line.node.id} line={line.node} />
-                  <div className='my-4 flex h-[1px] w-full shrink-0 bg-[#CCBC9E]' />
+                  <div className='my-4 flex h-[1px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
                 </>
               )
             })}
@@ -58,17 +58,22 @@ const Cart = () => {
           </div>
 
           <div
-            className='flex flex-col gap-y-4 px-4 py-6'
+            className='flex flex-col px-4 py-6'
             style={{
               backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
             }}
           >
-            <div className='grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
+            <div className='mb-6 grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
+              <label className='text-dark-green col-span-full mb-2 font-semibold'>
+                Select delivery / pickup date and time
+              </label>
               <DateSelect />
               <TimeSlotSelect />
             </div>
 
-            <div className='flex w-full items-center justify-between'>
+            <div className='flex h-[2px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
+
+            <div className='my-4 flex w-full items-center justify-between'>
               <p className='font-bold'>Estimated total</p>
               <p className='text-2xl font-bold'>
                 {getCart.data?.cost.totalAmount.amount}{' '}
@@ -76,7 +81,7 @@ const Cart = () => {
               </p>
             </div>
 
-            <Button.Plain className='w-full justify-center'>
+            <Button.Plain className='mb-4 w-full justify-center'>
               Checkout
             </Button.Plain>
 
