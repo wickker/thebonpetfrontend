@@ -80,7 +80,7 @@ const Login = () => {
       </Button.Plain>
 
       <button
-        className='text-dark-green mt-3 text-center text-sm underline hover:cursor-pointer'
+        className='text-dark-green mt-3 cursor-pointer text-center text-sm underline'
         onClick={() => navigate(ROUTES.RESET_PASSWORD)}
       >
         Forgot your password?
@@ -89,7 +89,7 @@ const Login = () => {
       <p className='text-dark-gray mt-3 text-center text-sm'>
         Don't have an account?{' '}
         <button
-          className='text-dark-green underline hover:cursor-pointer'
+          className='text-dark-green cursor-pointer underline'
           onClick={() => navigate(ROUTES.SIGNUP)}
         >
           Sign up

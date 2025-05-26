@@ -14,10 +14,7 @@ const Account = () => {
 
         <div className='text-dark-green my-6 flex items-center gap-x-2'>
           <FaRegUser className='h-4 w-4' />
-          <button
-            className='underline hover:cursor-pointer'
-            onClick={handleLogout}
-          >
+          <button className='cursor-pointer underline' onClick={handleLogout}>
             Log out
           </button>
         </div>

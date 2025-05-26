@@ -10,6 +10,8 @@ import {
   CustomerResetByUrlPayload,
   CustomerCreatePayload,
   CustomerCreateInput,
+  MutationCartAttributesUpdateArgs,
+  CartAttributesUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import Config from '@/configs'
@@ -90,10 +92,22 @@ const createCustomer = (
   client
     .request(Customer.Create, {
       variables: {
-        input: request,
+        input: {
+          ...request,
+          acceptsMarketing: true,
+        },
       },
     })
     .then((res) => res.data.customerCreate)
+
+const updateCartAttributes = (
+  request: MutationCartAttributesUpdateArgs
+): Promise<CartAttributesUpdatePayload> =>
+  client
+    .request(Cart.UpdateAttributes, {
+      variables: request,
+    })
+    .then((res) => res.data.cartAttributesUpdate)
 
 export default {
   createCustomer,
@@ -101,6 +115,7 @@ export default {
   updateCartBuyerIdentity,
   sendResetPasswordEmail,
   resetPasswordByUrl,
+  updateCartAttributes,
   getCart,
   getCustomer,
 }

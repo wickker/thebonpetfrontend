@@ -1,19 +1,18 @@
+import { motion } from 'motion/react'
+
 const FeedingGuide = () => {
   return (
     <div className='flex w-[100dvw] flex-col overflow-x-hidden'>
-      <div
-        className='relative grid h-[355px] w-full place-items-center bg-[#03443C] bg-auto bg-bottom'
-        style={{ backgroundImage: `url('/background-feeding-guide.png')` }}
+      <motion.div
+        className='grid h-[355px] w-full place-items-center bg-[#03443C] bg-auto bg-bottom'
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%), conic-gradient(#02443CCC, #02443CCC), url('/background-feeding-guide.png')`,
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ amount: 0.5 }}
       >
-        <div
-          className='absolute top-0 h-[355px] w-full opacity-80'
-          style={{
-            backgroundImage:
-              'linear-gradient(0deg, #02443C, #02443C), linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%)',
-          }}
-        />
-
-        <div className='isolate p-4'>
+        <div className='p-4'>
           <h1 className='text-center text-[66px] font-bold text-[#FFF5E3]'>
             THE BON PET
           </h1>
@@ -22,7 +21,7 @@ const FeedingGuide = () => {
             Feeding Guide
           </h1>
         </div>
-      </div>
+      </motion.div>
 
       <div className='flex flex-col items-center p-4 text-center'>
         <h1 className='text-dark-green text-[52px] font-bold'>
@@ -33,7 +32,7 @@ const FeedingGuide = () => {
           Transition from old to new food over a week
         </p>
 
-        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-10'>
+        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-10 sm:gap-x-14'>
           <div className='grid grid-cols-[auto_1fr] gap-x-1'>
             <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
               1
@@ -115,7 +114,7 @@ const FeedingGuide = () => {
           A quick and simple way to thaw
         </p>
 
-        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-2'>
+        <div className='my-6 grid max-w-md grid-cols-[1fr_1fr] gap-x-10 gap-y-2 sm:gap-x-14'>
           <div className='grid grid-cols-[auto_1fr] gap-x-1'>
             <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
               1

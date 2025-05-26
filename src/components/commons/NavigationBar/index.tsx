@@ -1,43 +1,12 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { BsCart2 } from 'react-icons/bs'
-import { FaRegUser, FaUser } from 'react-icons/fa6'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { Cart, Footer } from '@/components/commons'
 import { ROUTES } from '@/utils/constants'
-import { cn, getTokenJsonFromLocalStorage } from '@/utils/functions'
-
-const navigationItems = [
-  {
-    label: 'Dogs',
-    route: ROUTES.DOGS,
-  },
-  {
-    label: 'Cats',
-    route: ROUTES.CATS,
-  },
-  {
-    label: 'Feeding Guide',
-    route: ROUTES.FEEDING_GUIDE,
-  },
-  {
-    label: 'Pet Food Calculator',
-    route: ROUTES.PET_FOOD_CALCULATOR,
-  },
-  {
-    label: 'Donate',
-    route: ROUTES.DONATE,
-  },
-  {
-    label: 'Blog',
-    route: ROUTES.BLOG,
-  },
-  {
-    label: 'Contact',
-    route: ROUTES.CONTACT,
-  },
-] as const
+import { getTokenJsonFromLocalStorage } from '@/utils/functions'
+import DesktopHeader from './DesktopHeader'
+import MobileHeader from './MobileHeader'
 
 const NavigationBar = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   const customerToken = getTokenJsonFromLocalStorage()
   const isLoggedIn = !!customerToken
 
@@ -51,72 +20,30 @@ const NavigationBar = () => {
 
   return (
     <div
-      className='relative flex min-h-[100dvh] min-w-max flex-col'
-      style={{ backgroundImage: `url('/background.png')` }}
+      className='flex min-h-[100dvh] min-w-full flex-col'
+      style={{
+        backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
+      }}
     >
-      <div className='bg-beige absolute inset-0 opacity-95' />
-
       <div className='sticky top-0 z-10 w-full shadow-lg'>
-        <div className='h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'>
+        <div className='hidden h-8 w-full bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)] lg:block'>
           {/* TODO: */}
         </div>
 
-        <div
-          className='relative grid h-[76px] w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 px-4 lg:px-12'
-          style={{ backgroundImage: `url('/background.png')` }}
-        >
-          <div className='bg-cream absolute h-[76px] w-full opacity-97' />
+        {/* Displays at widths >= lg */}
+        <DesktopHeader onClickUserIcon={handleClickUserIcon} />
 
-          <button
-            className='text-green z-10 text-3xl font-bold hover:cursor-pointer'
-            onClick={() => navigate(ROUTES.HOME)}
-          >
-            TBP
-          </button>
-
-          <div className='z-10 mx-auto hidden items-center gap-x-8 lg:flex xl:gap-x-12'>
-            {navigationItems.map((item) => {
-              const isSelected = location.pathname === item.route
-              return (
-                <button
-                  className='text-green flex flex-col items-center font-semibold hover:cursor-pointer'
-                  key={item.label}
-                  onClick={() => navigate(item.route)}
-                >
-                  {item.label}
-                  <div
-                    className={cn(
-                      'h-[2px] w-full max-w-0 rounded-full transition-all',
-                      isSelected && 'bg-green max-w-full'
-                    )}
-                  />
-                </button>
-              )
-            })}
-          </div>
-
-          <div className='z-10 hidden items-center gap-x-8 lg:flex'>
-            <button
-              onClick={handleClickUserIcon}
-              className='hover:cursor-pointer'
-            >
-              {isLoggedIn ? (
-                <FaUser className='text-green h-5 w-5' />
-              ) : (
-                <FaRegUser className='text-green h-5 w-5' />
-              )}
-            </button>
-
-            <button className='hover:cursor-pointer'>
-              <BsCart2 className='text-green h-6 w-6' />
-            </button>
-          </div>
-        </div>
+        {/* Displays at widths < lg */}
+        <MobileHeader />
       </div>
 
-      <div className='isolate'>
+      <div className='min-h-[calc(100dvh-76px-766px)] lg:min-h-[calc(100dvh-330px-76px-32px)]'>
         <Outlet />
       </div>
+
+      <Footer />
+
+      <Cart />
     </div>
   )
 }

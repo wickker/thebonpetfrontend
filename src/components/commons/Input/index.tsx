@@ -2,11 +2,10 @@ import { InputHTMLAttributes, MouseEvent, useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { cn } from '@/utils/functions'
 
-interface TextProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string
-}
-
-const Text = ({ className, ...props }: TextProps) => {
+const Text = ({
+  className,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <input
       type='text'
@@ -19,11 +18,10 @@ const Text = ({ className, ...props }: TextProps) => {
   )
 }
 
-interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string
-}
-
-const Password = ({ className, ...props }: PasswordProps) => {
+const Password = ({
+  className,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const toggleShowPassword = (e: MouseEvent<HTMLButtonElement>) => {
@@ -43,7 +41,7 @@ const Password = ({ className, ...props }: PasswordProps) => {
         type={showPassword ? 'text' : 'password'}
         className='h-full w-full outline-none'
       />
-      <button className='hover:cursor-pointer' onClick={toggleShowPassword}>
+      <button className='cursor-pointer' onClick={toggleShowPassword}>
         {showPassword ? (
           <FaRegEyeSlash className='text-dark-green h-6 w-6' />
         ) : (

@@ -36,7 +36,7 @@ const Tile = ({
 
   return (
     <motion.div
-      className='z-10 grid h-fit w-full max-w-lg grid-cols-[auto_1fr] overflow-hidden bg-white shadow-lg'
+      className='z-50 grid h-fit w-full max-w-lg grid-cols-[auto_1fr] overflow-hidden bg-white shadow-lg'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -60,7 +60,7 @@ const Tile = ({
                 {title ||
                   `${type.charAt(0).toUpperCase()}${type.toLowerCase().slice(1)}`}
               </h1>
-              <button onClick={onClose} className='hover:cursor-pointer'>
+              <button onClick={onClose} className='cursor-pointer'>
                 <RxCross2 className='h-7 w-7' />
               </button>
             </div>
