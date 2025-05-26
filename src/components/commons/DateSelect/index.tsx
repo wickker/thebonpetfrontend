@@ -7,6 +7,7 @@ import {
 } from '@radix-ui/react-popover'
 import { DateTime } from 'luxon'
 import { FaChevronDown } from 'react-icons/fa6'
+import { IoCalendarOutline } from 'react-icons/io5'
 import { cn } from '@/utils/functions'
 import CalendarCells from './CalendarCells'
 import { DATE_FORMAT } from './dateSelect'
@@ -14,7 +15,7 @@ import MonthToggler from './MonthToggler'
 
 type DateSelectProps = {
   date?: string
-  onSelectDate?: () => void
+  onSelectDate?: (date: string) => void
 }
 
 const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
@@ -45,7 +46,7 @@ const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
 
   const handleSelectDate = (date: DateTime) => {
     setSelectedDate(date.toFormat(DATE_FORMAT))
-    onSelectDate?.()
+    onSelectDate?.(date.toFormat(DATE_FORMAT))
     setIsOpen(false)
   }
 
@@ -54,11 +55,12 @@ const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
       <PopoverTrigger>
         <button
           className={cn(
-            'text-dark-gray focus:border-dark-green flex h-[45px] w-full cursor-pointer items-center justify-between border border-[#90988F] px-3 py-2 text-left outline-none hover:border-[2px] focus:border-[2px]',
+            'text-dark-gray focus:border-dark-green grid h-[45px] w-full cursor-pointer grid-cols-[auto_1fr_auto] items-center gap-x-2 border border-[#90988F] px-3 py-2 text-left outline-none hover:border-[2px] focus:border-[2px]',
             isOpen && 'border-dark-green border-[2px]'
           )}
         >
-          {selectedDate}
+          <IoCalendarOutline className='text-dark-green' />
+          <p className='truncate text-sm'>{selectedDate}</p>
           <FaChevronDown className='text-dark-green' />
         </button>
       </PopoverTrigger>

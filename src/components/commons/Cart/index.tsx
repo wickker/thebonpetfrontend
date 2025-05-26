@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { IoCloseOutline } from 'react-icons/io5'
-import { Button, DateSelect } from '@/components/commons'
+import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions, useIsCartOpen } from '@/store/useCartStore'
 import { ROUTES } from '@/utils/constants'
@@ -63,9 +63,9 @@ const Cart = () => {
               backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
             }}
           >
-            <div className='grid grid-cols-[1fr_1fr] items-center gap-x-2'>
+            <div className='grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
               <DateSelect />
-              <div />
+              <TimeSlotSelect />
             </div>
 
             <div className='flex w-full items-center justify-between'>
