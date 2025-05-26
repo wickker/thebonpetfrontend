@@ -20,7 +20,7 @@ const Footer = () => {
   }
 
   return (
-    <div className='bg-[#03453D] p-6 lg:h-[330px] lg:p-12'>
+    <div className='bg-[#03453D] p-6 lg:p-12'>
       <div className='mb-4 grid w-full gap-x-6 gap-y-4 border-b-[2px] border-white/20 pb-4 lg:grid-cols-[1fr_1fr_1fr_1fr_auto] lg:gap-x-12'>
         <div className='flex flex-col gap-y-2 text-2xl font-bold text-white'>
           TBP
