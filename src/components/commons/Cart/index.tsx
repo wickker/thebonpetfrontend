@@ -1,13 +1,13 @@
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { IoCloseOutline } from 'react-icons/io5'
-import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
+import { TbShoppingBagExclamation } from 'react-icons/tb'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions, useIsCartOpen } from '@/store/useCartStore'
-import { ROUTES } from '@/utils/constants'
 import { getCartJsonFromLocalStorage } from '@/utils/functions'
+import Footer from './Footer'
+import Skeleton from './Skeleton'
 import Tile from './Tile'
-import { hasSubscription } from './utils'
 
 const Cart = () => {
   const cart = getCartJsonFromLocalStorage()
@@ -15,6 +15,51 @@ const Cart = () => {
   const { closeCart } = useCartActions()
   const { useGetCartQuery } = useCart()
   const getCart = useGetCartQuery(cart?.cartId)
+  const hasCart = cart && getCart.data && getCart.isSuccess
+
+  const renderCart = () => {
+    if (getCart.isLoading) {
+      return (
+        <div className='scrollbar flex flex-col overflow-y-auto p-4'>
+          <Skeleton />
+        </div>
+      )
+    }
+
+    if (!hasCart) {
+      return (
+        <div className='scrollbar text-dark-green flex flex-col items-center gap-y-8 overflow-y-auto p-4'>
+          <TbShoppingBagExclamation className='text-green h-20 w-20' />
+          <p className='text-center'>
+            Looks like you have not added any items to your cart yet.
+          </p>
+        </div>
+      )
+    }
+
+    return (
+      <>
+        <div className='scrollbar flex flex-col overflow-y-auto p-4'>
+          {getCart.data?.lines.edges.map((line) => (
+            <>
+              <Tile key={line.node.id} line={line.node} />
+              <div className='my-4 flex h-[1px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
+            </>
+          ))}
+
+          <label className='text-dark-green mb-2 font-semibold'>
+            Order special instructions
+          </label>
+          <textarea
+            className='text-dark-gray focus:border-dark-green block min-h-[66px] w-full border border-[#90988F] px-3 py-2 outline-none hover:border-[2px] focus:border-[2px]'
+            rows={2}
+          />
+        </div>
+
+        <Footer cart={getCart.data} />
+      </>
+    )
+  }
 
   return createPortal(
     <AnimatePresence>
@@ -36,72 +81,7 @@ const Cart = () => {
             </button>
           </div>
 
-          {/* TODO: Handle falsey cart, loading cart etc. */}
-
-          <div className='scrollbar flex flex-col overflow-y-auto p-4'>
-            {getCart.data?.lines.edges.map((line) => {
-              return (
-                <>
-                  <Tile key={line.node.id} line={line.node} />
-                  <div className='my-4 flex h-[1px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
-                </>
-              )
-            })}
-
-            <label className='text-dark-green mb-2 font-semibold'>
-              Order special instructions
-            </label>
-            <textarea
-              className='text-dark-gray focus:border-dark-green block min-h-[66px] w-full border border-[#90988F] px-3 py-2 outline-none hover:border-[2px] focus:border-[2px]'
-              rows={2}
-            />
-          </div>
-
-          <div
-            className='flex flex-col px-4 py-6'
-            style={{
-              backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
-            }}
-          >
-            <div className='mb-6 grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
-              <label className='text-dark-green col-span-full mb-2 font-semibold'>
-                Select delivery / pickup date and time
-              </label>
-              <DateSelect />
-              <TimeSlotSelect />
-            </div>
-
-            <div className='flex h-[2px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
-
-            <div className='my-4 flex w-full items-center justify-between'>
-              <p className='font-bold'>Estimated total</p>
-              <p className='text-2xl font-bold'>
-                {getCart.data?.cost.totalAmount.amount}{' '}
-                {getCart.data?.cost.totalAmount.currencyCode}
-              </p>
-            </div>
-
-            <Button.Plain className='mb-4 w-full justify-center'>
-              Checkout
-            </Button.Plain>
-
-            {hasSubscription(getCart.data) && (
-              <p className='text-dark-green text-center text-xs'>
-                One or more of the items in your cart is a recurring or deferred
-                purchase. By continuing, you agree to the{' '}
-                <a
-                  href={ROUTES.CANCELLATION_POLICY}
-                  target='_blank'
-                  className='cursor-pointer underline'
-                >
-                  cancellation policy
-                </a>{' '}
-                and authorize The Bon Pet to charge your payment method at the
-                prices, frequency and dates listed on this page until the order
-                is
-              </p>
-            )}
-          </div>
+          {renderCart()}
         </motion.div>
       )}
     </AnimatePresence>,
