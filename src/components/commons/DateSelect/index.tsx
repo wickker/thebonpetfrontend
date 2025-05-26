@@ -1,5 +1,13 @@
 import { useCallback, useState } from 'react'
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from '@radix-ui/react-popover'
 import { DateTime } from 'luxon'
+import { FaChevronDown } from 'react-icons/fa6'
+import { cn } from '@/utils/functions'
 import CalendarCells from './CalendarCells'
 import { DATE_FORMAT } from './dateSelect'
 import MonthToggler from './MonthToggler'
@@ -15,6 +23,7 @@ const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
   const selectedDateTime = DateTime.fromFormat(selectedDate, DATE_FORMAT)
   const [month, setMonth] = useState(selectedDateTime.month)
   const [year, setYear] = useState(selectedDateTime.year)
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleGoToNextMonth = useCallback(() => {
     if (month + 1 > 12) {
@@ -37,24 +46,48 @@ const DateSelect = ({ date, onSelectDate }: DateSelectProps) => {
   const handleSelectDate = (date: DateTime) => {
     setSelectedDate(date.toFormat(DATE_FORMAT))
     onSelectDate?.()
+    setIsOpen(false)
   }
 
   return (
-    <div className='text-dark-green flex w-fit flex-col gap-y-2 p-4'>
-      <MonthToggler
-        month={month}
-        year={year}
-        onNext={handleGoToNextMonth}
-        onPrevious={handleGoToPreviousMonth}
-      />
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger>
+        <button
+          className={cn(
+            'text-dark-gray focus:border-dark-green flex h-[45px] w-full cursor-pointer items-center justify-between border border-[#90988F] px-3 py-2 text-left outline-none hover:border-[2px] focus:border-[2px]',
+            isOpen && 'border-dark-green border-[2px]'
+          )}
+        >
+          {selectedDate}
+          <FaChevronDown className='text-dark-green' />
+        </button>
+      </PopoverTrigger>
 
-      <CalendarCells
-        month={month}
-        year={year}
-        selectedDate={selectedDate}
-        onSelectDate={handleSelectDate}
-      />
-    </div>
+      <PopoverPortal>
+        <PopoverContent sideOffset={6} align='start' className='z-20'>
+          <div
+            className='text-dark-green flex w-fit flex-col gap-y-2 rounded p-4 shadow-lg'
+            style={{
+              backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
+            }}
+          >
+            <MonthToggler
+              month={month}
+              year={year}
+              onNext={handleGoToNextMonth}
+              onPrevious={handleGoToPreviousMonth}
+            />
+
+            <CalendarCells
+              month={month}
+              year={year}
+              selectedDate={selectedDate}
+              onSelectDate={handleSelectDate}
+            />
+          </div>
+        </PopoverContent>
+      </PopoverPortal>
+    </Popover>
   )
 }
 

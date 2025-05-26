@@ -1,4 +1,3 @@
-import { DateSelect } from '@/components/commons'
 import useCustomer from '@/hooks/queries/useCustomer'
 
 const Home = () => {
@@ -9,11 +8,7 @@ const Home = () => {
 
   console.log('Customer : ', getCustomer.data)
 
-  return (
-    <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'>
-      <DateSelect />
-    </div>
-  )
+  return <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'></div>
 }
 
 export default Home
