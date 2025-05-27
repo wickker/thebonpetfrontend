@@ -1,9 +1,9 @@
 export default `
-mutation ($attributes: [AttributeInput!]!, $cartId: ID!) {
-  cartAttributesUpdate(attributes: $attributes, cartId: $cartId) {
+mutation ($cartId: ID!, $note: String!) {
+  cartNoteUpdate(cartId: $cartId, note: $note) {
     cart {
       note
-      attributes{
+      attributes {
         key
         value
       }

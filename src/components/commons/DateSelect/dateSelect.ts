@@ -15,7 +15,7 @@ type MonthDayCounter = {
   next: number
 }
 
-export const DATE_FORMAT = 'dd-MM-yyyy'
+export const DATE_SELECT_FORMAT = 'dd-MM-yyyy'
 
 export class DatePickerHandler {
   private month: number
@@ -105,10 +105,11 @@ export class DatePickerHandler {
         const cellDateTime = this.getCellDateTime()
         cells[i].push({
           dateTime: cellDateTime,
-          isSelected: this.selectedDate === cellDateTime.toFormat(DATE_FORMAT),
+          isSelected:
+            this.selectedDate === cellDateTime.toFormat(DATE_SELECT_FORMAT),
           isToday:
-            this.today.toFormat(DATE_FORMAT) ===
-            cellDateTime.toFormat(DATE_FORMAT),
+            this.today.toFormat(DATE_SELECT_FORMAT) ===
+            cellDateTime.toFormat(DATE_SELECT_FORMAT),
           isMonth: cellDateTime.month === this.month,
           isSunday: cellDateTime.weekday === 7,
           isAfterOneWeek: cellDateTime >= this.today.plus({ days: 7 }),

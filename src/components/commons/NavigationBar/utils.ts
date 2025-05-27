@@ -1,6 +1,6 @@
 import { ROUTES } from '@/utils/constants'
 
-export const desktopNavigationItems = [
+export const DESKTOP_NAVIGATION_ITEMS = [
   {
     label: 'Dogs',
     route: ROUTES.DOGS,

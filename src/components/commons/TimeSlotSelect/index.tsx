@@ -7,13 +7,8 @@ import {
 } from '@radix-ui/react-popover'
 import { FaChevronDown } from 'react-icons/fa6'
 import { IoTimeOutline } from 'react-icons/io5'
+import { TIME_SLOTS } from '@/components/commons/Cart/utils'
 import { cn } from '@/utils/functions'
-
-const timeSlots = [
-  '9:00 AM - 12:00 PM',
-  '3:00 PM - 6:00 PM',
-  '6:00 PM - 10:00 PM',
-] as const
 
 type TimeSlotSelectProps = {
   selectedTimeSlot: string
@@ -59,7 +54,7 @@ const TimeSlotSelect = ({
               backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
             }}
           >
-            {timeSlots.map((timeSlot) => (
+            {TIME_SLOTS.map((timeSlot) => (
               <button
                 key={timeSlot}
                 className={cn(

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EmailForm, EmailFormSchema } from '@/@types/customers'
-import { footerItems } from './utils'
+import { FOOTER_ITEMS } from './utils'
 
 const Footer = () => {
   const {
@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {Object.entries(footerItems).map(([key, items]) => (
+        {Object.entries(FOOTER_ITEMS).map(([key, items]) => (
           <div key={key} className='flex flex-col gap-y-2 text-white'>
             <p className='text-xl font-bold'>{key}</p>
             {items.map((item) => (

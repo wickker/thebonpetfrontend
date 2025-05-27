@@ -1,21 +1,33 @@
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { DateTime } from 'luxon'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment } from 'react/jsx-runtime'
 import { IoCloseOutline } from 'react-icons/io5'
 import { TbShoppingBagExclamation } from 'react-icons/tb'
+import { UpdateCartNoteBuyerIdentityAndAttributesResponse } from '@/@types/carts'
 import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
-import { DATE_FORMAT } from '@/components/commons/DateSelect/dateSelect'
+import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
+import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions, useIsCartOpen } from '@/store/useCartStore'
-import { getCartJsonFromLocalStorage } from '@/utils/functions'
+import {
+  getCartJsonFromLocalStorage,
+  getTokenJsonFromLocalStorage,
+} from '@/utils/functions'
 import CheckoutNotice from './CheckoutNotice'
 import Skeleton from './Skeleton'
 import Tile from './Tile'
-import { getDeliveryDate, getTimeSlot } from './utils'
+import {
+  composeAttributes,
+  getDeliveryDate,
+  getTimeSlot,
+  TIME_SLOTS,
+} from './utils'
 
 const Cart = () => {
+  const { toast } = useToastContext()
+
   // cart
   const cart = getCartJsonFromLocalStorage()
   const isCartOpen = useIsCartOpen()
@@ -25,18 +37,47 @@ const Cart = () => {
   const hasCart = cart && getCart.data && getCart.isSuccess
 
   // delivery date, time and special instructions
-  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_FORMAT)
-  const deliveryDate = getDeliveryDate(getCart.data?.attributes)
-  const timeSlot = getTimeSlot(getCart.data?.attributes)
-  const [selectedDate, setSelectedDate] = useState(deliveryDate || now)
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(
-    timeSlot || '9:00 AM - 12:00 PM'
+  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_SELECT_FORMAT)
+  const [selectedDate, setSelectedDate] = useState(now)
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>(
+    TIME_SLOTS[0]
   )
-  const noteRef = useRef<HTMLTextAreaElement>(null)
+  const [note, setNote] = useState('')
+  const [isRedirecting, setIsRedirecting] = useState(false)
+  const { useUpdateCartNoteBuyerIdentityAndAttributesMutation } = useCart()
+  const updateCart = useUpdateCartNoteBuyerIdentityAndAttributesMutation(
+    handleUpdateCartSuccess
+  )
+
+  function handleUpdateCartSuccess(
+    data: UpdateCartNoteBuyerIdentityAndAttributesResponse
+  ) {
+    const errors = [
+      ...data[0].userErrors,
+      ...data[1].userErrors,
+      ...data[2].userErrors,
+    ]
+    if (errors.length > 0) {
+      setIsRedirecting(false)
+      toast.error({ message: errors[0].message })
+      return
+    }
+    window.location.href = getCart.data?.checkoutUrl || ''
+  }
 
   const handleCheckout = () => {
-    console.log(selectedDate, selectedTimeSlot)
-    console.log(noteRef.current?.value)
+    if (!getCart.data?.id) return
+    const token = getTokenJsonFromLocalStorage()
+    const attributes = composeAttributes(selectedTimeSlot, selectedDate)
+    setIsRedirecting(true)
+    updateCart.mutate({
+      cartId: getCart.data.id,
+      note: note.trim() || '',
+      attributes,
+      buyerIdentity: {
+        customerAccessToken: token?.accessToken,
+      },
+    })
   }
 
   const renderCart = () => {
@@ -62,7 +103,7 @@ const Cart = () => {
     return (
       <>
         <div className='scrollbar flex flex-col overflow-y-auto p-4'>
-          {getCart.data?.lines.edges.map((line) => (
+          {getCart.data.lines.edges.map((line) => (
             <Fragment key={line.node.id}>
               <Tile line={line.node} />
               <div className='my-4 flex h-[1px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
@@ -75,7 +116,8 @@ const Cart = () => {
           <textarea
             className='text-dark-gray focus:border-dark-green scrollbar block min-h-[66px] w-full border border-[#90988F] px-3 py-2 outline-none hover:border-[2px] focus:border-[2px]'
             rows={2}
-            ref={noteRef}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
           />
         </div>
 
@@ -110,17 +152,35 @@ const Cart = () => {
           </div>
 
           <Button.Plain
-            className='mb-4 w-full justify-center'
+            className='z-10 mb-4 w-full justify-center'
             onClick={handleCheckout}
+            isLoading={isRedirecting}
           >
             Checkout
           </Button.Plain>
+          {isRedirecting && (
+            <motion.div
+              className='pointer-events-none fixed inset-0 bg-black/30'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            />
+          )}
 
           <CheckoutNotice cart={getCart.data} />
         </div>
       </>
     )
   }
+
+  useEffect(() => {
+    if (!getCart.data) return
+    const date = getDeliveryDate(getCart.data.attributes)
+    const timeSlot = getTimeSlot(getCart.data.attributes)
+
+    if (date) setSelectedDate(date)
+    if (timeSlot) setSelectedTimeSlot(timeSlot)
+    setNote(getCart.data.note || '')
+  }, [getCart.data])
 
   return createPortal(
     <AnimatePresence>

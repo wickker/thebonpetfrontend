@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/utils/constants'
 import { cn } from '@/utils/functions'
 import CartButton from './CartButton'
-import { desktopNavigationItems } from './utils'
+import { DESKTOP_NAVIGATION_ITEMS } from './utils'
 
 type DesktopHeaderProps = {
   onClickUserIcon: () => void
@@ -27,7 +27,7 @@ const DesktopHeader = ({ onClickUserIcon }: DesktopHeaderProps) => {
       </button>
 
       <div className='mx-auto flex items-center gap-x-8 xl:gap-x-12'>
-        {desktopNavigationItems.map((item, index) => {
+        {DESKTOP_NAVIGATION_ITEMS.map((item, index) => {
           const isSelected = location.pathname === item.route
 
           return (
