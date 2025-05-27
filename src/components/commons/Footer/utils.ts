@@ -1,6 +1,6 @@
 import { ROUTES } from '@/utils/constants'
 
-export const footerItems = {
+export const FOOTER_ITEMS = {
   Company: [
     {
       label: 'About',

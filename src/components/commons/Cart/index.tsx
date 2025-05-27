@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
   CartAttributesUpdatePayload,
+  CartBuyerIdentityUpdatePayload,
   CartNoteUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { DateTime } from 'luxon'
@@ -10,11 +11,14 @@ import { Fragment } from 'react/jsx-runtime'
 import { IoCloseOutline } from 'react-icons/io5'
 import { TbShoppingBagExclamation } from 'react-icons/tb'
 import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
-import { DATE_FORMAT } from '@/components/commons/DateSelect/dateSelect'
+import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions, useIsCartOpen } from '@/store/useCartStore'
-import { getCartJsonFromLocalStorage } from '@/utils/functions'
+import {
+  getCartJsonFromLocalStorage,
+  getTokenJsonFromLocalStorage,
+} from '@/utils/functions'
 import CheckoutNotice from './CheckoutNotice'
 import Skeleton from './Skeleton'
 import Tile from './Tile'
@@ -37,22 +41,30 @@ const Cart = () => {
   const hasCart = cart && getCart.data && getCart.isSuccess
 
   // delivery date, time and special instructions
-  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_FORMAT)
+  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_SELECT_FORMAT)
   const [selectedDate, setSelectedDate] = useState(now)
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>(
     TIME_SLOTS[0]
   )
   const [note, setNote] = useState('')
   const [isRedirecting, setIsRedirecting] = useState(false)
-  const { useUpdateCartNoteAndAttributesMutation } = useCart()
-  const updateCart = useUpdateCartNoteAndAttributesMutation(
+  const { useUpdateCartNoteBuyerIdentityAndAttributesMutation } = useCart()
+  const updateCart = useUpdateCartNoteBuyerIdentityAndAttributesMutation(
     handleUpdateCartSuccess
   )
 
   function handleUpdateCartSuccess(
-    data: Array<CartNoteUpdatePayload | CartAttributesUpdatePayload>
+    data: Array<
+      | CartNoteUpdatePayload
+      | CartAttributesUpdatePayload
+      | CartBuyerIdentityUpdatePayload
+    >
   ) {
-    const errors = [...data[0].userErrors, ...data[1].userErrors]
+    const errors = [
+      ...data[0].userErrors,
+      ...data[1].userErrors,
+      ...data[2].userErrors,
+    ]
     if (errors.length > 0) {
       setIsRedirecting(false)
       toast.error({ message: errors[0].message })
@@ -63,12 +75,16 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (!getCart.data?.id) return
+    const token = getTokenJsonFromLocalStorage()
     const attributes = composeAttributes(selectedTimeSlot, selectedDate)
     setIsRedirecting(true)
     updateCart.mutate({
       cartId: getCart.data.id,
       note: note.trim() || '',
       attributes,
+      buyerIdentity: {
+        customerAccessToken: token?.accessToken,
+      },
     })
   }
 

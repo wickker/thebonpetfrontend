@@ -16,7 +16,7 @@ import {
   CartNoteUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
-import { UpdateCartNoteAndAttributesRequqest } from '@/@types/carts'
+import { UpdateCartNoteAndAttributesRequest } from '@/@types/carts'
 import Config from '@/configs'
 import Cart from '@/graphql/cart'
 import Customer from '@/graphql/customer'
@@ -121,11 +121,22 @@ const updateCartNote = (
     })
     .then((res) => res.data.cartNoteUpdate)
 
-const updateCartNoteAndAttributes = async (
-  request: UpdateCartNoteAndAttributesRequqest
-): Promise<Array<CartNoteUpdatePayload | CartAttributesUpdatePayload>> => {
-  const tasks = [updateCartAttributes, updateCartNote]
-  const results: Array<CartNoteUpdatePayload | CartAttributesUpdatePayload> = []
+const updateCartNoteBuyerIdentityAndAttributes = async (
+  request: UpdateCartNoteAndAttributesRequest
+): Promise<
+  Array<
+    | CartNoteUpdatePayload
+    | CartAttributesUpdatePayload
+    | CartBuyerIdentityUpdatePayload
+  >
+> => {
+  const tasks = [updateCartAttributes, updateCartNote, updateCartBuyerIdentity]
+  const results: Array<
+    | CartNoteUpdatePayload
+    | CartAttributesUpdatePayload
+    | CartBuyerIdentityUpdatePayload
+  > = []
+
   for (const task of tasks) {
     const res = await task(request)
     results.push(res)
@@ -139,7 +150,7 @@ export default {
   updateCartBuyerIdentity,
   updateCartNote,
   updateCartAttributes,
-  updateCartNoteAndAttributes,
+  updateCartNoteBuyerIdentityAndAttributes,
   sendResetPasswordEmail,
   resetPasswordByUrl,
   getCart,

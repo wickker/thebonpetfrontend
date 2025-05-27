@@ -6,7 +6,7 @@ import {
   ComponentizableCartLine,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { DateTime } from 'luxon'
-import { DATE_FORMAT } from '@/components/commons/DateSelect/dateSelect'
+import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 
 export const getUnitPrice = (line: CartLine | ComponentizableCartLine) => {
   if (
@@ -44,7 +44,7 @@ export const getDeliveryDate = (attributes: Array<Attribute> = []) => {
   for (const attribute of attributes) {
     if (attribute.key === 'TBP Delivery Date') {
       return DateTime.fromJSDate(new Date(attribute.value as string)).toFormat(
-        DATE_FORMAT
+        DATE_SELECT_FORMAT
       )
     }
   }
@@ -64,7 +64,7 @@ export const composeAttributes = (
   timeSlot: string,
   date: string
 ): Array<AttributeInput> => {
-  const dt = DateTime.fromFormat(date, DATE_FORMAT)
+  const dt = DateTime.fromFormat(date, DATE_SELECT_FORMAT)
   return [
     {
       key: 'TBP Delivery Method',

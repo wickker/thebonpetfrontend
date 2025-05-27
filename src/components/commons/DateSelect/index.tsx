@@ -10,7 +10,7 @@ import { FaChevronDown } from 'react-icons/fa6'
 import { IoCalendarOutline } from 'react-icons/io5'
 import { cn } from '@/utils/functions'
 import CalendarCells from './CalendarCells'
-import { DATE_FORMAT } from './dateSelect'
+import { DATE_SELECT_FORMAT } from './dateSelect'
 import MonthToggler from './MonthToggler'
 
 type DateSelectProps = {
@@ -19,7 +19,7 @@ type DateSelectProps = {
 }
 
 const DateSelect = ({ selectedDate, onSelectDate }: DateSelectProps) => {
-  const selectedDateTime = DateTime.fromFormat(selectedDate, DATE_FORMAT)
+  const selectedDateTime = DateTime.fromFormat(selectedDate, DATE_SELECT_FORMAT)
   const [month, setMonth] = useState(selectedDateTime.month)
   const [year, setYear] = useState(selectedDateTime.year)
   const [isOpen, setIsOpen] = useState(false)
@@ -43,7 +43,7 @@ const DateSelect = ({ selectedDate, onSelectDate }: DateSelectProps) => {
   }, [month])
 
   const handleSelectDate = (date: DateTime) => {
-    onSelectDate(date.toFormat(DATE_FORMAT))
+    onSelectDate(date.toFormat(DATE_SELECT_FORMAT))
     setIsOpen(false)
   }
 

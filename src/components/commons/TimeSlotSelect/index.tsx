@@ -7,8 +7,8 @@ import {
 } from '@radix-ui/react-popover'
 import { FaChevronDown } from 'react-icons/fa6'
 import { IoTimeOutline } from 'react-icons/io5'
+import { TIME_SLOTS } from '@/components/commons/Cart/utils'
 import { cn } from '@/utils/functions'
-import { TIME_SLOTS } from '../Cart/utils'
 
 type TimeSlotSelectProps = {
   selectedTimeSlot: string

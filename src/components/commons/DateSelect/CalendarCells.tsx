@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { cn } from '@/utils/functions'
-import { DATE_FORMAT, DatePickerHandler } from './dateSelect'
+import { DATE_SELECT_FORMAT, DatePickerHandler } from './dateSelect'
 
 const daysOfWeek = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'] as const
 
@@ -30,7 +30,7 @@ const CalendarCells = ({
 
       {cells.map((cell) => (
         <button
-          key={cell.dateTime.toFormat(DATE_FORMAT)}
+          key={cell.dateTime.toFormat(DATE_SELECT_FORMAT)}
           onClick={() => onSelectDate(cell.dateTime)}
           className={cn(
             'hover:bg-green/20 grid h-7 w-7 cursor-pointer place-items-center text-center transition-all hover:rounded-full disabled:cursor-not-allowed disabled:text-neutral-400 disabled:hover:bg-transparent',

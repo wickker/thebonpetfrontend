@@ -25,13 +25,17 @@ const useCart = () => {
       onSuccess,
     })
 
-  const useUpdateCartNoteAndAttributesMutation = (
+  const useUpdateCartNoteBuyerIdentityAndAttributesMutation = (
     onSuccess: (
-      data: Array<CartNoteUpdatePayload | CartAttributesUpdatePayload>
+      data: Array<
+        | CartNoteUpdatePayload
+        | CartAttributesUpdatePayload
+        | CartBuyerIdentityUpdatePayload
+      >
     ) => void
   ) =>
     useMutation({
-      mutationFn: shopifyStorefrontApi.updateCartNoteAndAttributes,
+      mutationFn: shopifyStorefrontApi.updateCartNoteBuyerIdentityAndAttributes,
       retry: false,
       onSuccess,
     })
@@ -39,7 +43,7 @@ const useCart = () => {
   return {
     useGetCartQuery,
     useUpdateCartBuyerIdentityMutation,
-    useUpdateCartNoteAndAttributesMutation,
+    useUpdateCartNoteBuyerIdentityAndAttributesMutation,
   }
 }
 
