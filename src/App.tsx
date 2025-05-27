@@ -12,6 +12,7 @@ import Login from '@/views/Login'
 import SignUp from '@/views/SignUp'
 import SubmitNewPassword from '@/views/SubmitNewPassword'
 import CancellationPolicy from './views/CancellationPolicy'
+import PrivacyPolicy from './views/PrivacyPolicy'
 import RefundPolicy from './views/RefundPolicy'
 import TermsOfService from './views/TermsOfService'
 
@@ -60,6 +61,7 @@ const App = () => {
                 path={ROUTES.CANCELLATION_POLICY}
                 element={<CancellationPolicy />}
               />
+              <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy />} />
 
               {/* Shopify route matches */}
               <Route

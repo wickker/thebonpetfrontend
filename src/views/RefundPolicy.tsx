@@ -3,7 +3,7 @@ const RefundPolicy = () => {
     <div className='mx-auto flex max-w-[100dvw] flex-col items-center lg:max-w-6xl'>
       <div className='flex w-[100dvw] flex-col px-4 sm:w-full md:w-3/4 lg:w-2/3'>
         <h1 className='text-dark-green py-8 text-center text-4xl font-bold'>
-          Refund Policy
+          Refund policy
         </h1>
 
         <div className='text-dark-green space-y-6 pb-12'>
