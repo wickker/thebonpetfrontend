@@ -1,6 +1,7 @@
 import {
   CartAttributesUpdatePayload,
   CartBuyerIdentityUpdatePayload,
+  CartNoteUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import shopifyStorefrontApi from '@/services/api/shopifyStorefrontApi'
@@ -24,11 +25,13 @@ const useCart = () => {
       onSuccess,
     })
 
-  const useUpdateCartAttributesMutation = (
-    onSuccess: (data: CartAttributesUpdatePayload) => void
+  const useUpdateCartNoteAndAttributesMutation = (
+    onSuccess: (
+      data: Array<CartNoteUpdatePayload | CartAttributesUpdatePayload>
+    ) => void
   ) =>
     useMutation({
-      mutationFn: shopifyStorefrontApi.updateCartAttributes,
+      mutationFn: shopifyStorefrontApi.updateCartNoteAndAttributes,
       retry: false,
       onSuccess,
     })
@@ -36,7 +39,7 @@ const useCart = () => {
   return {
     useGetCartQuery,
     useUpdateCartBuyerIdentityMutation,
-    useUpdateCartAttributesMutation,
+    useUpdateCartNoteAndAttributesMutation,
   }
 }
 
