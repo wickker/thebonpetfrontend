@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import {
-  CartAttributesUpdatePayload,
-  CartBuyerIdentityUpdatePayload,
-  CartNoteUpdatePayload,
-} from '@shopify/hydrogen-react/storefront-api-types'
 import { DateTime } from 'luxon'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment } from 'react/jsx-runtime'
 import { IoCloseOutline } from 'react-icons/io5'
 import { TbShoppingBagExclamation } from 'react-icons/tb'
+import { UpdateCartNoteBuyerIdentityAndAttributesResponse } from '@/@types/carts'
 import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
 import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 import { useToastContext } from '@/contexts/useToastContext/context'
@@ -54,11 +50,7 @@ const Cart = () => {
   )
 
   function handleUpdateCartSuccess(
-    data: Array<
-      | CartNoteUpdatePayload
-      | CartAttributesUpdatePayload
-      | CartBuyerIdentityUpdatePayload
-    >
+    data: UpdateCartNoteBuyerIdentityAndAttributesResponse
   ) {
     const errors = [
       ...data[0].userErrors,

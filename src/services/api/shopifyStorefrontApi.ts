@@ -16,7 +16,10 @@ import {
   CartNoteUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
-import { UpdateCartNoteAndAttributesRequest } from '@/@types/carts'
+import {
+  UpdateCartNoteBuyerIdentityAndAttributesRequest,
+  UpdateCartNoteBuyerIdentityAndAttributesResponse,
+} from '@/@types/carts'
 import Config from '@/configs'
 import Cart from '@/graphql/cart'
 import Customer from '@/graphql/customer'
@@ -122,20 +125,10 @@ const updateCartNote = (
     .then((res) => res.data.cartNoteUpdate)
 
 const updateCartNoteBuyerIdentityAndAttributes = async (
-  request: UpdateCartNoteAndAttributesRequest
-): Promise<
-  Array<
-    | CartNoteUpdatePayload
-    | CartAttributesUpdatePayload
-    | CartBuyerIdentityUpdatePayload
-  >
-> => {
+  request: UpdateCartNoteBuyerIdentityAndAttributesRequest
+): Promise<UpdateCartNoteBuyerIdentityAndAttributesResponse> => {
   const tasks = [updateCartAttributes, updateCartNote, updateCartBuyerIdentity]
-  const results: Array<
-    | CartNoteUpdatePayload
-    | CartAttributesUpdatePayload
-    | CartBuyerIdentityUpdatePayload
-  > = []
+  const results: UpdateCartNoteBuyerIdentityAndAttributesResponse = []
 
   for (const task of tasks) {
     const res = await task(request)

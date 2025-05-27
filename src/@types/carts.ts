@@ -1,6 +1,9 @@
 import {
   AttributeInput,
+  CartAttributesUpdatePayload,
   CartBuyerIdentityInput,
+  CartBuyerIdentityUpdatePayload,
+  CartNoteUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 
 export type CartStorage = {
@@ -8,9 +11,15 @@ export type CartStorage = {
   expiresAt: string
 }
 
-export type UpdateCartNoteAndAttributesRequest = {
+export type UpdateCartNoteBuyerIdentityAndAttributesRequest = {
   note: string
   attributes: Array<AttributeInput>
   cartId: string
   buyerIdentity: CartBuyerIdentityInput
 }
+
+export type UpdateCartNoteBuyerIdentityAndAttributesResponse = Array<
+  | CartNoteUpdatePayload
+  | CartAttributesUpdatePayload
+  | CartBuyerIdentityUpdatePayload
+>
