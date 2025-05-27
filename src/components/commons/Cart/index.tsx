@@ -121,12 +121,7 @@ const Cart = () => {
           />
         </div>
 
-        <div
-          className='flex flex-col px-4 py-6'
-          style={{
-            backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
-          }}
-        >
+        <div className='flex flex-col px-4 py-6'>
           <div className='mb-6 grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
             <label className='text-dark-green col-span-full mb-2 font-semibold'>
               Select delivery / pickup date and time
@@ -192,7 +187,7 @@ const Cart = () => {
           exit={{ x: 500 }}
           transition={{ duration: 0.15, type: 'tween' }}
           style={{
-            backgroundImage: `linear-gradient(var(--color-cream-98), var(--color-cream-98)), url('/background.png')`,
+            backgroundImage: `linear-gradient(var(--color-cream-98) 0%, var(--color-cream-98) 46%, var(--color-beige-95) 68%, var(--color-beige-95) 100%), url('/background.png')`,
           }}
         >
           <div className='text-dark-green flex items-center justify-between p-4 text-3xl font-bold'>
