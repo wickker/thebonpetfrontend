@@ -15,10 +15,10 @@ export const ROUTES = {
   CONTACT: '/contact',
   REFUND_POLICY: '/refund-policy',
   PRIVACY_POLICY: '/privacy-policy',
-  TERMS_OF_SERVICE: '/terms-of-service',
   CANCELLATION_POLICY: '/cancellation-policy',
 
-  // needs to match Shopify urls for smooth redirects
+  // match Shopify urls for smooth redirects
+  TERMS_OF_SERVICE: '/policies/terms-of-service',
   LOGIN: '/account/login',
   SIGNUP: '/account/register',
   RESET_PASSWORD: '/account/login#recover',

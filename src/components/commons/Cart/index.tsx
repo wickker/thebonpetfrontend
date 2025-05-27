@@ -110,7 +110,7 @@ const Cart = () => {
             </Fragment>
           ))}
 
-          <label className='text-dark-green mb-2 font-semibold'>
+          <label className='text-dark-green mb-2 font-bold'>
             Order special instructions
           </label>
           <textarea
@@ -123,7 +123,7 @@ const Cart = () => {
 
         <div className='flex flex-col px-4 py-6'>
           <div className='mb-6 grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
-            <label className='text-dark-green col-span-full mb-2 font-semibold'>
+            <label className='text-dark-green col-span-full mb-2 font-bold'>
               Select delivery / pickup date and time
             </label>
             <DateSelect

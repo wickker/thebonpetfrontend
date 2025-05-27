@@ -11,6 +11,7 @@ import Home from '@/views/Home'
 import Login from '@/views/Login'
 import SignUp from '@/views/SignUp'
 import SubmitNewPassword from '@/views/SubmitNewPassword'
+import TermsOfService from './views/TermsOfService'
 
 const App = () => {
   const { toast } = useToastContext()
@@ -55,6 +56,10 @@ const App = () => {
               <Route path={ROUTES.DONATE} element={<></>} />
 
               {/* Shopify route matches */}
+              <Route
+                path={ROUTES.TERMS_OF_SERVICE}
+                element={<TermsOfService />}
+              />
               <Route path={ROUTES.ACCOUNT} element={<Account />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route

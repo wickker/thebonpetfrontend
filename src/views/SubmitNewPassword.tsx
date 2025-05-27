@@ -64,20 +64,20 @@ const SubmitNewPassword = () => {
   return (
     <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'>
       <div className='flex w-[100dvw] flex-col items-center px-4 sm:w-128'>
-        <h1 className='text-dark-green py-8 text-4xl font-semibold'>
+        <h1 className='text-dark-green py-8 text-4xl font-bold'>
           Reset your password
         </h1>
 
         <p className='text-dark-green mb-10'>Enter a new password.</p>
 
         <div className='flex w-[100dvw] flex-col sm:w-96'>
-          <label className='text-dark-green mb-2 font-semibold'>Password</label>
+          <label className='text-dark-green mb-2 font-bold'>Password</label>
           <Input.Password {...register('password')} />
           <p className='mt-2 h-4 text-xs text-red-500'>
             {errors?.password?.message || ''}
           </p>
 
-          <label className='text-dark-green mb-2 font-semibold'>
+          <label className='text-dark-green mb-2 font-bold'>
             Confirm password
           </label>
           <Input.Password {...register('confirmPassword')} />
