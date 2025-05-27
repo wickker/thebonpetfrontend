@@ -1,5 +1,6 @@
 import { CustomerAccessToken } from '@shopify/hydrogen-react/storefront-api-types'
 import { clsx, type ClassValue } from 'clsx'
+import { DateTime } from 'luxon'
 import { twMerge } from 'tailwind-merge'
 import { ZodSchema } from 'zod'
 import { CartStorage } from '@/@types/carts'
@@ -28,4 +29,14 @@ export const getTokenJsonFromLocalStorage = () => {
   const tokenStr = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)
   if (!tokenStr) return
   return jsonSafeParse<CustomerAccessToken>(tokenStr)
+}
+
+export const getShowPromoFromLocalStorage = () => {
+  const expiryStr = localStorage.getItem(
+    LOCAL_STORAGE_KEYS.PROMO_DISMISSED_EXPIRY
+  )
+  if (!expiryStr) return true
+  const expiry = DateTime.fromISO(expiryStr)
+  const now = DateTime.now()
+  return now > expiry
 }
