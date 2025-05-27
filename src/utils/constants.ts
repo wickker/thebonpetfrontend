@@ -13,11 +13,11 @@ export const ROUTES = {
   PET_FOOD_CALCULATOR: '/pet-food-calculator',
   DONATE: '/donate',
   CONTACT: '/contact',
-  REFUND_POLICY: '/refund-policy',
   PRIVACY_POLICY: '/privacy-policy',
   CANCELLATION_POLICY: '/cancellation-policy',
 
   // match Shopify urls for smooth redirects
+  REFUND_POLICY: '/policies/refund-policy',
   TERMS_OF_SERVICE: '/policies/terms-of-service',
   LOGIN: '/account/login',
   SIGNUP: '/account/register',

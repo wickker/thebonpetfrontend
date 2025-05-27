@@ -181,7 +181,7 @@ const Cart = () => {
     <AnimatePresence>
       {isCartOpen && (
         <motion.div
-          className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow sm:max-w-md'
+          className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
           initial={{ x: 500 }}
           animate={{ x: 0 }}
           exit={{ x: 500 }}
@@ -190,7 +190,7 @@ const Cart = () => {
             backgroundImage: `linear-gradient(var(--color-cream-98) 0%, var(--color-cream-98) 46%, var(--color-beige-95) 68%, var(--color-beige-95) 100%), url('/background.png')`,
           }}
         >
-          <div className='text-dark-green flex items-center justify-between p-4 text-3xl font-bold'>
+          <div className='bg-dark-green flex items-center justify-between p-4 text-3xl tracking-wider text-white'>
             CART
             <button onClick={closeCart} className='cursor-pointer'>
               <IoCloseOutline className='h-10 w-10' />

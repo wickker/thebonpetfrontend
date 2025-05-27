@@ -160,10 +160,7 @@ const TermsOfService = () => {
               through the website. These products or Services may have limited
               quantities and are subject to return or exchange only according to
               our{' '}
-              <a
-                href={ROUTES.REFUND_POLICY}
-                className='text-green hover:underline'
-              >
+              <a href={ROUTES.REFUND_POLICY} className='underline'>
                 Refund Policy
               </a>
               .
@@ -220,10 +217,7 @@ const TermsOfService = () => {
             </p>
             <p>
               For more details, please review our{' '}
-              <a
-                href={ROUTES.REFUND_POLICY}
-                className='text-green hover:underline'
-              >
+              <a href={ROUTES.REFUND_POLICY} className='underline'>
                 Refund Policy
               </a>
               .
@@ -543,10 +537,7 @@ const TermsOfService = () => {
             </h2>
             <p>
               Questions about the Terms of Service should be sent to us at{' '}
-              <a
-                href='mailto:hello@thebonpet.com'
-                className='text-green hover:underline'
-              >
+              <a href='mailto:hello@thebonpet.com' className='underline'>
                 hello@thebonpet.com
               </a>
               .

@@ -11,6 +11,8 @@ import Home from '@/views/Home'
 import Login from '@/views/Login'
 import SignUp from '@/views/SignUp'
 import SubmitNewPassword from '@/views/SubmitNewPassword'
+import CancellationPolicy from './views/CancellationPolicy'
+import RefundPolicy from './views/RefundPolicy'
 import TermsOfService from './views/TermsOfService'
 
 const App = () => {
@@ -54,12 +56,17 @@ const App = () => {
               <Route path={ROUTES.CONTACT} element={<></>} />
               <Route path={ROUTES.PET_FOOD_CALCULATOR} element={<></>} />
               <Route path={ROUTES.DONATE} element={<></>} />
+              <Route
+                path={ROUTES.CANCELLATION_POLICY}
+                element={<CancellationPolicy />}
+              />
 
               {/* Shopify route matches */}
               <Route
                 path={ROUTES.TERMS_OF_SERVICE}
                 element={<TermsOfService />}
               />
+              <Route path={ROUTES.REFUND_POLICY} element={<RefundPolicy />} />
               <Route path={ROUTES.ACCOUNT} element={<Account />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route

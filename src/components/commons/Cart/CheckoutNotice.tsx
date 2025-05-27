@@ -12,11 +12,7 @@ const CheckoutNotice = ({ cart }: CheckoutNoticeProps) => {
       <p className='text-dark-green text-center text-xs'>
         One or more of the items in your cart is a recurring or deferred
         purchase. By continuing, you agree to the{' '}
-        <a
-          href={ROUTES.CANCELLATION_POLICY}
-          target='_blank'
-          className='cursor-pointer underline'
-        >
+        <a href={ROUTES.CANCELLATION_POLICY} className='underline'>
           cancellation policy
         </a>{' '}
         and authorize The Bon Pet to charge your payment method at the prices,
