@@ -32,18 +32,18 @@ const Plain = ({
 
 type QuantityProps = {
   quantity: number
-  onRemove: () => void
+  onMinus: () => void
   onAdd: () => void
-  isRemoveLoading?: boolean
+  isMinusLoading?: boolean
   isAddLoading?: boolean
 }
 
 const Quantity = ({
   quantity,
-  onRemove,
+  onMinus,
   onAdd,
   isAddLoading,
-  isRemoveLoading,
+  isMinusLoading,
 }: QuantityProps) => {
   return (
     <div className='border-dark-green text-dark-green flex items-center gap-x-4 border px-2 py-1 text-sm'>
@@ -51,11 +51,11 @@ const Quantity = ({
         className='hover:text-green h-4 w-4 cursor-pointer transition-colors disabled:cursor-not-allowed'
         onClick={(e) => {
           e.preventDefault()
-          onRemove()
+          onMinus()
         }}
-        disabled={isRemoveLoading}
+        disabled={isMinusLoading}
       >
-        {isRemoveLoading ? (
+        {isMinusLoading ? (
           <RiLoader4Fill className='animate-spin' />
         ) : (
           <IoRemoveOutline className='h-4 w-4' />

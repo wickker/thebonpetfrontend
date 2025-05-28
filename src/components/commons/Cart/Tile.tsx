@@ -13,6 +13,7 @@ import useCart from '@/hooks/queries/useCart'
 import { fixVariantName } from '@/utils/functions'
 import { QUERY_KEYS } from '@/utils/queryKeys'
 import { getUnitPrice } from './utils'
+
 type TileProps = {
   line: CartLine | ComponentizableCartLine
   cartId: string
@@ -119,11 +120,11 @@ const Tile = ({ line, cartId }: TileProps) => {
           <Button.Quantity
             quantity={line.quantity}
             onAdd={handleClickAdd}
-            onRemove={handleClickMinus}
+            onMinus={handleClickMinus}
             isAddLoading={
               updateCartQuantity.isPending && buttonClickedRef.current === 'add'
             }
-            isRemoveLoading={
+            isMinusLoading={
               updateCartQuantity.isPending &&
               buttonClickedRef.current === 'minus'
             }
