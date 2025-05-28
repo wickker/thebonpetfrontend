@@ -21,6 +21,16 @@ query ($customerAccessToken: String!, $first: Int) {
           subtotalPrice {
             amount
           }
+          cancelReason
+          canceledAt
+          customerUrl
+          financialStatus
+          fulfillmentStatus
+          statusUrl
+          customAttributes {
+            key
+            value
+          }
           totalPrice {
             amount
           }

@@ -1,6 +1,7 @@
 export const LOCAL_STORAGE_KEYS = {
   ACCESS_TOKEN: 'tbp_access_token', // CustomerAccessToken
   CART: 'tbp_cart', // CartStorage
+  PROMO_DISMISSED_EXPIRY: 'tbp_promo_dismissed_expiry',
 } as const
 
 export const ROUTES = {
@@ -12,12 +13,12 @@ export const ROUTES = {
   PET_FOOD_CALCULATOR: '/pet-food-calculator',
   DONATE: '/donate',
   CONTACT: '/contact',
-  REFUND_POLICY: '/refund-policy',
   PRIVACY_POLICY: '/privacy-policy',
-  TERMS_OF_SERVICE: '/terms-of-service',
   CANCELLATION_POLICY: '/cancellation-policy',
 
-  // needs to match Shopify urls for smooth redirects
+  // match Shopify urls for smooth redirects
+  REFUND_POLICY: '/policies/refund-policy',
+  TERMS_OF_SERVICE: '/policies/terms-of-service',
   LOGIN: '/account/login',
   SIGNUP: '/account/register',
   RESET_PASSWORD: '/account/login#recover',

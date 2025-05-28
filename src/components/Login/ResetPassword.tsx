@@ -44,7 +44,7 @@ const ResetPassword = () => {
 
   return (
     <div className='flex w-[100dvw] flex-col items-center px-4 sm:w-128'>
-      <h1 className='text-dark-green py-8 text-4xl font-semibold'>
+      <h1 className='text-dark-green py-8 text-4xl font-bold'>
         Reset your password
       </h1>
 
@@ -53,7 +53,7 @@ const ResetPassword = () => {
       </p>
 
       <div className='flex w-[100dvw] flex-col sm:w-96'>
-        <label className='text-dark-green mb-2 font-semibold'>Email</label>
+        <label className='text-dark-green mb-2 font-bold'>Email</label>
         <Input.Text {...register('email')} />
         <p className='mt-2 h-4 text-xs text-red-500'>
           {errors?.email?.message || ''}

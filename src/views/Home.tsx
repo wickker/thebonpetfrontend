@@ -1,8 +1,10 @@
 import useCustomer from '@/hooks/queries/useCustomer'
+import { getTokenJsonFromLocalStorage } from '@/utils/functions'
 
 const Home = () => {
+  const token = getTokenJsonFromLocalStorage()
   const { useGetCustomerQuery } = useCustomer()
-  const getCustomer = useGetCustomerQuery('', {
+  const getCustomer = useGetCustomerQuery(token?.accessToken || '', {
     first: 100,
   })
 

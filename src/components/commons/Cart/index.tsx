@@ -110,7 +110,7 @@ const Cart = () => {
             </Fragment>
           ))}
 
-          <label className='text-dark-green mb-2 font-semibold'>
+          <label className='text-dark-green mb-2 font-bold'>
             Order special instructions
           </label>
           <textarea
@@ -121,14 +121,9 @@ const Cart = () => {
           />
         </div>
 
-        <div
-          className='flex flex-col px-4 py-6'
-          style={{
-            backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
-          }}
-        >
+        <div className='flex flex-col px-4 py-6'>
           <div className='mb-6 grid grid-cols-[1fr_1.2fr] items-center gap-x-2'>
-            <label className='text-dark-green col-span-full mb-2 font-semibold'>
+            <label className='text-dark-green col-span-full mb-2 font-bold'>
               Select delivery / pickup date and time
             </label>
             <DateSelect
@@ -186,16 +181,16 @@ const Cart = () => {
     <AnimatePresence>
       {isCartOpen && (
         <motion.div
-          className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow sm:max-w-md'
+          className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
           initial={{ x: 500 }}
           animate={{ x: 0 }}
           exit={{ x: 500 }}
           transition={{ duration: 0.15, type: 'tween' }}
           style={{
-            backgroundImage: `linear-gradient(var(--color-cream-98), var(--color-cream-98)), url('/background.png')`,
+            backgroundImage: `linear-gradient(var(--color-cream-98) 0%, var(--color-cream-98) 46%, var(--color-beige-95) 68%, var(--color-beige-95) 100%), url('/background.png')`,
           }}
         >
-          <div className='text-dark-green flex items-center justify-between p-4 text-3xl font-bold'>
+          <div className='bg-dark-green flex items-center justify-between p-4 text-3xl tracking-wider text-white'>
             CART
             <button onClick={closeCart} className='cursor-pointer'>
               <IoCloseOutline className='h-10 w-10' />

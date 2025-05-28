@@ -51,19 +51,19 @@ const Login = () => {
 
   return (
     <div className='flex w-[100dvw] flex-col px-4 sm:w-96'>
-      <h1 className='text-dark-green py-8 text-center text-4xl font-semibold'>
+      <h1 className='text-dark-green py-8 text-center text-4xl font-bold'>
         Login
       </h1>
 
       <form>
-        <label className='text-dark-green mb-2 font-semibold'>Email</label>
+        <label className='text-dark-green mb-2 font-bold'>Email</label>
         <Input.Text {...register('email')} />
         <p className='mt-2 h-4 text-xs text-red-500'>
           {errors?.email?.message || ''}
         </p>
         <div className='mb-6' />
 
-        <label className='text-dark-green mb-2 font-semibold'>Password</label>
+        <label className='text-dark-green mb-2 font-bold'>Password</label>
         <Input.Password {...register('password')} />
         <p className='mt-2 h-4 text-xs text-red-500'>
           {errors?.password?.message || ''}
