@@ -102,9 +102,9 @@ const Cart = () => {
 
     if (!hasCart) {
       return (
-        <div className='scrollbar text-dark-green flex flex-col items-center gap-y-8 overflow-y-auto p-4'>
+        <div className='scrollbar-green flex flex-col items-center gap-y-8 overflow-y-auto p-4'>
           <TbShoppingBagExclamation className='text-green h-20 w-20' />
-          <p className='text-center'>
+          <p className='text-dark-green text-center'>
             Looks like you have not added any items to your cart yet.
           </p>
         </div>
