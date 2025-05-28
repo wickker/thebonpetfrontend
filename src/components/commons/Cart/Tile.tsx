@@ -1,23 +1,76 @@
+import { MouseEvent, useRef } from 'react'
 import {
   CartLine,
+  CartLinesUpdatePayload,
   ComponentizableCartLine,
 } from '@shopify/hydrogen-react/storefront-api-types'
+import { useQueryClient } from '@tanstack/react-query'
 import { IoTrashOutline } from 'react-icons/io5'
+import { RiLoader4Fill } from 'react-icons/ri'
 import { Button } from '@/components/commons'
-import { getUnitPrice } from './utils'
+import { useToastContext } from '@/contexts/useToastContext/context'
+import useCart from '@/hooks/queries/useCart'
+import { QUERY_KEYS } from '@/utils/queryKeys'
+import { getUnitPrice, fixVariantName } from './utils'
 
 type TileProps = {
   line: CartLine | ComponentizableCartLine
+  cartId: string
 }
 
-const Tile = ({ line }: TileProps) => {
+const Tile = ({ line, cartId }: TileProps) => {
+  const queryClient = useQueryClient()
+  const { toast } = useToastContext()
+  const { useUpdateCartQuantityMutation } = useCart()
+  const updateCartQuantity = useUpdateCartQuantityMutation(
+    handleUpdateCartQuantitySuccess
+  )
+  const buttonClickedRef = useRef<'add' | 'minus' | 'delete' | ''>('')
   const { unitPrice, originalUnitPrice } = getUnitPrice(line)
-  const variantName = line.merchandise.title.includes('g')
-    ? line.merchandise.title
-    : `${line.merchandise.title}g`
+  const variantName = fixVariantName(line.merchandise.title)
   const subscriptionName = line.sellingPlanAllocation
     ? ` | ${line.sellingPlanAllocation.sellingPlan.name}`
     : ''
+  const isDeletePending =
+    buttonClickedRef.current === 'delete' && updateCartQuantity.isPending
+
+  function handleUpdateCartQuantitySuccess(data: CartLinesUpdatePayload) {
+    buttonClickedRef.current = ''
+    if (data.userErrors.length > 0) {
+      toast.error({ message: data.userErrors[0].message })
+      return
+    }
+    queryClient.invalidateQueries({
+      queryKey: QUERY_KEYS.GET_CART(cartId),
+    })
+  }
+
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    buttonClickedRef.current = 'delete'
+    updateCartQuantity.mutate({
+      cartId,
+      lines: [{ id: line.id, quantity: 0 }],
+    })
+  }
+
+  const handleClickAdd = () => {
+    buttonClickedRef.current = 'add'
+    const newQuantity = line.quantity + 1
+    updateCartQuantity.mutate({
+      cartId,
+      lines: [{ id: line.id, quantity: newQuantity }],
+    })
+  }
+
+  const handleClickMinus = () => {
+    buttonClickedRef.current = 'minus'
+    const newQuantity = line.quantity - 1
+    updateCartQuantity.mutate({
+      cartId,
+      lines: [{ id: line.id, quantity: newQuantity }],
+    })
+  }
 
   return (
     <div className='grid grid-cols-[auto_1fr] gap-x-3'>
@@ -43,8 +96,16 @@ const Tile = ({ line }: TileProps) => {
               {subscriptionName}
             </p>
           </div>
-          <button className='cursor-pointer'>
-            <IoTrashOutline className='text-dark-green h-5 w-5' />
+          <button
+            className='hover:text-green text-dark-green cursor-pointer transition-colors disabled:cursor-not-allowed'
+            onClick={handleDelete}
+            disabled={isDeletePending}
+          >
+            {isDeletePending ? (
+              <RiLoader4Fill className='h-5 w-5 animate-spin' />
+            ) : (
+              <IoTrashOutline className='h-5 w-5' />
+            )}
           </button>
         </div>
 
@@ -57,10 +118,15 @@ const Tile = ({ line }: TileProps) => {
           </p>
           <Button.Quantity
             quantity={line.quantity}
-            onAdd={() => {}}
-            onRemove={() => {}}
-            isAddLoading={false}
-            isRemoveLoading={false}
+            onAdd={handleClickAdd}
+            onMinus={handleClickMinus}
+            isAddLoading={
+              updateCartQuantity.isPending && buttonClickedRef.current === 'add'
+            }
+            isMinusLoading={
+              updateCartQuantity.isPending &&
+              buttonClickedRef.current === 'minus'
+            }
           />
         </div>
       </div>

@@ -14,6 +14,8 @@ import {
   CartAttributesUpdatePayload,
   MutationCartNoteUpdateArgs,
   CartNoteUpdatePayload,
+  MutationCartLinesUpdateArgs,
+  CartLinesUpdatePayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import {
@@ -137,15 +139,25 @@ const updateCartNoteBuyerIdentityAndAttributes = async (
   return results
 }
 
+const updateCartQuantity = (
+  request: MutationCartLinesUpdateArgs
+): Promise<CartLinesUpdatePayload> =>
+  client
+    .request(Cart.UpdateQuantity, {
+      variables: request,
+    })
+    .then((res) => res.data.cartLinesUpdate)
+
 export default {
   createCustomer,
   createCustomerAccessToken,
-  updateCartBuyerIdentity,
-  updateCartNote,
-  updateCartAttributes,
-  updateCartNoteBuyerIdentityAndAttributes,
-  sendResetPasswordEmail,
-  resetPasswordByUrl,
   getCart,
   getCustomer,
+  resetPasswordByUrl,
+  sendResetPasswordEmail,
+  updateCartAttributes,
+  updateCartBuyerIdentity,
+  updateCartNote,
+  updateCartNoteBuyerIdentityAndAttributes,
+  updateCartQuantity,
 }

@@ -21,6 +21,21 @@ body {
   border-radius: 8px;
 }
 
+.scrollbar-green::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-green::-webkit-scrollbar-thumb {
+  background-color: #14423d33;
+  border-radius: 8px;
+}
+
+.scrollbar-green::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  border-radius: 8px;
+}
+
 .grid-stack {
   display: grid;
 }

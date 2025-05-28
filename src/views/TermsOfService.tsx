@@ -321,8 +321,11 @@ const TermsOfService = () => {
             </h2>
             <p>
               Your submission of personal information through the store is
-              governed by our Privacy Policy, which can be viewed here:
-              {/* TODO: */}
+              governed by our{' '}
+              <a href={ROUTES.PRIVACY_POLICY} className='underline'>
+                Privacy Policy
+              </a>
+              .
             </p>
           </section>
 

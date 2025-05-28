@@ -32,27 +32,30 @@ const Plain = ({
 
 type QuantityProps = {
   quantity: number
-  onRemove: () => void
+  onMinus: () => void
   onAdd: () => void
-  isRemoveLoading?: boolean
+  isMinusLoading?: boolean
   isAddLoading?: boolean
 }
 
 const Quantity = ({
   quantity,
-  onRemove,
+  onMinus,
   onAdd,
   isAddLoading,
-  isRemoveLoading,
+  isMinusLoading,
 }: QuantityProps) => {
   return (
     <div className='border-dark-green text-dark-green flex items-center gap-x-4 border px-2 py-1 text-sm'>
       <button
-        className='h-4 w-4 cursor-pointer disabled:cursor-not-allowed'
-        onClick={onRemove}
-        disabled={isRemoveLoading}
+        className='hover:text-green h-4 w-4 cursor-pointer transition-colors disabled:cursor-not-allowed'
+        onClick={(e) => {
+          e.preventDefault()
+          onMinus()
+        }}
+        disabled={isMinusLoading}
       >
-        {isRemoveLoading ? (
+        {isMinusLoading ? (
           <RiLoader4Fill className='animate-spin' />
         ) : (
           <IoRemoveOutline className='h-4 w-4' />
@@ -60,8 +63,11 @@ const Quantity = ({
       </button>
       <p>{quantity}</p>
       <button
-        className='h-4 w-4 cursor-pointer disabled:cursor-not-allowed'
-        onClick={onAdd}
+        className='hover:text-green h-4 w-4 cursor-pointer transition-colors disabled:cursor-not-allowed'
+        onClick={(e) => {
+          e.preventDefault()
+          onAdd()
+        }}
         disabled={isAddLoading}
       >
         {isAddLoading ? (
