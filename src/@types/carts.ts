@@ -23,3 +23,9 @@ export type UpdateCartNoteBuyerIdentityAndAttributesResponse = Array<
   | CartAttributesUpdatePayload
   | CartBuyerIdentityUpdatePayload
 >
+
+export type CartForm = {
+  note: string
+  date: string
+  timeSlot: string
+}

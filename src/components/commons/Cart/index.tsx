@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Controller, useForm } from 'react-hook-form'
 import { DateTime } from 'luxon'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment } from 'react/jsx-runtime'
 import { IoCloseOutline } from 'react-icons/io5'
 import { TbShoppingBagExclamation } from 'react-icons/tb'
-import { UpdateCartNoteBuyerIdentityAndAttributesResponse } from '@/@types/carts'
+import {
+  CartForm,
+  UpdateCartNoteBuyerIdentityAndAttributesResponse,
+} from '@/@types/carts'
 import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
 import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 import { useToastContext } from '@/contexts/useToastContext/context'
@@ -37,12 +41,13 @@ const Cart = () => {
   const hasCart = cart && getCart.data && getCart.isSuccess
 
   // delivery date, time and special instructions
-  const now = DateTime.now().plus({ day: 8 }).toFormat(DATE_SELECT_FORMAT)
-  const [selectedDate, setSelectedDate] = useState(now)
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>(
-    TIME_SLOTS[0]
-  )
-  const [note, setNote] = useState('')
+  const { handleSubmit, register, control, setValue } = useForm<CartForm>({
+    defaultValues: {
+      note: '',
+      date: DateTime.now().plus({ day: 8 }).toFormat(DATE_SELECT_FORMAT),
+      timeSlot: TIME_SLOTS[0],
+    },
+  })
   const [isRedirecting, setIsRedirecting] = useState(false)
   const { useUpdateCartNoteBuyerIdentityAndAttributesMutation } = useCart()
   const updateCart = useUpdateCartNoteBuyerIdentityAndAttributesMutation(
@@ -65,10 +70,11 @@ const Cart = () => {
     window.location.href = getCart.data?.checkoutUrl || ''
   }
 
-  const handleCheckout = () => {
+  const onSubmit = (data: CartForm) => {
     if (!getCart.data?.id) return
+    const { note, date, timeSlot } = data
     const token = getTokenJsonFromLocalStorage()
-    const attributes = composeAttributes(selectedTimeSlot, selectedDate)
+    const attributes = composeAttributes(timeSlot, date)
     setIsRedirecting(true)
     updateCart.mutate({
       cartId: getCart.data.id,
@@ -78,6 +84,11 @@ const Cart = () => {
         customerAccessToken: token?.accessToken,
       },
     })
+  }
+
+  const handleCloseCart = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    closeCart()
   }
 
   const renderCart = () => {
@@ -116,8 +127,7 @@ const Cart = () => {
           <textarea
             className='text-dark-gray focus:border-dark-green scrollbar block min-h-[66px] w-full border border-[#90988F] px-3 py-2 outline-none hover:border-[2px] focus:border-[2px]'
             rows={2}
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
+            {...register('note')}
           />
         </div>
 
@@ -126,13 +136,25 @@ const Cart = () => {
             <label className='text-dark-green col-span-full mb-2 font-bold'>
               Select delivery / pickup date and time
             </label>
-            <DateSelect
-              selectedDate={selectedDate}
-              onSelectDate={setSelectedDate}
+            <Controller
+              control={control}
+              name='date'
+              render={({ field }) => (
+                <DateSelect
+                  selectedDate={field.value}
+                  onSelectDate={field.onChange}
+                />
+              )}
             />
-            <TimeSlotSelect
-              selectedTimeSlot={selectedTimeSlot}
-              onSelectTimeSlot={setSelectedTimeSlot}
+            <Controller
+              control={control}
+              name='timeSlot'
+              render={({ field }) => (
+                <TimeSlotSelect
+                  selectedTimeSlot={field.value}
+                  onSelectTimeSlot={field.onChange}
+                />
+              )}
             />
           </div>
 
@@ -148,8 +170,9 @@ const Cart = () => {
 
           <Button.Plain
             className='z-10 mb-4 w-full justify-center'
-            onClick={handleCheckout}
+            onClick={handleSubmit(onSubmit)}
             isLoading={isRedirecting}
+            type='submit'
           >
             Checkout
           </Button.Plain>
@@ -172,33 +195,35 @@ const Cart = () => {
     const date = getDeliveryDate(getCart.data.attributes)
     const timeSlot = getTimeSlot(getCart.data.attributes)
 
-    if (date) setSelectedDate(date)
-    if (timeSlot) setSelectedTimeSlot(timeSlot)
-    setNote(getCart.data.note || '')
-  }, [getCart.data])
+    if (date) setValue('date', date)
+    if (timeSlot) setValue('timeSlot', timeSlot)
+    setValue('note', getCart.data.note || '')
+  }, [getCart.data, setValue])
 
   return createPortal(
     <AnimatePresence>
       {isCartOpen && (
-        <motion.div
-          className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
-          initial={{ x: 500 }}
-          animate={{ x: 0 }}
-          exit={{ x: 500 }}
-          transition={{ duration: 0.15, type: 'tween' }}
-          style={{
-            backgroundImage: `linear-gradient(var(--color-cream-98) 0%, var(--color-cream-98) 46%, var(--color-beige-95) 68%, var(--color-beige-95) 100%), url('/background.png')`,
-          }}
-        >
-          <div className='bg-dark-green flex items-center justify-between p-4 text-3xl tracking-wider text-white'>
-            CART
-            <button onClick={closeCart} className='cursor-pointer'>
-              <IoCloseOutline className='h-10 w-10' />
-            </button>
-          </div>
+        <form>
+          <motion.div
+            className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
+            initial={{ x: 500 }}
+            animate={{ x: 0 }}
+            exit={{ x: 500 }}
+            transition={{ duration: 0.15, type: 'tween' }}
+            style={{
+              backgroundImage: `linear-gradient(var(--color-cream-98) 0%, var(--color-cream-98) 46%, var(--color-beige-95) 68%, var(--color-beige-95) 100%), url('/background.png')`,
+            }}
+          >
+            <div className='bg-dark-green flex items-center justify-between p-4 text-3xl tracking-wider text-white'>
+              CART
+              <button onClick={handleCloseCart} className='cursor-pointer'>
+                <IoCloseOutline className='h-10 w-10' />
+              </button>
+            </div>
 
-          {renderCart()}
-        </motion.div>
+            {renderCart()}
+          </motion.div>
+        </form>
       )}
     </AnimatePresence>,
     document.body
