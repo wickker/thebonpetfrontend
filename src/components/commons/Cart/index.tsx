@@ -113,11 +113,11 @@ const Cart = () => {
 
     return (
       <>
-        <div className='scrollbar flex flex-col overflow-y-auto p-4'>
+        <div className='scrollbar-green flex flex-col overflow-y-auto p-4'>
           {getCart.data.lines.edges.map((line) => (
             <Fragment key={line.node.id}>
-              <Tile line={line.node} />
-              <div className='my-4 flex h-[1px] w-full shrink-0 rounded-full bg-[#CCBC9E]' />
+              <Tile line={line.node} cartId={getCart.data.id} />
+              <div className='my-4 flex h-[1px] shrink-0 rounded-full bg-[#CCBC9E]' />
             </Fragment>
           ))}
 

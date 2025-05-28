@@ -40,3 +40,10 @@ export const getShowPromoFromLocalStorage = () => {
   const now = DateTime.now()
   return now > expiry
 }
+
+export const fixVariantName = (variantName: string) => {
+  if (parseInt(variantName) && !variantName.includes('g')) {
+    return `${variantName}g`
+  }
+  return variantName
+}

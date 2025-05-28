@@ -48,8 +48,11 @@ const Quantity = ({
   return (
     <div className='border-dark-green text-dark-green flex items-center gap-x-4 border px-2 py-1 text-sm'>
       <button
-        className='h-4 w-4 cursor-pointer disabled:cursor-not-allowed'
-        onClick={onRemove}
+        className='hover:text-green h-4 w-4 cursor-pointer transition-colors disabled:cursor-not-allowed'
+        onClick={(e) => {
+          e.preventDefault()
+          onRemove()
+        }}
         disabled={isRemoveLoading}
       >
         {isRemoveLoading ? (
@@ -60,8 +63,11 @@ const Quantity = ({
       </button>
       <p>{quantity}</p>
       <button
-        className='h-4 w-4 cursor-pointer disabled:cursor-not-allowed'
-        onClick={onAdd}
+        className='hover:text-green h-4 w-4 cursor-pointer transition-colors disabled:cursor-not-allowed'
+        onClick={(e) => {
+          e.preventDefault()
+          onAdd()
+        }}
         disabled={isAddLoading}
       >
         {isAddLoading ? (
