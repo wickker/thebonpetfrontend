@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
@@ -67,6 +67,10 @@ const App = () => {
               <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy />} />
 
               {/* Shopify route matches */}
+              <Route
+                path={ROUTES.CART}
+                element={<Navigate to={`${ROUTES.HOME}?cart=open`} replace />}
+              />
               <Route
                 path={ROUTES.TERMS_OF_SERVICE}
                 element={<TermsOfService />}

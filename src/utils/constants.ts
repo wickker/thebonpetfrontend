@@ -17,6 +17,7 @@ export const ROUTES = {
   CANCELLATION_POLICY: '/cancellation-policy',
 
   // match Shopify urls for smooth redirects
+  CART: '/cart',
   REFUND_POLICY: '/policies/refund-policy',
   TERMS_OF_SERVICE: '/policies/terms-of-service',
   LOGIN: '/account/login',

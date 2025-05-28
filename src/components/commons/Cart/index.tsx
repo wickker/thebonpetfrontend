@@ -113,7 +113,7 @@ const Cart = () => {
 
     return (
       <>
-        <div className='scrollbar-green flex flex-col overflow-y-auto p-4'>
+        <div className='scrollbar-green flex flex-col overflow-y-auto px-4 pt-6 pb-4'>
           {getCart.data.lines.edges.map((line) => (
             <Fragment key={line.node.id}>
               <Tile line={line.node} cartId={getCart.data.id} />
@@ -198,7 +198,8 @@ const Cart = () => {
     if (date) setValue('date', date)
     if (timeSlot) setValue('timeSlot', timeSlot)
     setValue('note', getCart.data.note || '')
-  }, [getCart.data, setValue])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getCart.data])
 
   return createPortal(
     <AnimatePresence>
@@ -214,7 +215,7 @@ const Cart = () => {
               backgroundImage: `linear-gradient(var(--color-cream-98) 0%, var(--color-cream-98) 46%, var(--color-beige-95) 68%, var(--color-beige-95) 100%), url('/background.png')`,
             }}
           >
-            <div className='bg-dark-green flex items-center justify-between p-4 text-3xl tracking-wider text-white'>
+            <div className='bg-dark-green flex items-center justify-between px-4 py-2 text-3xl tracking-wider text-white'>
               CART
               <button onClick={handleCloseCart} className='cursor-pointer'>
                 <IoCloseOutline className='h-10 w-10' />

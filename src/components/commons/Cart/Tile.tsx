@@ -10,9 +10,8 @@ import { RiLoader4Fill } from 'react-icons/ri'
 import { Button } from '@/components/commons'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
-import { fixVariantName } from '@/utils/functions'
 import { QUERY_KEYS } from '@/utils/queryKeys'
-import { getUnitPrice } from './utils'
+import { getUnitPrice, fixVariantName } from './utils'
 
 type TileProps = {
   line: CartLine | ComponentizableCartLine
