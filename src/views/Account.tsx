@@ -19,7 +19,7 @@ const Account = () => {
           </button>
         </div>
 
-        <h1 className='text-dark-green mt-8 text-4xl font-bold'>
+        <h1 className='text-dark-green my-8 text-4xl font-bold'>
           Order history
         </h1>
       </div>
