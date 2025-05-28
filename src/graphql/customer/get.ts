@@ -45,25 +45,6 @@ query ($customerAccessToken: String!, $first: Int) {
               quantity
               variant {
                 id
-                sellingPlanAllocations(first: 10) {
-                  nodes {
-                    sellingPlan {
-                      id
-                      name
-                    }
-                    priceAdjustments {
-                      price {
-                        amount
-                      }
-                      compareAtPrice {
-                        amount
-                      }
-                      perDeliveryPrice {
-                        amount
-                      }
-                    }
-                  }
-                }
                 image {
                   url
                 }

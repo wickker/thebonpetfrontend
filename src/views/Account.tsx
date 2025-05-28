@@ -51,13 +51,13 @@ const Account = () => {
 
     if (!hasOrders) {
       return (
-        <div className='col-span-full flex flex-col items-center justify-center py-8'>
-          <div className='mb-1 flex items-center'>
+        <div className='col-span-full flex flex-col items-center justify-center gap-y-2 py-8'>
+          <div className='flex items-center'>
             <FiXCircle className='text-dark-green mr-2 h-5 w-5' />
-            <p className='text-dark-green text-lg font-medium'>No orders yet</p>
+            <p className='text-dark-green text-lg'>No orders yet</p>
           </div>
-          <p className='text-dark-green/70 mt-1'>
-            Your order history will appear here once you make a purchase
+          <p className='text-dark-green/70'>
+            Your order history will appear here once you have made a purchase
           </p>
         </div>
       )
