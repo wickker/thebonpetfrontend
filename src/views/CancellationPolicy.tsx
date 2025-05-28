@@ -11,7 +11,7 @@ const CancellationPolicy = () => {
           you can change or cancel these kinds of purchases.
         </p>
 
-        <h2 className='text-dark-green py-4 text-2xl font-semibold'>
+        <h2 className='text-dark-green py-4 text-2xl font-bold'>
           Subscriptions
         </h2>
         <p className='mb-3'>
@@ -36,9 +36,7 @@ const CancellationPolicy = () => {
           See our returns policy for more details on returns and refunds.
         </p>
 
-        <h2 className='text-dark-green py-4 text-2xl font-semibold'>
-          Pre-orders
-        </h2>
+        <h2 className='text-dark-green py-4 text-2xl font-bold'>Pre-orders</h2>
         <p className='mb-3'>
           When you purchase a pre-order, you are buying an out-of-stock or
           soon-to-be-available product not yet in inventory. We may collect no
@@ -53,7 +51,7 @@ const CancellationPolicy = () => {
           policy for more details on returns and refunds.
         </p>
 
-        <h2 className='text-dark-green py-4 text-2xl font-semibold'>
+        <h2 className='text-dark-green py-4 text-2xl font-bold'>
           Try before you buy
         </h2>
         <p className='mb-6'>
