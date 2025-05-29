@@ -1,25 +1,17 @@
 import { Fragment, PropsWithChildren } from 'react'
 import { DateTime } from 'luxon'
 import { FaRegUser } from 'react-icons/fa6'
-import { FiXCircle } from 'react-icons/fi'
+import { MobileView, NoOrdersYet } from '@/components/Account'
+import { ORDER_FIELDS } from '@/components/Account/utils'
 import useCustomer from '@/hooks/queries/useCustomer'
 import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
 import { getTokenJsonFromLocalStorage } from '@/utils/functions'
 
-const columnHeaders = [
-  'Order',
-  'Date',
-  'Payment Status',
-  'Fulfillment Status',
-  'Total',
-] as const
-
 const Skeleton = () =>
   Array.from({ length: 5 }).map((_, i) => (
-    <div
-      key={i}
-      className='bg-dark-green/20 my-4 h-4 w-[80%] animate-pulse rounded-full'
-    />
+    <div key={i} className='flex h-[56px] w-[80%] flex-col justify-center py-4'>
+      <div className='bg-dark-green/20 h-4 animate-pulse rounded-full' />
+    </div>
   ))
 
 const HeaderContent = ({ children }: PropsWithChildren) => (
@@ -27,7 +19,7 @@ const HeaderContent = ({ children }: PropsWithChildren) => (
 )
 
 const Content = ({ children }: PropsWithChildren) => (
-  <div className='text-dark-green py-4'>{children}</div>
+  <div className='text-dark-green h-[56px] py-4'>{children}</div>
 )
 
 const Account = () => {
@@ -50,17 +42,7 @@ const Account = () => {
     }
 
     if (!hasOrders) {
-      return (
-        <div className='col-span-full flex flex-col items-center justify-center gap-y-2 py-8'>
-          <div className='flex items-center'>
-            <FiXCircle className='text-dark-green mr-2 h-5 w-5' />
-            <p className='text-dark-green text-lg'>No orders yet</p>
-          </div>
-          <p className='text-dark-green/70'>
-            Your order history will appear here once you have made a purchase
-          </p>
-        </div>
-      )
+      return <NoOrdersYet />
     }
 
     return getCustomer.data.orders.edges
@@ -83,7 +65,7 @@ const Account = () => {
           <Content>{order.node.financialStatus}</Content>
           <Content>{order.node.fulfillmentStatus}</Content>
           <Content>
-            {order.node.totalPrice.amount} {order.node.totalPrice.currencyCode}
+            ${order.node.totalPrice.amount} {order.node.totalPrice.currencyCode}
           </Content>
         </Fragment>
       ))
@@ -101,20 +83,22 @@ const Account = () => {
           </button>
         </div>
 
-        <h1 className='text-dark-green my-8 text-4xl font-bold'>
+        <h1 className='text-dark-green mt-8 mb-2 text-4xl font-bold md:my-8'>
           Order history
         </h1>
 
         {/* Desktop view*/}
         <div className='mb-8 hidden grid-cols-[0.5fr_0.8fr_1fr_1.2fr_0.5fr] items-center gap-x-4 md:grid'>
-          {columnHeaders.map((header) => {
-            return <HeaderContent key={header}>{header}</HeaderContent>
+          {ORDER_FIELDS.map((field) => {
+            return <HeaderContent key={field}>{field}</HeaderContent>
           })}
 
           <div className='bg-dark-green/20 col-span-full h-[1px] w-full' />
 
           {renderOrders()}
         </div>
+
+        <MobileView getCustomer={getCustomer} />
       </div>
     </div>
   )
