@@ -1,19 +1,10 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import useCustomer from '@/hooks/queries/useCustomer'
 import { useCartActions } from '@/store/useCartStore'
-import { getTokenJsonFromLocalStorage } from '@/utils/functions'
 
 const Home = () => {
   const { openCart } = useCartActions()
   const [searchParams, setSearchParams] = useSearchParams()
-  const token = getTokenJsonFromLocalStorage()
-  const { useGetCustomerQuery } = useCustomer()
-  const getCustomer = useGetCustomerQuery(token?.accessToken || '', {
-    first: 100,
-  })
-
-  console.log('Customer : ', getCustomer.data)
 
   useEffect(() => {
     if (searchParams.get('cart')) {

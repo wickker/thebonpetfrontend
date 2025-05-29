@@ -102,10 +102,12 @@ const Cart = () => {
 
     if (!hasCart) {
       return (
-        <div className='scrollbar-green flex flex-col items-center gap-y-8 overflow-y-auto p-4'>
+        <div className='scrollbar-green flex flex-col items-center gap-y-4 overflow-y-auto px-4 py-12'>
           <TbShoppingBagExclamation className='text-green h-20 w-20' />
-          <p className='text-dark-green text-center'>
-            Looks like you have not added any items to your cart yet.
+          <p className='text-dark-green text-center text-lg'>No items yet</p>
+          <p className='text-dark-green/70 text-center'>
+            Browse our selection of premium pet food to keep your furry friends
+            happy and healthy!
           </p>
         </div>
       )

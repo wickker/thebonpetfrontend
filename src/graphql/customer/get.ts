@@ -26,6 +26,7 @@ query ($customerAccessToken: String!, $first: Int) {
           customerUrl
           financialStatus
           fulfillmentStatus
+          processedAt
           statusUrl
           customAttributes {
             key
@@ -33,6 +34,7 @@ query ($customerAccessToken: String!, $first: Int) {
           }
           totalPrice {
             amount
+            currencyCode
           }
           totalShippingPrice {
             amount
@@ -43,25 +45,6 @@ query ($customerAccessToken: String!, $first: Int) {
               quantity
               variant {
                 id
-                sellingPlanAllocations(first: 10) {
-                  nodes {
-                    sellingPlan {
-                      id
-                      name
-                    }
-                    priceAdjustments {
-                      price {
-                        amount
-                      }
-                      compareAtPrice {
-                        amount
-                      }
-                      perDeliveryPrice {
-                        amount
-                      }
-                    }
-                  }
-                }
                 image {
                   url
                 }
