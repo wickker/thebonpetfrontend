@@ -75,10 +75,10 @@ const Cart = () => {
   }
 
   const onSubmit = (data: CartForm) => {
-    if (!getCart.data?.id) return
+    if (!getCart.data) return
     const { note, date, timeSlot } = data
     const token = getTokenJsonFromLocalStorage()
-    const attributes = composeAttributes(timeSlot, date)
+    const attributes = composeAttributes(timeSlot, date, getCart.data)
     setIsRedirecting(true)
     updateCart.mutate({
       cartId: getCart.data.id,

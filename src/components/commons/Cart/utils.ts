@@ -6,7 +6,9 @@ import {
   ComponentizableCartLine,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { DateTime } from 'luxon'
+import { DeliveryDetails, OrderItem } from '@/@types/carts'
 import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
+import { ATTRIBUTE_KEYS } from '@/utils/constants'
 
 export const getUnitPrice = (line: CartLine | ComponentizableCartLine) => {
   if (
@@ -60,31 +62,69 @@ export const getTimeSlot = (attributes: Array<Attribute> = []) => {
   return ''
 }
 
+export const getWeekInterval = (frequency: string) => {
+  if (frequency.includes('2')) return 2
+  if (frequency.includes('3')) return 3
+  if (frequency.includes('4')) return 4
+  if (frequency.includes('5')) return 5
+  if (frequency.includes('6')) return 6
+  return 1
+}
+
+export const getNextDeliveryDate = (date: string, frequency: string) => {
+  const weekInterval = getWeekInterval(frequency)
+  const now = DateTime.now()
+  const dt = DateTime.fromFormat(date, DATE_SELECT_FORMAT)
+  if (now < dt) {
+    return dt.toFormat(DATE_SELECT_FORMAT)
+  }
+  const diff = Math.floor(now.diff(dt, 'days').days)
+  const factor = Math.ceil(diff / (weekInterval * 7))
+  const nextDeliveryDate = dt.plus({ days: factor * 7 * weekInterval })
+  return nextDeliveryDate.toFormat(DATE_SELECT_FORMAT)
+}
+
 export const composeAttributes = (
   timeSlot: string,
-  date: string
+  date: string,
+  cart: Cart
 ): Array<AttributeInput> => {
   const dt = DateTime.fromFormat(date, DATE_SELECT_FORMAT)
+  const deliveryDetails: DeliveryDetails = {
+    date: dt.toFormat('LLL d, yyyy'),
+    day: dt.toFormat('EEEE'),
+    time_slot: timeSlot,
+    customer_time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  }
+
+  const orderItems: Array<OrderItem> = []
+  for (const line of cart.lines.edges) {
+    const variantName = fixVariantName(line.node.merchandise.title)
+    const frequency =
+      line.node.sellingPlanAllocation?.sellingPlan.name.replace(
+        ', 10% off',
+        ''
+      ) || 'Once-off'
+    const item: OrderItem = {
+      name: `${line.node.merchandise.product.title} - ${variantName}`,
+      quantity: line.node.quantity,
+      frequency,
+      delivery_date: date,
+      time_slot: timeSlot,
+      next_delivery_date: getNextDeliveryDate(date, frequency),
+      variant_id: line.node.merchandise.id,
+    }
+    orderItems.push(item)
+  }
+
   return [
     {
-      key: 'TBP Delivery Method',
-      value: 'Delivery',
+      key: ATTRIBUTE_KEYS.DELIVERY_DETAILS,
+      value: JSON.stringify(deliveryDetails),
     },
     {
-      key: 'TBP Delivery Date',
-      value: dt.toFormat('LLL d, yyyy'),
-    },
-    {
-      key: 'TBP Delivery Day',
-      value: dt.toFormat('EEEE'),
-    },
-    {
-      key: 'TBP Delivery Time',
-      value: timeSlot,
-    },
-    {
-      key: 'TBP Customer TimeZone',
-      value: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      key: ATTRIBUTE_KEYS.ITEMS,
+      value: JSON.stringify(orderItems),
     },
   ]
 }

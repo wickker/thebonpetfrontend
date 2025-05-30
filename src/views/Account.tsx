@@ -84,6 +84,13 @@ const Account = () => {
           Order history
         </h1>
 
+        <div className='h-20 w-full bg-[#CCBC9E]/50' />
+        {/* <div className=' bg-cream/30 h-30 w-full' /> */}
+        <br />
+        <div className='h-20 w-full bg-[#CCBC9E]/50' />
+        {/* <div className=' bg-cream/30 h-30 w-full' /> */}
+        <br />
+
         {/* <EmptyDisplay
           title='No orders yet'
           description='Your order history will appear here once you have made a purchase.'
