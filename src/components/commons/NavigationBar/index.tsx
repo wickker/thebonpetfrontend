@@ -1,29 +1,14 @@
 import { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { DateTime } from 'luxon'
 import { Cart, Footer } from '@/components/commons'
-import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
-import {
-  cn,
-  getShowPromoFromLocalStorage,
-  getTokenJsonFromLocalStorage,
-} from '@/utils/functions'
+import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
+import { cn, getShowPromoFromLocalStorage } from '@/utils/functions'
 import DesktopHeader from './DesktopHeader'
 import MobileHeader from './MobileHeader'
 
 const NavigationBar = () => {
   const [showPromo, setShowPromo] = useState(getShowPromoFromLocalStorage())
-  const navigate = useNavigate()
-  const customerToken = getTokenJsonFromLocalStorage()
-  const isLoggedIn = !!customerToken
-
-  const handleClickUserIcon = () => {
-    if (isLoggedIn) {
-      navigate(ROUTES.ACCOUNT)
-      return
-    }
-    navigate(ROUTES.LOGIN)
-  }
 
   const handleDismissPromo = () => {
     localStorage.setItem(
@@ -56,7 +41,7 @@ const NavigationBar = () => {
         )}
 
         {/* Displays at widths >= lg */}
-        <DesktopHeader onClickUserIcon={handleClickUserIcon} />
+        <DesktopHeader />
 
         {/* Displays at widths < lg */}
         <MobileHeader />

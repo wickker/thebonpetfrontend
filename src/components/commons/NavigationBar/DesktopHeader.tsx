@@ -2,13 +2,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/utils/constants'
 import { cn } from '@/utils/functions'
 import CartButton from './CartButton'
+import UserButton from './UserButton'
 import { DESKTOP_NAVIGATION_ITEMS } from './utils'
 
-type DesktopHeaderProps = {
-  onClickUserIcon: () => void
-}
-
-const DesktopHeader = ({ onClickUserIcon }: DesktopHeaderProps) => {
+const DesktopHeader = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -65,9 +62,7 @@ const DesktopHeader = ({ onClickUserIcon }: DesktopHeaderProps) => {
       </div>
 
       <div className='flex items-center gap-x-8'>
-        <button onClick={onClickUserIcon} className='cursor-pointer'>
-          <img src='/icons/user.png' alt='User' className='h-5 w-5' />
-        </button>
+        <UserButton />
 
         <CartButton />
       </div>
