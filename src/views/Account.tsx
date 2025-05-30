@@ -80,9 +80,14 @@ const Account = () => {
           </button>
         </div>
 
-        <h1 className='text-dark-green mt-8 mb-2 text-4xl font-bold md:my-8'>
+        <h1 className='text-dark-green my-8 text-4xl font-bold'>
           Order history
         </h1>
+
+        {/* <EmptyDisplay
+          title='No orders yet'
+          description='Your order history will appear here once you have made a purchase.'
+        /> */}
 
         {/* <div className='mb-8 hidden grid-cols-[0.5fr_0.8fr_1fr_1.2fr_0.5fr] items-center gap-x-4 md:grid'>
           {ORDER_FIELDS.map((field) => {

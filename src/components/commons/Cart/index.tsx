@@ -5,12 +5,16 @@ import { DateTime } from 'luxon'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment } from 'react/jsx-runtime'
 import { IoCloseOutline } from 'react-icons/io5'
-import { TbShoppingBagExclamation } from 'react-icons/tb'
 import {
   CartForm,
   UpdateCartNoteBuyerIdentityAndAttributesResponse,
 } from '@/@types/carts'
-import { Button, DateSelect, TimeSlotSelect } from '@/components/commons'
+import {
+  Button,
+  DateSelect,
+  EmptyDisplay,
+  TimeSlotSelect,
+} from '@/components/commons'
 import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
@@ -102,14 +106,10 @@ const Cart = () => {
 
     if (!hasCart) {
       return (
-        <div className='scrollbar-green flex flex-col items-center gap-y-4 overflow-y-auto px-4 py-12'>
-          <TbShoppingBagExclamation className='text-green h-20 w-20' />
-          <p className='text-dark-green text-center text-lg'>No items yet</p>
-          <p className='text-dark-green/70 text-center'>
-            Browse our selection of premium pet food to keep your furry friends
-            happy and healthy!
-          </p>
-        </div>
+        <EmptyDisplay
+          title='No items yet'
+          description='Browse our selection of premium pet food to keep your furry friends happy and healthy!'
+        />
       )
     }
 
