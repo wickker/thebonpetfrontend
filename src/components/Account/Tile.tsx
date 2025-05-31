@@ -14,22 +14,22 @@ const columnLabels = [
   'Next Fulfillment Date',
 ] as const
 
+const getOrderItems = (order: OrderEdge): Array<OrderItem> => {
+  if (!order.node.customAttributes) return []
+  const orderItem = order.node.customAttributes.find(
+    (attribute) => attribute.key === ATTRIBUTE_KEYS.ITEMS
+  )
+  if (!orderItem) return []
+  return jsonSafeParse<Array<OrderItem>>(orderItem.value as string) || []
+}
+
 type TileProps = {
   order: OrderEdge
 }
 
 const Desktop = ({ order }: TileProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const orderItems = getOrderItems()
-
-  function getOrderItems(): Array<OrderItem> {
-    if (!order.node.customAttributes) return []
-    const orderItem = order.node.customAttributes.find(
-      (attribute) => attribute.key === ATTRIBUTE_KEYS.ITEMS
-    )
-    if (!orderItem) return []
-    return jsonSafeParse<Array<OrderItem>>(orderItem.value as string) || []
-  }
+  const orderItems = getOrderItems(order)
 
   const handleToggleAccordian = () => setIsOpen((prev) => !prev)
 
@@ -75,7 +75,7 @@ const Desktop = ({ order }: TileProps) => {
         )}
       </div>
 
-      {/* Accordian */}
+      {/* Desktop accordian */}
       <div
         className={cn(
           'bg-cream/30 col-span-full h-fit max-h-0 w-full overflow-hidden transition-[max_height]',
@@ -97,7 +97,88 @@ const Desktop = ({ order }: TileProps) => {
               <p>x{item.quantity}</p>
               <p>{item.frequency}</p>
               <p>{item.delivery_date}</p>
-              <p>{item.next_delivery_date}</p>
+              <p>{item.next_delivery_date || 'N.A'}</p>
+            </Fragment>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const Mobile = ({ order }: TileProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const orderItems = getOrderItems(order)
+
+  const handleToggleAccordian = () => setIsOpen((prev) => !prev)
+
+  return (
+    <div>
+      <div className='text-dark-gray flex w-full flex-col bg-[#CCBC9E]/50 p-4'>
+        <div className='flex items-center justify-between gap-x-2'>
+          <a
+            className='text-dark-green text-2xl font-bold underline'
+            href={order.node.statusUrl}
+            target='_blank'
+          >
+            {order.node.name}
+          </a>
+          <p className='text-sm'>
+            {DateTime.fromJSDate(new Date(order.node.processedAt)).toFormat(
+              'd LLL yyyy'
+            )}
+          </p>
+        </div>
+
+        <div className='flex items-center justify-between gap-x-2'>
+          <p>{order.node.financialStatus}</p>
+          <p className='text-2xl font-bold'>
+            {order.node.totalPrice.amount} {order.node.totalPrice.currencyCode}
+          </p>
+        </div>
+
+        <div className='flex items-center justify-between gap-x-2'>
+          <p>{order.node.fulfillmentStatus}</p>
+          {orderItems.length > 0 && (
+            <button
+              className='text-dark-green cursor-pointer'
+              onClick={handleToggleAccordian}
+            >
+              <IoChevronDown
+                className={cn(
+                  'h-6 w-6 transition-transform',
+                  isOpen && 'rotate-180'
+                )}
+              />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Mobile accordian */}
+      <div
+        className={cn(
+          'bg-cream/30 col-span-full h-fit max-h-0 w-full overflow-hidden transition-[max_height]',
+          isOpen && 'max-h-[1000px]'
+        )}
+      >
+        <div className='flex flex-col gap-y-2 p-4 text-sm'>
+          {orderItems.map((item, index) => (
+            <Fragment key={`${item.variant_id}-${index}`}>
+              <p className='font-bold'>{item.name}</p>
+              <div className='item-center flex justify-between'>
+                <p>{item.frequency}</p>
+                <p>x{item.quantity}</p>
+              </div>
+              <div className='item-center flex justify-between'>
+                <p>Fulfillment date:</p>
+                <p>{item.delivery_date}</p>
+              </div>
+              <div className='item-center flex justify-between'>
+                <p>Next fulfillment date:</p>
+                <p>{item.next_delivery_date || 'N.A'}</p>
+              </div>
+              <div className='bg-dark-gray/20 col-span-full h-[1px]' />
             </Fragment>
           ))}
         </div>
@@ -108,6 +189,7 @@ const Desktop = ({ order }: TileProps) => {
 
 const Tile = {
   Desktop,
+  Mobile,
 }
 
 export default Tile

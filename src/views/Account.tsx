@@ -59,6 +59,12 @@ const Account = () => {
         <div className='mb-8 hidden flex-col gap-y-2 md:flex'>
           {renderDesktopOrders()}
         </div>
+
+        <div className='mb-8 flex flex-col gap-y-2 md:hidden'>
+          {orders.map((order) => (
+            <Tile.Mobile key={order.node.id} order={order} />
+          ))}
+        </div>
       </div>
     </div>
   )
