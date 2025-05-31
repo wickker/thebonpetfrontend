@@ -9,6 +9,7 @@ import { DateTime } from 'luxon'
 import { DeliveryDetails, OrderItem } from '@/@types/carts'
 import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 import { ATTRIBUTE_KEYS } from '@/utils/constants'
+import { jsonSafeParse } from '@/utils/functions'
 
 export const getUnitPrice = (line: CartLine | ComponentizableCartLine) => {
   if (
@@ -44,10 +45,15 @@ export const hasSubscription = (cart?: Cart) => {
 
 export const getDeliveryDate = (attributes: Array<Attribute> = []) => {
   for (const attribute of attributes) {
-    if (attribute.key === 'TBP Delivery Date') {
-      return DateTime.fromJSDate(new Date(attribute.value as string)).toFormat(
-        DATE_SELECT_FORMAT
+    if (attribute.key === ATTRIBUTE_KEYS.DELIVERY_DETAILS) {
+      const deliveryDetails = jsonSafeParse<DeliveryDetails>(
+        attribute.value as string
       )
+      return deliveryDetails?.date
+        ? DateTime.fromJSDate(new Date(deliveryDetails.date)).toFormat(
+            DATE_SELECT_FORMAT
+          )
+        : ''
     }
   }
   return ''
@@ -55,8 +61,11 @@ export const getDeliveryDate = (attributes: Array<Attribute> = []) => {
 
 export const getTimeSlot = (attributes: Array<Attribute> = []) => {
   for (const attribute of attributes) {
-    if (attribute.key === 'TBP Delivery Time') {
-      return attribute.value?.toString().trim()
+    if (attribute.key === ATTRIBUTE_KEYS.DELIVERY_DETAILS) {
+      const deliveryDetails = jsonSafeParse<DeliveryDetails>(
+        attribute.value as string
+      )
+      return deliveryDetails?.time_slot || ''
     }
   }
   return ''
@@ -69,19 +78,6 @@ export const getWeekInterval = (frequency: string) => {
   if (frequency.includes('5')) return 5
   if (frequency.includes('6')) return 6
   return 1
-}
-
-export const getNextDeliveryDate = (date: string, frequency: string) => {
-  const weekInterval = getWeekInterval(frequency)
-  const now = DateTime.now()
-  const dt = DateTime.fromFormat(date, DATE_SELECT_FORMAT)
-  if (now < dt) {
-    return dt.toFormat(DATE_SELECT_FORMAT)
-  }
-  const diff = Math.floor(now.diff(dt, 'days').days)
-  const factor = Math.ceil(diff / (weekInterval * 7))
-  const nextDeliveryDate = dt.plus({ days: factor * 7 * weekInterval })
-  return nextDeliveryDate.toFormat(DATE_SELECT_FORMAT)
 }
 
 export const composeAttributes = (
@@ -105,15 +101,21 @@ export const composeAttributes = (
         ', 10% off',
         ''
       ) || 'Once-off'
+    const weekInterval = getWeekInterval(frequency)
+
     const item: OrderItem = {
       name: `${line.node.merchandise.product.title} - ${variantName}`,
       quantity: line.node.quantity,
       frequency,
       delivery_date: date,
       time_slot: timeSlot,
-      next_delivery_date: getNextDeliveryDate(date, frequency),
+      next_delivery_date:
+        frequency === 'Once-off'
+          ? ''
+          : dt.plus({ days: 7 * weekInterval }).toFormat(DATE_SELECT_FORMAT),
       variant_id: line.node.merchandise.id,
     }
+
     orderItems.push(item)
   }
 

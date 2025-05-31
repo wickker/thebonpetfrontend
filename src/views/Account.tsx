@@ -1,22 +1,9 @@
 import { FaRegUser } from 'react-icons/fa6'
+import { Skeleton, Tile } from '@/components/Account'
+import { EmptyDisplay } from '@/components/commons'
 import useCustomer from '@/hooks/queries/useCustomer'
 import { LOCAL_STORAGE_KEYS, ROUTES } from '@/utils/constants'
 import { getTokenJsonFromLocalStorage } from '@/utils/functions'
-
-// const Skeleton = () =>
-//   Array.from({ length: 5 }).map((_, i) => (
-//     <div key={i} className='flex h-[56px] w-[80%] flex-col justify-center py-4'>
-//       <div className='bg-dark-green/20 h-4 animate-pulse rounded-full' />
-//     </div>
-//   ))
-
-// const HeaderContent = ({ children }: PropsWithChildren) => (
-//   <div className='py-4 text-sm font-bold uppercase'>{children}</div>
-// )
-
-// const Content = ({ children }: PropsWithChildren) => (
-//   <div className='text-dark-green h-[56px] py-4'>{children}</div>
-// )
 
 const Account = () => {
   const token = getTokenJsonFromLocalStorage()
@@ -24,49 +11,34 @@ const Account = () => {
   const getCustomer = useGetCustomerQuery(token?.accessToken || '', {
     first: 100,
   })
-  const hasOrders =
-    getCustomer.isSuccess && getCustomer.data.orders.edges.length > 0
-  console.log(hasOrders)
+  const orders = getCustomer.data?.orders.edges.slice().reverse() || []
+  const hasOrders = getCustomer.isSuccess && orders.length > 0
 
   const handleLogout = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)
     window.location.replace(ROUTES.HOME)
   }
 
-  // const renderOrders = () => {
-  //   if (getCustomer.isLoading) {
-  //     return Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} />)
-  //   }
+  const renderDesktopOrders = () => {
+    if (getCustomer.isFetching) {
+      return Array.from({ length: 3 }).map((_, i) => (
+        <Skeleton.Desktop key={i} />
+      ))
+    }
 
-  //   if (!hasOrders) {
-  //     return <NoOrdersYet />
-  //   }
+    if (!hasOrders) {
+      return (
+        <EmptyDisplay
+          title='No orders yet'
+          description='Your order history will appear here once you have made a purchase'
+        />
+      )
+    }
 
-  //   return getCustomer.data.orders.edges
-  //     .slice()
-  //     .reverse()
-  //     .map((order) => (
-  //       <Fragment key={order.node.id}>
-  //         <a
-  //           className='text-green font-bold underline'
-  //           href={order.node.statusUrl}
-  //           target='_blank'
-  //         >
-  //           {order.node.name}
-  //         </a>
-  //         <Content>
-  //           {DateTime.fromJSDate(
-  //             new Date(order.node.processedAt)
-  //           ).toLocaleString(DateTime.DATE_MED)}
-  //         </Content>
-  //         <Content>{order.node.financialStatus}</Content>
-  //         <Content>{order.node.fulfillmentStatus}</Content>
-  //         <Content>
-  //           ${order.node.totalPrice.amount} {order.node.totalPrice.currencyCode}
-  //         </Content>
-  //       </Fragment>
-  //     ))
-  // }
+    return orders.map((order) => (
+      <Tile.Desktop key={order.node.id} order={order} />
+    ))
+  }
 
   return (
     <div className='mx-auto flex max-w-[100dvw] flex-col items-center lg:max-w-6xl'>
@@ -84,29 +56,9 @@ const Account = () => {
           Order history
         </h1>
 
-        <div className='h-20 w-full bg-[#CCBC9E]/50' />
-        {/* <div className=' bg-cream/30 h-30 w-full' /> */}
-        <br />
-        <div className='h-20 w-full bg-[#CCBC9E]/50' />
-        {/* <div className=' bg-cream/30 h-30 w-full' /> */}
-        <br />
-
-        {/* <EmptyDisplay
-          title='No orders yet'
-          description='Your order history will appear here once you have made a purchase.'
-        /> */}
-
-        {/* <div className='mb-8 hidden grid-cols-[0.5fr_0.8fr_1fr_1.2fr_0.5fr] items-center gap-x-4 md:grid'>
-          {ORDER_FIELDS.map((field) => {
-            return <HeaderContent key={field}>{field}</HeaderContent>
-          })}
-
-          <div className='bg-dark-green/20 col-span-full h-[1px] w-full' />
-
-          {renderOrders()}
+        <div className='mb-8 hidden flex-col gap-y-2 md:flex'>
+          {renderDesktopOrders()}
         </div>
-
-        <MobileView getCustomer={getCustomer} /> */}
       </div>
     </div>
   )
