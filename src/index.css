@@ -6,6 +6,10 @@ body {
   overflow-x: hidden;
 }
 
+.custom-stroke {
+  -webkit-text-stroke: 1px black; /* text border */
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 4px;
   height: 4px;

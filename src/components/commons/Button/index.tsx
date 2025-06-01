@@ -30,6 +30,38 @@ const Plain = ({
   )
 }
 
+interface CtaProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode
+  isLoading?: boolean
+  icon?: ReactNode
+}
+
+const Cta = ({
+  children,
+  className = '',
+  isLoading = false,
+  disabled,
+  icon,
+  ...props
+}: CtaProps) => {
+  return (
+    <button
+      className={cn(
+        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 px-4 py-2 text-2xl text-white disabled:hover:cursor-not-allowed',
+        className
+      )}
+      style={{
+        background: 'linear-gradient(180deg, #39AB6D 0%, #10776B 100%)',
+      }}
+      disabled={disabled || isLoading}
+      {...props}
+    >
+      {isLoading ? <RiLoader4Fill className='h-6 w-6 animate-spin' /> : icon}
+      {children}
+    </button>
+  )
+}
+
 type QuantityProps = {
   quantity: number
   onMinus: () => void
@@ -81,6 +113,7 @@ const Quantity = ({
 }
 
 const Button = {
+  Cta,
   Plain,
   Quantity,
 }
