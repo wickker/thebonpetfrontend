@@ -4,6 +4,11 @@ export const LOCAL_STORAGE_KEYS = {
   PROMO_DISMISSED_EXPIRY: 'tbp_promo_dismissed_expiry',
 } as const
 
+export const ATTRIBUTE_KEYS = {
+  DELIVERY_DETAILS: 'tbp_delivery_details',
+  ITEMS: 'tbp_items',
+} as const
+
 export const ROUTES = {
   HOME: '/',
   DOGS: '/dogs',

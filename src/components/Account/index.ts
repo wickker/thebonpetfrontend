@@ -1,3 +1,2 @@
-export { default as MobileSkeleton } from './MobileSkeleton'
-export { default as MobileView } from './MobileView'
-export { default as NoOrdersYet } from './NoOrdersYet'
+export { default as Tile } from './Tile'
+export { default as Skeleton } from './Skeleton'

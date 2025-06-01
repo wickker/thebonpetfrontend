@@ -29,3 +29,20 @@ export type CartForm = {
   date: string
   timeSlot: string
 }
+
+export type DeliveryDetails = {
+  date: string
+  day: string
+  time_slot: string
+  customer_time_zone: string
+}
+
+export type OrderItem = {
+  name: string
+  quantity: number
+  frequency: string
+  delivery_date: string
+  time_slot: string
+  next_delivery_date: string
+  variant_id: string
+}
