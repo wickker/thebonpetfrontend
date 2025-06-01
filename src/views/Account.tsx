@@ -19,6 +19,13 @@ const Account = () => {
     window.location.replace(ROUTES.HOME)
   }
 
+  const emptyDisplay = (
+    <EmptyDisplay
+      title='No orders yet'
+      description='Your order history will appear here once you have made a purchase'
+    />
+  )
+
   const renderDesktopOrders = () => {
     if (getCustomer.isFetching) {
       return Array.from({ length: 3 }).map((_, i) => (
@@ -27,12 +34,7 @@ const Account = () => {
     }
 
     if (!hasOrders) {
-      return (
-        <EmptyDisplay
-          title='No orders yet'
-          description='Your order history will appear here once you have made a purchase'
-        />
-      )
+      return emptyDisplay
     }
 
     return orders.map((order) => (
@@ -48,12 +50,7 @@ const Account = () => {
     }
 
     if (!hasOrders) {
-      return (
-        <EmptyDisplay
-          title='No orders yet'
-          description='Your order history will appear here once you have made a purchase'
-        />
-      )
+      return emptyDisplay
     }
 
     return orders.map((order) => (
