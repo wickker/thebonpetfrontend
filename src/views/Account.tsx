@@ -40,6 +40,27 @@ const Account = () => {
     ))
   }
 
+  const renderMobileOrders = () => {
+    if (getCustomer.isFetching) {
+      return Array.from({ length: 3 }).map((_, i) => (
+        <Skeleton.Mobile key={i} />
+      ))
+    }
+
+    if (!hasOrders) {
+      return (
+        <EmptyDisplay
+          title='No orders yet'
+          description='Your order history will appear here once you have made a purchase'
+        />
+      )
+    }
+
+    return orders.map((order) => (
+      <Tile.Mobile key={order.node.id} order={order} />
+    ))
+  }
+
   return (
     <div className='mx-auto flex max-w-[100dvw] flex-col items-center lg:max-w-6xl'>
       <div className='flex w-[100dvw] flex-col px-4 md:px-8 lg:w-2/3'>
@@ -61,9 +82,7 @@ const Account = () => {
         </div>
 
         <div className='mb-8 flex flex-col gap-y-2 md:hidden'>
-          {orders.map((order) => (
-            <Tile.Mobile key={order.node.id} order={order} />
-          ))}
+          {renderMobileOrders()}
         </div>
       </div>
     </div>
