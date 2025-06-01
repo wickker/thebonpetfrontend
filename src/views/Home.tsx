@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Button } from '@/components/commons'
+import { FaArrowRight } from 'react-icons/fa6'
+import { IoDocumentText } from 'react-icons/io5'
+import { Section1Hero } from '@/components/Home'
 import { useCartActions } from '@/store/useCartStore'
 
 const computeConicGradient = () => {
@@ -28,47 +30,85 @@ const Home = () => {
 
   return (
     <div className='flex w-full flex-col'>
-      {/* Section 1: Introduction */}
-      <div className='relative h-fit md:p-14'>
-        <div
-          className='flex h-full w-full flex-col items-center bg-cover bg-bottom bg-no-repeat px-4 text-white md:rounded-xl'
-          style={{
-            backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.24)), url('/home-introduction.png')`,
-          }}
-        >
+      <Section1Hero />
+
+      <div className='relative flex h-fit flex-col items-center overflow-hidden bg-white'>
+        <div className='z-1 mt-8 mb-8 grid w-full grid-cols-[1fr] gap-4 px-4 lg:mt-50 lg:w-[90%] lg:grid-cols-[1fr_1fr_1fr]'>
           <img
-            src='/home-time-to-eat.png'
-            alt='Time to eat'
-            className='mt-14'
+            src='/badge.png'
+            alt='Badge'
+            className='justify-self-center lg:hidden'
           />
-          <h1
-            className='mx-4 mt-24 mb-8 w-full text-center text-2xl leading-[1.4] text-white md:mt-54 md:w-[60%] md:text-4xl'
-            style={{ textShadow: '1px 1px 5px black' }}
-          >
-            Our obsession with fresh pet food starts with using premium,
-            globally-sourced ingredients
-          </h1>
-          <Button.Cta className='mb-8'>
-            {/* TODO: */}
-            Learn More
-          </Button.Cta>
+
+          <div className='flex flex-col items-center gap-4'>
+            <img
+              src='/home-scales.png'
+              alt='Scales'
+              className='h-[250px] w-[250px] rounded-xl border-[2px] border-[#E9D9BD]'
+            />
+            <h1 className='text-center text-2xl font-bold text-[#FFF3DF]'>
+              Scientifically Balanced
+            </h1>
+            <p className='text-center leading-[1.8] text-[#E9D9BD]'>
+              Developed by PhD nutritionists and made with love, our
+              comprehensive meals <b>exceed AAFCO standards</b>, ensuring a
+              complete and balanced nutrition.
+            </p>
+          </div>
+
+          <div className='flex flex-col items-center gap-4'>
+            <img
+              src='/home-scales.png'
+              alt='Scales'
+              className='h-[250px] w-[250px] rounded-xl border-[2px] border-[#E9D9BD]'
+            />
+            <h1 className='text-center text-2xl font-bold text-[#FFF3DF]'>
+              Restaurant Grade Ingredients
+            </h1>
+            <p className='text-center leading-[1.8] text-[#E9D9BD]'>
+              We only use carefully curated, whole food ingredients and free
+              range chickens, offering quality you'd expect on your plate -
+              crafted for your pet.
+            </p>
+          </div>
+
+          <div className='flex flex-col items-center gap-4'>
+            <img
+              src='/home-scales.png'
+              alt='Scales'
+              className='h-[250px] w-[250px] rounded-xl border-[2px] border-[#E9D9BD]'
+            />
+            <h1 className='text-center text-2xl font-bold text-[#FFF3DF]'>
+              Healthier, Drool-Worthy Meals
+            </h1>
+            <p className='text-center leading-[1.8] text-[#E9D9BD]'>
+              Made for the needs of your furkid, our{' '}
+              <span className='underline'>gently cooked</span> meals provide
+              better breath, better poop, a healthier weight and are always{' '}
+              <b>ethically sourced</b>.
+            </p>
+          </div>
+
+          <button className='my-8 flex w-fit cursor-pointer items-center gap-x-1 justify-self-center rounded-full border-2 border-white/80 bg-white/24 px-4 py-2 text-white lg:col-start-2'>
+            <IoDocumentText className='h-10 w-10' />
+            <div>
+              <div className='flex items-center gap-x-2 text-lg'>
+                Transparency Matters
+                <FaArrowRight />
+              </div>
+              <p className='mr-1 truncate text-sm'>
+                Trace ingredients, supplements & more
+              </p>
+            </div>
+          </button>
         </div>
 
-        <div className='absolute right-0 bottom-[-134px] left-0 hidden place-items-center md:grid'>
-          <img src='/badge.png' alt='Badge' className='z-1' />
-        </div>
-      </div>
-
-      <div className='relative h-[728px] overflow-hidden bg-white'>
         <div
-          className='h-[1300px] w-full translate-y-[-46%] scale-200'
+          className='absolute top-[-670px] h-[1500px] w-full scale-230'
           style={{
             background: `linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(0, 0, 0, 0.24) 75%), radial-gradient(transparent 0%, var(--color-dark-green) 42%, var(--color-dark-green) 100%), conic-gradient(${computeConicGradient()})`,
           }}
         />
-        <div className='absolute top-0 flex h-full w-full flex-col items-center justify-center text-white'>
-          {/* TODO: */}
-        </div>
       </div>
     </div>
   )
