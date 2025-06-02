@@ -8,6 +8,7 @@ import { ROUTES } from '@/utils/constants'
 import {
   Account,
   CancellationPolicy,
+  Cats,
   Contact,
   FeedingGuide,
   Home,
@@ -54,7 +55,7 @@ const App = () => {
             <Route element={<NavigationBar />}>
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route path={ROUTES.DOGS} element={<></>} />
-              <Route path={ROUTES.CATS} element={<></>} />
+              <Route path={ROUTES.CATS} element={<Cats />} />
               <Route path={ROUTES.BLOG} element={<></>} />
               <Route path={ROUTES.FEEDING_GUIDE} element={<FeedingGuide />} />
               <Route path={ROUTES.CONTACT} element={<Contact />} />
