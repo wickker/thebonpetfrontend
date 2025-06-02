@@ -1,5 +1,6 @@
 export { default as Account } from './Account'
 export { default as CancellationPolicy } from './CancellationPolicy'
+export { default as Cats } from './Cats'
 export { default as Contact } from './Contact'
 export { default as FeedingGuide } from './FeedingGuide'
 export { default as Home } from './Home'

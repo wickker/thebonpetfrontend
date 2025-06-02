@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Section1Hero, Section2Guarantee } from '@/components/Home'
 import { useCartActions } from '@/store/useCartStore'
 
 const Home = () => {
@@ -14,7 +15,13 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
 
-  return <div className='mx-auto max-w-[100dvw] lg:max-w-6xl'></div>
+  return (
+    <div className='flex w-full flex-col'>
+      <Section1Hero />
+
+      <Section2Guarantee />
+    </div>
+  )
 }
 
 export default Home
