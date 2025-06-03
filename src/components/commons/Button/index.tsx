@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
 import { RiLoader4Fill } from 'react-icons/ri'
 import { cn } from '@/utils/functions'
@@ -62,7 +63,7 @@ const Cta = ({
   )
 }
 
-type QuantityProps = {
+type CartQuantityProps = {
   quantity: number
   onMinus: () => void
   onAdd: () => void
@@ -70,13 +71,13 @@ type QuantityProps = {
   isAddLoading?: boolean
 }
 
-const Quantity = ({
+const CartQuantity = ({
   quantity,
   onMinus,
   onAdd,
   isAddLoading,
   isMinusLoading,
-}: QuantityProps) => {
+}: CartQuantityProps) => {
   return (
     <div className='border-dark-green text-dark-green flex items-center gap-x-4 border px-2 py-1 text-sm'>
       <button
@@ -112,9 +113,41 @@ const Quantity = ({
   )
 }
 
+type QuantityProps = {
+  quantity: number
+  onMinus: () => void
+  onAdd: () => void
+}
+
+const Quantity = ({ quantity, onMinus, onAdd }: QuantityProps) => {
+  return (
+    <div className='bg-cream grid h-[30px] w-fit grid-cols-[30px_100px_30px] items-center rounded-full'>
+      <button
+        className='bg-dark-green ml-[2.5px] grid h-[25px] w-[25px] cursor-pointer place-items-center rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        onClick={onMinus}
+        disabled={quantity <= 1}
+      >
+        <FaMinus className='h-3 w-3' />
+      </button>
+
+      <p className='text-dark-green justify-self-center text-sm'>
+        <b className='mr-2'>{quantity}</b> Pack(s)
+      </p>
+
+      <button
+        className='bg-dark-green mr-[2.5px] grid h-[25px] w-[25px] cursor-pointer place-items-center justify-self-end rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        onClick={onAdd}
+      >
+        <FaPlus className='h-3 w-3' />
+      </button>
+    </div>
+  )
+}
+
 const Button = {
   Cta,
   Plain,
+  CartQuantity,
   Quantity,
 }
 

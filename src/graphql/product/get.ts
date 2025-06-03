@@ -12,6 +12,8 @@ query ($first: Int) {
         edges {
           node {
             id
+            title
+            sku
             availableForSale
             price {
               amount

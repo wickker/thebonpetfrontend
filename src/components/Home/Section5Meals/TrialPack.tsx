@@ -1,0 +1,82 @@
+import { useState } from 'react'
+import { Product } from '@shopify/hydrogen-react/storefront-api-types'
+import { IoBag } from 'react-icons/io5'
+import { Button } from '@/components/commons'
+import { MeatType } from './utils'
+
+type TrialPackProps = {
+  products: Array<Product>
+  packWeight: string
+}
+
+const TrialPack = ({ products, packWeight }: TrialPackProps) => {
+  const [selectedMeat, setSelectedMeat] = useState<MeatType>(MeatType.BEEF)
+  const [quantity, setQuantity] = useState(1)
+  const product = products.find((product) =>
+    product.title.includes(selectedMeat)
+  )
+  const imageUrl = product?.featuredImage?.url || ''
+  const price = `${product?.variants.edges[0].node.price.amount || ''} ${product?.variants.edges[0].node.price.currencyCode || ''}`
+
+  const handleSelectMeat = (meat: MeatType) => setSelectedMeat(meat)
+
+  return (
+    <div className='bg-beige grid grid-cols-[auto_1fr] items-center gap-x-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928]'>
+      <div
+        className='bg-dark-gray h-[320px] w-[320px] rounded-xl bg-contain bg-center bg-no-repeat'
+        style={{
+          backgroundImage: `url('${imageUrl}')`,
+        }}
+      />
+      <div className='flex flex-col gap-y-2'>
+        <p className='text-[#7B6D57]'>Gently Cooked • Free-Range</p>
+
+        <h1 className='text-4xl font-bold'>Trial Pack</h1>
+
+        <div className='flex items-center gap-x-8 text-lg font-bold'>
+          {Object.values(MeatType).map((meat) => (
+            <label className='flex items-center gap-x-2' key={meat}>
+              <input
+                type='radio'
+                value={meat}
+                checked={selectedMeat === meat}
+                onChange={() => handleSelectMeat(meat)}
+                className='accent-green h-4 w-4'
+              />
+              {meat}
+            </label>
+          ))}
+        </div>
+
+        <p className='text-sm text-[#7B6D57]'>
+          Curious about our meals but not ready to commit to a big batch? Or,
+          just looking to transition to a new protein? Our Trial Pack is perfect
+          for you! Featuring three {packWeight} portions, these conveniently
+          sized packs make it easy to slowly transition your pet by mixing a
+          little into their current food.
+        </p>
+
+        <div className='my-3 flex items-center gap-x-6'>
+          <Button.Quantity
+            quantity={quantity}
+            onMinus={() => setQuantity((prev) => prev - 1)}
+            onAdd={() => setQuantity((prev) => prev + 1)}
+          />
+
+          <p className='flex items-center gap-x-2 text-lg font-bold'>
+            {price}
+            <span className='text-sm font-normal text-[#7B6D57]'>
+              / 3 x {packWeight} Packs
+            </span>
+          </p>
+        </div>
+
+        <Button.Cta icon={<IoBag className='h-6 w-6' />}>
+          Add to Cart
+        </Button.Cta>
+      </div>
+    </div>
+  )
+}
+
+export default TrialPack

@@ -116,7 +116,7 @@ const Tile = ({ line, cartId }: TileProps) => {
             </span>{' '}
             ${unitPrice}
           </p>
-          <Button.Quantity
+          <Button.CartQuantity
             quantity={line.quantity}
             onAdd={handleClickAdd}
             onMinus={handleClickMinus}
