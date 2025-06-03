@@ -131,7 +131,7 @@ const Quantity = ({ quantity, onMinus, onAdd }: QuantityProps) => {
       </button>
 
       <p className='text-dark-green justify-self-center text-sm'>
-        <b className='mr-2'>{quantity}</b> Pack(s)
+        <b className='mr-1'>{quantity}</b> Pack(s)
       </p>
 
       <button

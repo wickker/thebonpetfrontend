@@ -15,17 +15,18 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   const product = products.find((product) =>
     product.title.includes(selectedMeat)
   )
-  const imageUrl = product?.featuredImage?.url || ''
+  // const imageUrl = product?.featuredImage?.url || ''
   const price = `${product?.variants.edges[0].node.price.amount || ''} ${product?.variants.edges[0].node.price.currencyCode || ''}`
 
   const handleSelectMeat = (meat: MeatType) => setSelectedMeat(meat)
 
   return (
-    <div className='bg-beige grid grid-cols-[auto_1fr] items-center gap-x-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928]'>
+    <div className='bg-beige grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[auto_1fr]'>
       <div
-        className='bg-dark-gray h-[320px] w-[320px] rounded-xl bg-contain bg-center bg-no-repeat'
+        className='bg-dark-gray h-[300px] w-[300px] rounded-xl bg-contain bg-center bg-no-repeat'
         style={{
-          backgroundImage: `url('${imageUrl}')`,
+          // backgroundImage: `url('${imageUrl}')`,
+          backgroundImage: `url('https://placehold.co/300x200')`,
         }}
       />
       <div className='flex flex-col gap-y-2'>
@@ -56,7 +57,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
           little into their current food.
         </p>
 
-        <div className='my-3 flex items-center gap-x-6'>
+        <div className='my-2 flex flex-wrap items-center gap-4 lg:my-3'>
           <Button.Quantity
             quantity={quantity}
             onMinus={() => setQuantity((prev) => prev - 1)}

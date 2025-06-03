@@ -33,7 +33,7 @@ const Section5Meals = () => {
           A Different Breed
         </h1>
 
-        <div className='mb-4 grid w-full grid-cols-[1fr_1fr] items-center text-[#443928] lg:w-[30%]'>
+        <div className='mb-4 grid w-full grid-cols-[1fr_1fr] items-center text-[#443928] lg:w-[30%] lg:max-w-[380px]'>
           {TABS.map((tab) => {
             const isSelected = tab.tab === selectedTab
 
@@ -67,7 +67,7 @@ const Section5Meals = () => {
           })}
         </div>
 
-        <div className='grid grid-cols-[5fr_1fr]'>
+        <div className='grid lg:grid-cols-[5fr_1fr]'>
           <TrialPack
             products={trialPackProducts}
             packWeight={selectedTab === Tab.DOGS ? '300g' : '200g'}
