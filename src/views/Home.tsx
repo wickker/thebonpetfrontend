@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { PromoBanner } from '@/components/commons'
 import {
   Section1Hero,
   Section2Guarantee,
@@ -29,6 +30,8 @@ const Home = () => {
       <Section3Guide />
 
       <Section4HowItWorks />
+
+      <PromoBanner />
     </div>
   )
 }
