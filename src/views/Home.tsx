@@ -4,6 +4,7 @@ import {
   Section1Hero,
   Section2Guarantee,
   Section3Guide,
+  Section4HowItWorks,
 } from '@/components/Home'
 import { useCartActions } from '@/store/useCartStore'
 
@@ -26,6 +27,8 @@ const Home = () => {
       <Section2Guarantee />
 
       <Section3Guide />
+
+      <Section4HowItWorks />
     </div>
   )
 }
