@@ -47,7 +47,7 @@ const Cta = ({
   return (
     <button
       className={cn(
-        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 px-4 py-2 text-2xl text-white disabled:hover:cursor-not-allowed',
+        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 px-4 py-2 text-2xl whitespace-nowrap text-white disabled:hover:cursor-not-allowed',
         className
       )}
       style={{
