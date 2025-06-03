@@ -6,6 +6,7 @@ import {
   Section2Guarantee,
   Section3Guide,
   Section4HowItWorks,
+  Section5Meals,
 } from '@/components/Home'
 import { useCartActions } from '@/store/useCartStore'
 
@@ -32,6 +33,8 @@ const Home = () => {
       <Section4HowItWorks />
 
       <PromoBanner />
+
+      <Section5Meals />
     </div>
   )
 }

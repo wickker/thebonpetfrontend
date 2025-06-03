@@ -16,6 +16,12 @@ import {
   CartNoteUpdatePayload,
   MutationCartLinesUpdateArgs,
   CartLinesUpdatePayload,
+  QueryRootProductsArgs,
+  ProductConnection,
+  CartInput,
+  CartCreatePayload,
+  MutationCartLinesAddArgs,
+  CartLinesAddPayload,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import {
@@ -25,6 +31,7 @@ import {
 import Config from '@/configs'
 import Cart from '@/graphql/cart'
 import Customer from '@/graphql/customer'
+import Product from '@/graphql/product'
 
 const client = createStorefrontApiClient({
   storeDomain: Config.VITE_SHOPIFY_SHOP_URL,
@@ -52,6 +59,15 @@ const getCustomer = (
       },
     })
     .then((res) => res.data.customer)
+
+const getProducts = (
+  request: QueryRootProductsArgs
+): Promise<ProductConnection> =>
+  client
+    .request(Product.Get, {
+      variables: request,
+    })
+    .then((res) => res.data.products)
 
 // Mutations
 const createCustomerAccessToken = (
@@ -148,11 +164,32 @@ const updateCartQuantity = (
     })
     .then((res) => res.data.cartLinesUpdate)
 
+const createCart = (request: CartInput): Promise<CartCreatePayload> =>
+  client
+    .request(Cart.Create, {
+      variables: {
+        cartInput: request,
+      },
+    })
+    .then((res) => res.data.cartCreate)
+
+const addItemToCart = (
+  request: MutationCartLinesAddArgs
+): Promise<CartLinesAddPayload> =>
+  client
+    .request(Cart.AddItem, {
+      variables: request,
+    })
+    .then((res) => res.data.cartLinesAdd)
+
 export default {
+  addItemToCart,
+  createCart,
   createCustomer,
   createCustomerAccessToken,
   getCart,
   getCustomer,
+  getProducts,
   resetPasswordByUrl,
   sendResetPasswordEmail,
   updateCartAttributes,
