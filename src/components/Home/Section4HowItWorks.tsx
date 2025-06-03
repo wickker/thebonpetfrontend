@@ -3,7 +3,7 @@ const Section4HowItWorks = () => {
     <img
       src='/home-how-arrow.png'
       alt='How it works arrow'
-      className='mt-[80px] hidden scale-180 lg:block xl:scale-200'
+      className='mt-[80px] hidden scale-180 lg:block xl:scale-240'
     />
   )
 
@@ -20,7 +20,7 @@ const Section4HowItWorks = () => {
           <img
             src='/home-how-1.png'
             alt='How it works 1'
-            className='h-[200px] w-[200px]'
+            className='aspect-square h-[200px] w-[200px] object-cover'
           />
           <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
             1
@@ -40,7 +40,7 @@ const Section4HowItWorks = () => {
           <img
             src='/home-how-2.png'
             alt='How it works 2'
-            className='h-[200px] w-[200px]'
+            className='aspect-square h-[200px] w-[200px] object-cover'
           />
           <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
             2
@@ -60,7 +60,7 @@ const Section4HowItWorks = () => {
           <img
             src='/home-how-3.png'
             alt='How it works 3'
-            className='h-[200px] w-[200px] translate-y-4'
+            className='aspect-square h-[200px] w-[200px] translate-y-6 object-cover'
           />
           <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
             3
@@ -87,7 +87,7 @@ const Section4HowItWorks = () => {
           <img
             src='/home-how-4.png'
             alt='How it works 4'
-            className='h-[200px] w-[200px] translate-y-3'
+            className='aspect-square h-[200px] w-[200px] translate-y-4 object-cover'
           />
           <div className='bg-dark-green text-beige grid h-8 w-8 place-items-center rounded-full text-xl font-bold'>
             4
