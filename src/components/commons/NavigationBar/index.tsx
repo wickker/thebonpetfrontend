@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { DateTime } from 'luxon'
 import { Cart, Footer } from '@/components/commons'
 import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
@@ -8,6 +8,7 @@ import DesktopHeader from './DesktopHeader'
 import MobileHeader from './MobileHeader'
 
 const NavigationBar = () => {
+  const { pathname } = useLocation()
   const [showPromo, setShowPromo] = useState(getShowPromoFromLocalStorage())
 
   const handleDismissPromo = () => {
@@ -17,6 +18,10 @@ const NavigationBar = () => {
     )
     setShowPromo(false)
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
 
   return (
     <div

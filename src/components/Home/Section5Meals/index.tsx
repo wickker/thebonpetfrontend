@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   CartCreatePayload,
   CartLinesAddPayload,
@@ -14,7 +14,7 @@ import { getCartJsonFromLocalStorage } from '@/utils/functions'
 import CalculatorTile from './CalculatorTile'
 import Tabs from './Tabs'
 import TrialPack from './TrialPack'
-import { Tab } from './utils'
+import { AddToCartButton, Tab } from './utils'
 
 const Section5Meals = () => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.DOGS)
@@ -31,6 +31,7 @@ const Section5Meals = () => {
   const getCart = useGetCartQuery(cart?.cartId)
   const addToCart = useAddItemToCartMutation(handleAddToCartSuccess)
   const createCart = useCreateCartMutation(handleCreateCartSuccess)
+  const addToCartButtonRef = useRef<AddToCartButton | ''>('')
 
   // derived state
   const cartExistsWithItems =
@@ -46,6 +47,8 @@ const Section5Meals = () => {
   )
 
   function handleAddToCartSuccess(data: CartLinesAddPayload) {
+    addToCartButtonRef.current = ''
+
     if (data.userErrors.length > 0) {
       toast.error({
         title: 'Failed to add item to cart',
@@ -61,6 +64,8 @@ const Section5Meals = () => {
   }
 
   function handleCreateCartSuccess(data: CartCreatePayload) {
+    addToCartButtonRef.current = ''
+
     if (data.userErrors.length > 0) {
       toast.error({
         title: 'Failed to create cart',
@@ -83,10 +88,13 @@ const Section5Meals = () => {
   }
 
   const addItemToCart = (
+    buttonRef: AddToCartButton,
     variantId: string,
     quantity: number,
     sellingPlanId?: string
   ) => {
+    addToCartButtonRef.current = buttonRef
+
     if (cartExistsWithItems) {
       addToCart.mutate({
         cartId: cart?.cartId || '',
@@ -127,6 +135,10 @@ const Section5Meals = () => {
               products={trialPackProducts}
               packWeight={selectedTab === Tab.DOGS ? '300g' : '200g'}
               onAddToCart={addItemToCart}
+              isLoading={
+                addToCartButtonRef.current === AddToCartButton.TRIAL_PACK &&
+                (addToCart.isPending || createCart.isPending)
+              }
             />
           )}
 

@@ -24,3 +24,12 @@ export const TABS = [
     icon: '/icons/cat.png',
   },
 ] as const
+
+export const AddToCartButton = {
+  TRIAL_PACK: 'Trial Pack',
+  CHICKEN: 'Chicken',
+  BEEF: 'Beef',
+} as const
+
+export type AddToCartButton =
+  (typeof AddToCartButton)[keyof typeof AddToCartButton]
