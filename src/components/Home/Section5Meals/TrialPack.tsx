@@ -7,28 +7,36 @@ import { MeatType } from './utils'
 type TrialPackProps = {
   products: Array<Product>
   packWeight: string
+  onAddToCart: (
+    variantId: string,
+    quantity: number,
+    sellingPlanId?: string
+  ) => void
 }
 
-const TrialPack = ({ products, packWeight }: TrialPackProps) => {
+const TrialPack = ({ products, packWeight, onAddToCart }: TrialPackProps) => {
   const [selectedMeat, setSelectedMeat] = useState<MeatType>(MeatType.BEEF)
   const [quantity, setQuantity] = useState(1)
   const product = products.find((product) =>
     product.title.includes(selectedMeat)
   )
-  // const imageUrl = product?.featuredImage?.url || '' TODO:
+  const imageUrl = product?.featuredImage?.url || ''
   const price = `${product?.variants.edges[0].node.price.amount || ''} ${product?.variants.edges[0].node.price.currencyCode || ''}`
 
   const handleSelectMeat = (meat: MeatType) => setSelectedMeat(meat)
+
+  const handleAddToCart = () => {
+    if (!product) return
+    onAddToCart(product.variants.edges[0].node.id, quantity)
+  }
 
   return (
     <div className='bg-beige grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[auto_1fr]'>
       <div
         className='bg-dark-gray h-[340px] w-[340px] rounded-xl bg-contain bg-center bg-no-repeat'
-        style={
-          {
-            // backgroundImage: `url('${imageUrl}')`,
-          }
-        }
+        style={{
+          backgroundImage: `url('${imageUrl}')`,
+        }}
       />
 
       <div className='flex flex-col'>
@@ -75,7 +83,10 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
           </p>
         </div>
 
-        <Button.Cta icon={<IoBag className='h-6 w-6' />}>
+        <Button.Cta
+          icon={<IoBag className='h-6 w-6' />}
+          onClick={handleAddToCart}
+        >
           Add to Cart
         </Button.Cta>
       </div>

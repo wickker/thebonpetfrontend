@@ -42,7 +42,11 @@ const Cart = () => {
   const { closeCart } = useCartActions()
   const { useGetCartQuery } = useCart()
   const getCart = useGetCartQuery(cart?.cartId)
-  const hasCart = cart && getCart.data && getCart.isSuccess
+  const hasCart =
+    getCart.data &&
+    getCart.isSuccess &&
+    getCart.data.lines.edges.length > 0 &&
+    DateTime.now() < DateTime.fromISO(cart?.expiresAt || '')
 
   // delivery date, time and special instructions
   const { handleSubmit, register, control, setValue } = useForm<CartForm>({
