@@ -8,7 +8,12 @@ const Section4HowItWorks = () => {
   )
 
   return (
-    <div className='text-dark-green mx-auto flex w-full flex-col items-center px-4 py-10 lg:w-[90%]'>
+    <div
+      className='text-dark-green bg-top-left mx-auto flex w-full flex-col items-center bg-contain bg-no-repeat px-4 py-10 lg:w-[90%]'
+      style={{
+        backgroundImage: `url('/home-how-paw-prints.png')`,
+      }}
+    >
       <h1 className='text-center text-5xl font-bold'>How it works</h1>
 
       <p className='mt-4 mb-6 text-center text-lg leading-[1.8]'>
