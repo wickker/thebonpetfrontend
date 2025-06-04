@@ -13,10 +13,11 @@ export const DESKTOP_NAVIGATION_ITEMS = [
     label: 'Feeding Guide',
     route: ROUTES.FEEDING_GUIDE,
   },
-  {
-    label: 'Pet Food Calculator',
-    route: ROUTES.PET_FOOD_CALCULATOR,
-  },
+  // TODO:
+  // {
+  //   label: 'Pet Food Calculator',
+  //   route: ROUTES.PET_FOOD_CALCULATOR,
+  // },
   {
     label: 'Donate',
     route: ROUTES.DONATE,

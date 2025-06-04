@@ -120,25 +120,27 @@ type QuantityProps = {
 }
 
 const Quantity = ({ quantity, onMinus, onAdd }: QuantityProps) => {
+  const packsLabel = quantity === 1 ? 'Pack' : 'Packs'
+
   return (
-    <div className='bg-cream grid h-[30px] w-fit grid-cols-[30px_100px_30px] items-center rounded-full'>
+    <div className='bg-cream grid h-[36px] w-fit grid-cols-[36px_100px_36px] items-center rounded-full'>
       <button
-        className='bg-dark-green ml-[2.5px] grid h-[25px] w-[25px] cursor-pointer place-items-center rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        className='bg-dark-green ml-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
         onClick={onMinus}
         disabled={quantity <= 1}
       >
-        <FaMinus className='h-3 w-3' />
+        <FaMinus className='h-4 w-4' />
       </button>
 
-      <p className='text-dark-green justify-self-center text-sm'>
-        <b className='mr-1'>{quantity}</b> Pack(s)
+      <p className='text-dark-green justify-self-center'>
+        <b className='mr-1'>{quantity}</b> {packsLabel}
       </p>
 
       <button
-        className='bg-dark-green mr-[2.5px] grid h-[25px] w-[25px] cursor-pointer place-items-center justify-self-end rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        className='bg-dark-green mr-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center justify-self-end rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
         onClick={onAdd}
       >
-        <FaPlus className='h-3 w-3' />
+        <FaPlus className='h-4 w-4' />
       </button>
     </div>
   )

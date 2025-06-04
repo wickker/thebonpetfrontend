@@ -13,13 +13,13 @@ const Section3Guide = () => {
         backgroundImage: `linear-gradient(var(--color-cream-98), var(--color-cream-98)), url('/background.png')`,
       }}
     >
-      <div className='mx-auto grid w-full grid-cols-[1fr] justify-items-center gap-10 self-center px-4 py-8 lg:w-[90%] lg:grid-cols-[1fr_1fr] lg:justify-items-start'>
+      <div className='mx-auto grid w-full grid-cols-[1fr] items-center gap-10 px-4 py-8 lg:w-[90%] lg:grid-cols-[1fr_1fr]'>
         <div>
           <h1 className='mb-4 text-center text-5xl font-bold text-[#443928] lg:text-left'>
             Tail-Wagging Goodness in Every Bowl
           </h1>
 
-          <p className='mb-6 text-center leading-[1.8] text-[#443928] lg:text-left'>
+          <p className='mb-6 text-center text-lg leading-[1.8] text-[#443928] lg:text-left'>
             Learn how to prepare and transition to gently cooked meals for both
             dog and cat formula.
           </p>

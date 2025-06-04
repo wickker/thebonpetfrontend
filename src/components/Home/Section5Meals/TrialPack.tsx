@@ -15,7 +15,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   const product = products.find((product) =>
     product.title.includes(selectedMeat)
   )
-  // const imageUrl = product?.featuredImage?.url || ''
+  // const imageUrl = product?.featuredImage?.url || '' TODO:
   const price = `${product?.variants.edges[0].node.price.amount || ''} ${product?.variants.edges[0].node.price.currencyCode || ''}`
 
   const handleSelectMeat = (meat: MeatType) => setSelectedMeat(meat)
@@ -23,18 +23,20 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   return (
     <div className='bg-beige grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[auto_1fr]'>
       <div
-        className='bg-dark-gray h-[300px] w-[300px] rounded-xl bg-contain bg-center bg-no-repeat'
-        style={{
-          // backgroundImage: `url('${imageUrl}')`,
-          backgroundImage: `url('https://placehold.co/300x200')`,
-        }}
+        className='bg-dark-gray h-[340px] w-[340px] rounded-xl bg-contain bg-center bg-no-repeat'
+        style={
+          {
+            // backgroundImage: `url('${imageUrl}')`,
+          }
+        }
       />
-      <div className='flex flex-col gap-y-2'>
-        <p className='text-[#7B6D57]'>Gently Cooked • Free-Range</p>
 
-        <h1 className='text-4xl font-bold'>Trial Pack</h1>
+      <div className='flex flex-col'>
+        <p className='text-lg text-[#7B6D57]'>Gently Cooked • Free-Range</p>
 
-        <div className='flex items-center gap-x-8 text-lg font-bold'>
+        <h1 className='mb-2 text-[42px] font-bold'>Trial Pack</h1>
+
+        <div className='mb-2 flex items-center gap-x-8 text-lg font-bold'>
           {Object.values(MeatType).map((meat) => (
             <label className='flex items-center gap-x-2' key={meat}>
               <input
@@ -49,7 +51,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
           ))}
         </div>
 
-        <p className='text-sm text-[#7B6D57]'>
+        <p className='mb-4 text-[#7B6D57]'>
           Curious about our meals but not ready to commit to a big batch? Or,
           just looking to transition to a new protein? Our Trial Pack is perfect
           for you! Featuring three {packWeight} portions, these conveniently
@@ -57,17 +59,18 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
           little into their current food.
         </p>
 
-        <div className='my-2 flex flex-wrap items-center gap-4 lg:my-3'>
+        <div className='mb-5 flex flex-wrap items-center gap-4'>
           <Button.Quantity
             quantity={quantity}
             onMinus={() => setQuantity((prev) => prev - 1)}
             onAdd={() => setQuantity((prev) => prev + 1)}
           />
 
-          <p className='flex items-center gap-x-2 text-lg font-bold'>
+          <p className='flex items-center text-xl font-bold'>
             {price}
+            <span className='mx-2 text-sm font-normal text-[#7B6D57]'>/</span>
             <span className='text-sm font-normal text-[#7B6D57]'>
-              / 3 x {packWeight} Packs
+              3 x {packWeight} packs
             </span>
           </p>
         </div>

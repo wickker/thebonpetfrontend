@@ -11,7 +11,7 @@ const Section4HowItWorks = () => {
     <div className='text-dark-green mx-auto flex w-full flex-col items-center px-4 py-10 lg:w-[90%]'>
       <h1 className='text-center text-5xl font-bold'>How it works</h1>
 
-      <p className='mt-4 mb-6 text-center leading-[1.8]'>
+      <p className='mt-4 mb-6 text-center text-lg leading-[1.8]'>
         Our paws ensure you get the best. Every step of the way.
       </p>
 
