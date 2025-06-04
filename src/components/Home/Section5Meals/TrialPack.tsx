@@ -83,4 +83,25 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   )
 }
 
+const Skeleton = () => {
+  return (
+    <div className='bg-beige grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[auto_1fr]'>
+      <div className='h-[340px] w-[340px] animate-pulse rounded-xl bg-neutral-300' />
+
+      <div className='flex flex-col'>
+        <div className='mb-4 h-[20px] w-[36%] animate-pulse rounded-full bg-neutral-300' />
+        <div className='mb-4 h-[42px] w-[30%] animate-pulse rounded-full bg-neutral-300' />
+        <div className='mb-4 h-[20px] w-[30%] animate-pulse rounded-full bg-neutral-300' />
+        <div className='mb-4 h-[16px] w-full animate-pulse rounded-full bg-neutral-300' />
+        <div className='mb-4 h-[16px] w-full animate-pulse rounded-full bg-neutral-300' />
+        <div className='mb-4 h-[16px] w-[70%] animate-pulse rounded-full bg-neutral-300' />
+        <div className='mb-4 h-[36px] w-[50%] animate-pulse rounded-full bg-neutral-300' />
+        <div className='h-[40px] w-[30%] animate-pulse rounded-full bg-neutral-300' />
+      </div>
+    </div>
+  )
+}
+
+TrialPack.Skeleton = Skeleton
+
 export default TrialPack
