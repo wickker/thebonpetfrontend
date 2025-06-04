@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { PromoBanner } from '@/components/commons'
 
 const FeedingGuide = () => {
   return (
@@ -178,6 +179,8 @@ const FeedingGuide = () => {
           </p>
         </div>
       </div>
+
+      <PromoBanner />
     </div>
   )
 }

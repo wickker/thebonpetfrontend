@@ -1,6 +1,13 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Section1Hero, Section2Guarantee } from '@/components/Home'
+import { PromoBanner } from '@/components/commons'
+import {
+  Section1Hero,
+  Section2Guarantee,
+  Section3Guide,
+  Section4HowItWorks,
+  Section5Meals,
+} from '@/components/Home'
 import { useCartActions } from '@/store/useCartStore'
 
 const Home = () => {
@@ -20,6 +27,14 @@ const Home = () => {
       <Section1Hero />
 
       <Section2Guarantee />
+
+      <Section3Guide />
+
+      <Section4HowItWorks />
+
+      <PromoBanner />
+
+      <Section5Meals />
     </div>
   )
 }

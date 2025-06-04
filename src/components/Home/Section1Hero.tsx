@@ -10,6 +10,7 @@ const Section1Hero = () => {
         }}
       >
         <img src='/home-tagline.png' alt='Time to eat' className='mt-14' />
+
         <h1
           className='mx-4 mt-24 mb-8 w-full text-center text-2xl leading-[1.4] text-white lg:mt-54 lg:w-[60%] lg:text-4xl'
           style={{ textShadow: '1px 1px 5px black' }}
@@ -17,6 +18,7 @@ const Section1Hero = () => {
           Our obsession with fresh pet food starts with using premium,
           globally-sourced ingredients
         </h1>
+
         <Button.Cta className='mb-8'>
           {/* TODO: */}
           Learn More
