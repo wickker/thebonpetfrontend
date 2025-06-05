@@ -64,7 +64,7 @@ const Section5Meals = () => {
           <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         </div>
 
-        <div className='grid gap-6 lg:grid-cols-[5fr_1.2fr]'>
+        <div className='grid w-full gap-6 lg:grid-cols-[5fr_1.2fr]'>
           {getProducts.isFetching ? (
             <TrialPack.Skeleton />
           ) : (

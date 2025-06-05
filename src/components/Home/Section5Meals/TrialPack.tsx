@@ -32,9 +32,9 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   }
 
   return (
-    <div className='bg-beige text-dark-brown grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[auto_1fr]'>
+    <div className='bg-beige text-dark-brown grid items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[0.5fr_1fr]'>
       <div
-        className='bg-dark-gray h-[340px] w-[340px] rounded-xl bg-contain bg-center bg-no-repeat'
+        className='bg-dark-gray aspect-square max-w-[340px] rounded-xl bg-contain bg-center bg-no-repeat lg:w-full'
         style={{
           backgroundImage: `url('${imageUrl}')`,
         }}
@@ -101,8 +101,8 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
 
 const Skeleton = () => {
   return (
-    <div className='bg-beige text-dark-brown grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[auto_1fr]'>
-      <div className='h-[340px] w-[340px] animate-pulse rounded-xl bg-neutral-300' />
+    <div className='bg-beige text-dark-brown grid items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[0.5fr_1fr]'>
+      <div className='aspect-square max-w-[340px] animate-pulse rounded-xl bg-neutral-300 lg:w-full' />
 
       <div className='flex flex-col'>
         <div className='mb-4 h-[20px] w-[36%] animate-pulse rounded-full bg-neutral-300' />

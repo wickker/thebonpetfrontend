@@ -36,8 +36,22 @@ const DonationTile = () => {
         </p>
         <p className='text-brown mb-8 text-sm'>
           100% goes to the charity of your choosing.{' '}
-          <b className='underline'>Wildflower Studio</b> or{' '}
-          <b className='underline'>LUNI</b>.
+          <a
+            className='underline'
+            href='https://www.wildflowerstudio.sg/'
+            target='_blank'
+          >
+            Wildflower Studio
+          </a>{' '}
+          or{' '}
+          <a
+            className='underline'
+            href='https://luni-singapore.com/'
+            target='_blank'
+          >
+            LUNI
+          </a>
+          .
         </p>
 
         <DonationModal>
