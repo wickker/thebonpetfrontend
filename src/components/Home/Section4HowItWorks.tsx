@@ -9,7 +9,7 @@ const Section4HowItWorks = () => {
 
   return (
     <div
-      className='text-dark-green bg-top-left mx-auto flex w-full flex-col items-center bg-contain bg-no-repeat px-4 py-10 lg:w-[90%]'
+      className='text-dark-green bg-top-left mx-auto flex w-full max-w-[1650px] flex-col items-center bg-contain bg-no-repeat px-4 py-10 lg:w-[90%]'
       style={{
         backgroundImage: `url('/home-how-paw-prints.png')`,
       }}

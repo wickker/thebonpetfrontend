@@ -63,7 +63,7 @@ const DateSelect = ({ selectedDate, onSelectDate }: DateSelectProps) => {
       </PopoverTrigger>
 
       <PopoverPortal>
-        <PopoverContent sideOffset={6} align='start' className='z-20'>
+        <PopoverContent sideOffset={6} align='start'>
           <div
             className='text-dark-green flex w-fit flex-col gap-y-2 rounded p-4 shadow-lg'
             style={{

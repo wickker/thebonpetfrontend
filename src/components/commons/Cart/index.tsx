@@ -42,7 +42,11 @@ const Cart = () => {
   const { closeCart } = useCartActions()
   const { useGetCartQuery } = useCart()
   const getCart = useGetCartQuery(cart?.cartId)
-  const hasCart = cart && getCart.data && getCart.isSuccess
+  const hasCart =
+    getCart.data &&
+    getCart.isSuccess &&
+    getCart.data.lines.edges.length > 0 &&
+    DateTime.now() < DateTime.fromISO(cart?.expiresAt || '')
 
   // delivery date, time and special instructions
   const { handleSubmit, register, control, setValue } = useForm<CartForm>({
@@ -171,7 +175,7 @@ const Cart = () => {
           </div>
 
           <Button.Plain
-            className='z-10 mb-4 w-full justify-center'
+            className='z-checkout-button mb-4 w-full justify-center'
             onClick={handleSubmit(onSubmit)}
             isLoading={isRedirecting}
             type='submit'
@@ -206,9 +210,9 @@ const Cart = () => {
   return createPortal(
     <AnimatePresence>
       {isCartOpen && (
-        <form>
+        <form className='isolate'>
           <motion.div
-            className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
+            className='z-cart fixed top-0 right-0 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
             initial={{ x: 500 }}
             animate={{ x: 0 }}
             exit={{ x: 500 }}

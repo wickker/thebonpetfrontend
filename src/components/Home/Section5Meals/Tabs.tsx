@@ -19,7 +19,7 @@ const Tabs = ({ selectedTab, setSelectedTab }: TabsProps) =>
         <p
           className={cn(
             'flex items-center gap-x-2 transition-colors',
-            !isSelected && 'text-[#7B6D57]'
+            !isSelected && 'text-brown'
           )}
         >
           <img src={tab.icon} alt={`${tab.label} icon`} className='h-8 w-8' />
@@ -28,7 +28,7 @@ const Tabs = ({ selectedTab, setSelectedTab }: TabsProps) =>
         <div
           className={cn(
             'h-[2px] w-full max-w-0 rounded-full transition-all',
-            isSelected && 'max-w-full bg-[#7B6D57]'
+            isSelected && 'bg-brown max-w-full'
           )}
         />
       </button>

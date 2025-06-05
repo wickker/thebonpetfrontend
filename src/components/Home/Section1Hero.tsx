@@ -25,8 +25,8 @@ const Section1Hero = () => {
         </Button.Cta>
       </div>
 
-      <div className='absolute right-0 bottom-[-134px] left-0 hidden place-items-center lg:grid'>
-        <img src='/badge.png' alt='Badge' className='z-1' />
+      <div className='z-badge absolute right-0 bottom-[-134px] left-0 hidden place-items-center lg:grid'>
+        <img src='/badge.png' alt='Badge' />
       </div>
     </div>
   )

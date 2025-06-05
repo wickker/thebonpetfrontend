@@ -123,7 +123,7 @@ const Quantity = ({ quantity, onMinus, onAdd }: QuantityProps) => {
   const packsLabel = quantity === 1 ? 'Pack' : 'Packs'
 
   return (
-    <div className='bg-cream grid h-[36px] w-fit grid-cols-[36px_100px_36px] items-center rounded-full'>
+    <div className='bg-cream grid h-[36px] w-fit grid-cols-[36px_100px_36px] items-center rounded-full shadow'>
       <button
         className='bg-dark-green ml-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
         onClick={onMinus}

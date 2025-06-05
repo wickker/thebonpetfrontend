@@ -36,7 +36,7 @@ const Tile = ({
 
   return (
     <motion.div
-      className='z-50 grid h-fit w-full max-w-lg grid-cols-[auto_1fr] overflow-hidden bg-white shadow-lg'
+      className='grid h-fit w-full max-w-lg grid-cols-[auto_1fr] overflow-hidden bg-white shadow-lg'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

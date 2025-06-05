@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { DateTime } from 'luxon'
 import { Cart, Footer } from '@/components/commons'
 import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
@@ -8,6 +8,7 @@ import DesktopHeader from './DesktopHeader'
 import MobileHeader from './MobileHeader'
 
 const NavigationBar = () => {
+  const { pathname } = useLocation()
   const [showPromo, setShowPromo] = useState(getShowPromoFromLocalStorage())
 
   const handleDismissPromo = () => {
@@ -18,14 +19,18 @@ const NavigationBar = () => {
     setShowPromo(false)
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <div
-      className='flex min-h-[100dvh] min-w-full flex-col'
+      className='isolate flex min-h-[100dvh] min-w-full flex-col'
       style={{
         backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
       }}
     >
-      <div className='sticky top-0 z-10 w-full shadow-lg'>
+      <div className='z-sticky-header sticky top-0 w-full shadow-lg'>
         {showPromo && (
           <div className='hidden h-8 w-full grid-cols-[auto_1fr_auto] items-center gap-x-2 bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)] px-6 lg:grid'>
             <div />

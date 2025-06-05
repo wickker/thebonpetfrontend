@@ -42,12 +42,7 @@ const TimeSlotSelect = ({
       </PopoverTrigger>
 
       <PopoverPortal>
-        <PopoverContent
-          sideOffset={6}
-          align='start'
-          side='top'
-          className='z-20'
-        >
+        <PopoverContent sideOffset={6} align='start' side='top'>
           <div
             className='text-dark-green flex w-[var(--radix-popover-trigger-width)] flex-col rounded py-2 shadow-lg'
             style={{
