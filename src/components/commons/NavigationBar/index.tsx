@@ -25,7 +25,7 @@ const NavigationBar = () => {
 
   return (
     <div
-      className='flex min-h-[100dvh] min-w-full flex-col'
+      className='isolate flex min-h-[100dvh] min-w-full flex-col'
       style={{
         backgroundImage: `linear-gradient(var(--color-beige-95), var(--color-beige-95)), url('/background.png')`,
       }}

@@ -1,8 +1,9 @@
 import { Button } from '@/components/commons'
+import DonationModal from './DonationModal'
 
 const DonationTile = () => {
   return (
-    <div className='bg-beige relative mt-6 grid items-center gap-6 overflow-hidden rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[1fr_1fr]'>
+    <div className='bg-beige relative grid items-center gap-6 overflow-hidden rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[1fr_1fr]'>
       <div className='relative'>
         <img
           src='/home-meals-wildflower.png'
@@ -39,14 +40,16 @@ const DonationTile = () => {
           <b className='underline'>LUNI</b>.
         </p>
 
-        <Button.Cta className='mb-20 lg:mb-0'>
-          <img
-            src='/icons/paw-white.png'
-            alt='Paw icon'
-            className='aspect-auto w-6'
-          />
-          Donate a Meal
-        </Button.Cta>
+        <DonationModal>
+          <Button.Cta className='mb-20 lg:mb-0'>
+            <img
+              src='/icons/paw-white.png'
+              alt='Paw icon'
+              className='aspect-auto w-6'
+            />
+            Donate a Meal
+          </Button.Cta>
+        </DonationModal>
       </div>
 
       <img

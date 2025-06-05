@@ -210,7 +210,7 @@ const Cart = () => {
   return createPortal(
     <AnimatePresence>
       {isCartOpen && (
-        <form>
+        <form className='isolate'>
           <motion.div
             className='fixed top-0 right-0 z-20 grid h-full w-full grid-rows-[auto_1fr_auto] shadow-lg sm:max-w-md'
             initial={{ x: 500 }}
