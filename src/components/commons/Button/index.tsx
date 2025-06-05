@@ -146,11 +146,45 @@ const Quantity = ({ quantity, onMinus, onAdd }: QuantityProps) => {
   )
 }
 
+type WeeksProps = {
+  weeks: number
+  onMinus: () => void
+  onAdd: () => void
+}
+
+const Weeks = ({ weeks, onMinus, onAdd }: WeeksProps) => {
+  const weeksLabel = weeks === 1 ? 'Week' : 'Weeks'
+
+  return (
+    <div className='bg-cream grid h-[36px] w-fit grid-cols-[36px_140px_36px] items-center rounded-full shadow'>
+      <button
+        className='bg-dark-green ml-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        onClick={onMinus}
+        disabled={weeks <= 1}
+      >
+        <FaMinus className='h-4 w-4' />
+      </button>
+
+      <p className='text-dark-green justify-self-center'>
+        Every <b className='mx-1'>{weeks}</b> {weeksLabel}
+      </p>
+
+      <button
+        className='bg-dark-green mr-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center justify-self-end rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        onClick={onAdd}
+      >
+        <FaPlus className='h-4 w-4' />
+      </button>
+    </div>
+  )
+}
+
 const Button = {
   Cta,
   Plain,
   CartQuantity,
   Quantity,
+  Weeks,
 }
 
 export default Button
