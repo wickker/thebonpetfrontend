@@ -3,7 +3,7 @@ import DonationModal from './DonationModal'
 
 const DonationTile = () => {
   return (
-    <div className='bg-beige relative grid items-center gap-6 overflow-hidden rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[1fr_1fr]'>
+    <div className='bg-beige text-dark-brown relative grid items-center gap-6 overflow-hidden rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[1fr_1fr]'>
       <div className='relative'>
         <img
           src='/home-meals-wildflower.png'
@@ -31,10 +31,10 @@ const DonationTile = () => {
           Help Stay Cats, One Meal at a Time.
         </p>
 
-        <p className='text-sm text-[#7B6D57]'>
+        <p className='text-brown text-sm'>
           Opt into kindness by donating to support rescue cats.
         </p>
-        <p className='mb-8 text-sm text-[#7B6D57]'>
+        <p className='text-brown mb-8 text-sm'>
           100% goes to the charity of your choosing.{' '}
           <b className='underline'>Wildflower Studio</b> or{' '}
           <b className='underline'>LUNI</b>.

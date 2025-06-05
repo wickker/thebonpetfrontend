@@ -97,7 +97,7 @@ const FeedingGuide = () => {
           </div>
         </div>
 
-        <div className='mb-6 w-full max-w-xl text-[#7B6D57]'>
+        <div className='text-brown mb-6 w-full max-w-xl'>
           <p>Applicable for both dog and cat formulas.</p>
           <p>
             If your pet is known to have a sensitive stomach, you may extend the
@@ -168,7 +168,7 @@ const FeedingGuide = () => {
           </div>
         </div>
 
-        <div className='mb-6 w-full max-w-xl text-[#7B6D57]'>
+        <div className='text-brown mb-6 w-full max-w-xl'>
           <p>
             Cooking or microwaving is not recommended as it can affect the
             nutrient content of the formula.

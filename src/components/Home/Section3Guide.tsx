@@ -15,11 +15,11 @@ const Section3Guide = () => {
     >
       <div className='mx-auto grid w-full max-w-[1650px] grid-cols-[1fr] items-center gap-10 px-4 py-8 lg:w-[90%] lg:grid-cols-[1fr_1fr]'>
         <div>
-          <h1 className='mb-4 text-center text-5xl font-bold text-[#443928] lg:text-left'>
+          <h1 className='text-dark-brown mb-4 text-center text-5xl font-bold lg:text-left'>
             Tail-Wagging Goodness in Every Bowl
           </h1>
 
-          <p className='mb-6 text-center text-lg leading-[1.8] text-[#443928] lg:text-left'>
+          <p className='text-dark-brown mb-6 text-center text-lg leading-[1.8] lg:text-left'>
             Learn how to prepare and transition to gently cooked meals for both
             dog and cat formula.
           </p>
@@ -39,7 +39,7 @@ const Section3Guide = () => {
         </div>
 
         <div className='grid grid-cols-[auto_auto] items-center justify-self-center lg:gap-x-10'>
-          <div className='relative flex h-[400px] w-[240px] flex-col items-center justify-center overflow-hidden rounded-xl border-[2px] border-[#7B6D57] lg:rotate-[-5deg]'>
+          <div className='border-brown relative flex h-[400px] w-[240px] flex-col items-center justify-center overflow-hidden rounded-xl border-[2px] lg:rotate-[-5deg]'>
             <img
               src='/home-guide-1.png'
               alt='Guide 1'
@@ -65,7 +65,7 @@ const Section3Guide = () => {
             </button>
           </div>
 
-          <div className='hidden h-[350px] w-[220px] rotate-5 flex-col items-center justify-center overflow-hidden rounded-xl border-[2px] border-[#7B6D57] lg:flex'>
+          <div className='border-brown hidden h-[350px] w-[220px] rotate-5 flex-col items-center justify-center overflow-hidden rounded-xl border-[2px] lg:flex'>
             <img
               src='/home-guide-2.png'
               alt='Guide 1'

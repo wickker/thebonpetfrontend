@@ -28,7 +28,7 @@ const StandardProductTile = ({
 
   return (
     <div className='flex flex-col items-center gap-y-2 text-center'>
-      <button className='bg-beige group grid h-[340px] w-[340px] cursor-pointer grid-rows-[auto_1fr_auto] items-center justify-items-center gap-y-2 rounded-xl border border-[#CCBC9E] p-4 text-lg text-[#7B6D57]'>
+      <button className='bg-beige group text-brown grid h-[340px] w-[340px] cursor-pointer grid-rows-[auto_1fr_auto] items-center justify-items-center gap-y-2 rounded-xl border border-[#CCBC9E] p-4 text-lg'>
         <p className='opacity-0 transition-opacity group-hover:opacity-100'>
           Learn about ingredients, supplements, nutrition and more
         </p>
@@ -44,13 +44,13 @@ const StandardProductTile = ({
         </p>
       </button>
 
-      <p className='text-sm text-[#7B6D57]'>Free-Range</p>
+      <p className='text-brown text-sm'>Free-Range</p>
 
-      <h1 className='mb-1 text-3xl font-bold text-[#443928]'>
+      <h1 className='text-dark-brown mb-1 text-3xl font-bold'>
         {productLabel} Ragu
       </h1>
 
-      <p className='text-lg text-[#7B6D57]'>${unitPrice} / Pack</p>
+      <p className='text-brown text-lg'>${unitPrice} / Pack</p>
 
       <div className='flex items-center gap-x-4'>
         <Button.Quantity

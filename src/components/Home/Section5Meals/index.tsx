@@ -52,15 +52,15 @@ const Section5Meals = () => {
       }}
     >
       <div className='mx-auto flex w-full max-w-[1650px] flex-col items-center px-4 py-8 lg:w-[90%]'>
-        <p className='text-lg font-bold tracking-wider text-[#443928] uppercase'>
+        <p className='text-dark-brown text-lg font-bold tracking-wider uppercase'>
           Our Meals Are
         </p>
 
-        <h1 className='mt-4 mb-8 text-center text-5xl font-bold text-[#443928]'>
+        <h1 className='text-dark-brown mt-4 mb-8 text-center text-5xl font-bold'>
           A Different Breed
         </h1>
 
-        <div className='mb-6 grid w-full grid-cols-[1fr_1fr] items-center text-[#443928] lg:w-[30%] lg:max-w-[380px]'>
+        <div className='text-dark-brown mb-6 grid w-full grid-cols-[1fr_1fr] items-center lg:w-[30%] lg:max-w-[380px]'>
           <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         </div>
 
@@ -77,7 +77,7 @@ const Section5Meals = () => {
           <CalculatorTile />
         </div>
 
-        <h1 className='my-8 text-center text-[40px] font-bold text-[#443928]'>
+        <h1 className='text-dark-brown my-8 text-center text-[40px] font-bold'>
           Complete & Balanced Superfoods
         </h1>
 

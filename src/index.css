@@ -50,11 +50,19 @@ body {
 }
 
 @theme {
-  --color-dark-green: #14423d;
-  --color-green: #107965;
   --color-cream: #fef3df;
   --color-cream-98: #fef3dffa;
   --color-beige: #f0e0c4;
   --color-beige-95: #f0e0c4f2;
+  --color-green: #107965;
+  --color-brown: #7b6d57;
   --color-dark-gray: #121212;
+  --color-dark-green: #14423d;
+  --color-dark-brown: #443928;
+
+  --z-index-cart: 20;
+  --z-index-toast: 100;
+  --z-index-sticky-header: 100;
+  --z-index-checkout-button: 10;
+  --z-index-badge: 1;
 }

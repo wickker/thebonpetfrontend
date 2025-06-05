@@ -32,7 +32,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   }
 
   return (
-    <div className='bg-beige grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[auto_1fr]'>
+    <div className='bg-beige text-dark-brown grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[auto_1fr]'>
       <div
         className='bg-dark-gray h-[340px] w-[340px] rounded-xl bg-contain bg-center bg-no-repeat'
         style={{
@@ -41,7 +41,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
       />
 
       <div className='flex flex-col'>
-        <p className='text-lg text-[#7B6D57]'>Gently Cooked • Free-Range</p>
+        <p className='text-brown text-lg'>Gently Cooked • Free-Range</p>
 
         <h1 className='mb-2 text-[42px] font-bold'>Trial Pack</h1>
 
@@ -60,7 +60,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
           ))}
         </div>
 
-        <p className='mb-4 text-[#7B6D57]'>
+        <p className='text-brown mb-4'>
           Curious about our meals but not ready to commit to a big batch? Or,
           just looking to transition to a new protein? Our Trial Pack is perfect
           for you! Featuring three {packWeight} portions, these conveniently
@@ -77,8 +77,8 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
 
           <p className='flex items-center text-xl font-bold'>
             {price}
-            <span className='mx-2 text-sm font-normal text-[#7B6D57]'>/</span>
-            <span className='text-sm font-normal text-[#7B6D57]'>
+            <span className='text-brown mx-2 text-sm font-normal'>/</span>
+            <span className='text-brown text-sm font-normal'>
               3 x {packWeight} packs
             </span>
           </p>
@@ -101,7 +101,7 @@ const TrialPack = ({ products, packWeight }: TrialPackProps) => {
 
 const Skeleton = () => {
   return (
-    <div className='bg-beige grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 text-[#443928] lg:grid-cols-[auto_1fr]'>
+    <div className='bg-beige text-dark-brown grid grid-cols-[1fr] items-center gap-6 rounded-xl border-[2px] border-[#E9D9BD] p-6 lg:grid-cols-[auto_1fr]'>
       <div className='h-[340px] w-[340px] animate-pulse rounded-xl bg-neutral-300' />
 
       <div className='flex flex-col'>

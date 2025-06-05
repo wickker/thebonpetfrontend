@@ -16,7 +16,7 @@ const computeConicGradient = () => {
 const Section2Guarantee = () => {
   return (
     <div className='relative flex h-fit flex-col items-center overflow-hidden bg-white'>
-      <div className='z-1 mt-8 mb-8 grid w-full max-w-[1650px] grid-cols-[1fr] gap-4 px-4 lg:mt-50 lg:w-[90%] lg:grid-cols-[1fr_1fr_1fr]'>
+      <div className='z-badge mt-8 mb-8 grid w-full max-w-[1650px] grid-cols-[1fr] gap-4 px-4 lg:mt-50 lg:w-[90%] lg:grid-cols-[1fr_1fr_1fr]'>
         <img
           src='/badge.png'
           alt='Badge'
