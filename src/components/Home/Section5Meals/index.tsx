@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import useProduct from '@/hooks/queries/useProduct'
-import useAddItemToCart, { AddToCartButton } from '@/hooks/useAddItemToCart'
 import CalculatorTile from './CalculatorTile'
+import StandardProductTile from './StandardProductTile'
 import Tabs from './Tabs'
 import TrialPack from './TrialPack'
 import { Tab } from './utils'
 
 const Section5Meals = () => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.DOGS)
-  const { addItemToCart, addToCartButtonRef, isLoading } = useAddItemToCart()
   const { useGetProductsQuery } = useProduct()
   const getProducts = useGetProductsQuery({
     first: 100,
@@ -19,6 +18,13 @@ const Section5Meals = () => {
       product.title.includes('Trial') &&
       product.title.toLowerCase().includes(selectedTab)
   )
+  const standardProducts = products.filter(
+    (product) =>
+      !product.title.includes('Trial') &&
+      !product.title.includes('Christmas') &&
+      !product.title.includes('Donation') &&
+      product.title.toLowerCase().includes(selectedTab)
+  )
 
   return (
     <div
@@ -26,7 +32,7 @@ const Section5Meals = () => {
         backgroundImage: `linear-gradient(var(--color-cream-98), var(--color-cream-98)), url('/background.png')`,
       }}
     >
-      <div className='mx-auto flex w-full flex-col items-center px-4 py-8 lg:w-[90%]'>
+      <div className='mx-auto flex w-full max-w-[1650px] flex-col items-center px-4 py-8 lg:w-[90%]'>
         <p className='text-lg font-bold tracking-wider text-[#443928] uppercase'>
           Our Meals Are
         </p>
@@ -39,25 +45,34 @@ const Section5Meals = () => {
           <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         </div>
 
-        <div className='grid gap-6 lg:grid-cols-[5fr_1fr]'>
+        <div className='grid gap-6 lg:grid-cols-[5fr_1.2fr]'>
           {getProducts.isFetching ? (
             <TrialPack.Skeleton />
           ) : (
             <TrialPack
               products={trialPackProducts}
               packWeight={selectedTab === Tab.DOGS ? '300g' : '200g'}
-              onAddToCart={addItemToCart}
-              isLoading={
-                addToCartButtonRef.current === AddToCartButton.TRIAL_PACK &&
-                isLoading
-              }
             />
           )}
 
           <CalculatorTile />
         </div>
 
-        {/* TODO: */}
+        <h1 className='my-8 text-center text-[40px] font-bold text-[#443928]'>
+          Complete & Balanced Superfoods
+        </h1>
+
+        <div className='flex w-full flex-wrap items-center justify-around gap-6'>
+          {standardProducts.map((p) => (
+            <StandardProductTile
+              key={p.id}
+              productTitle={p.title}
+              unitPrice={p.variants.edges[0].node.price.amount}
+              variantId={p.variants.edges[0].node.id}
+              imageUrl={p.featuredImage?.url || ''}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

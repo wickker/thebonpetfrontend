@@ -2,28 +2,18 @@ import { useState } from 'react'
 import { Product } from '@shopify/hydrogen-react/storefront-api-types'
 import { IoBag } from 'react-icons/io5'
 import { Button } from '@/components/commons'
-import { AddToCartButton, MeatType } from './utils'
+import useAddItemToCart, { AddToCartButton } from '@/hooks/useAddItemToCart'
+import { MeatType } from './utils'
 
 type TrialPackProps = {
   products: Array<Product>
   packWeight: string
-  onAddToCart: (
-    buttonRef: AddToCartButton,
-    variantId: string,
-    quantity: number,
-    sellingPlanId?: string
-  ) => void
-  isLoading?: boolean
 }
 
-const TrialPack = ({
-  products,
-  packWeight,
-  onAddToCart,
-  isLoading = false,
-}: TrialPackProps) => {
+const TrialPack = ({ products, packWeight }: TrialPackProps) => {
   const [selectedMeat, setSelectedMeat] = useState<MeatType>(MeatType.BEEF)
   const [quantity, setQuantity] = useState(1)
+  const { addItemToCart, addToCartButtonRef, isLoading } = useAddItemToCart()
   const product = products.find((product) =>
     product.title.includes(selectedMeat)
   )
@@ -34,7 +24,7 @@ const TrialPack = ({
 
   const handleAddToCart = () => {
     if (!product) return
-    onAddToCart(
+    addItemToCart(
       AddToCartButton.TRIAL_PACK,
       product.variants.edges[0].node.id,
       quantity
@@ -97,7 +87,10 @@ const TrialPack = ({
         <Button.Cta
           icon={<IoBag className='h-6 w-6' />}
           onClick={handleAddToCart}
-          isLoading={isLoading}
+          isLoading={
+            addToCartButtonRef.current === AddToCartButton.TRIAL_PACK &&
+            isLoading
+          }
         >
           Add to Cart
         </Button.Cta>
