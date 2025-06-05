@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import useProduct from '@/hooks/queries/useProduct'
 import CalculatorTile from './CalculatorTile'
+import DonationTile from './DonationTile'
 import StandardProductTile from './StandardProductTile'
 import Tabs from './Tabs'
 import TrialPack from './TrialPack'
@@ -83,6 +84,8 @@ const Section5Meals = () => {
         <div className='flex w-full flex-wrap items-center justify-around gap-6'>
           {renderStandardProducts()}
         </div>
+
+        <DonationTile />
       </div>
     </div>
   )
