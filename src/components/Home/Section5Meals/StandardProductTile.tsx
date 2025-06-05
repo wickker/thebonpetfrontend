@@ -71,4 +71,20 @@ const StandardProductTile = ({
   )
 }
 
+const Skeleton = () => {
+  return (
+    <div className='flex flex-col items-center gap-y-3.5 text-center'>
+      <div className='bg-beige grid h-[340px] w-[340px] animate-pulse place-items-center gap-y-2 rounded-xl border border-[#CCBC9E] p-4'>
+        <div className='h-[160px] w-[86%] animate-pulse rounded-xl bg-neutral-300' />
+      </div>
+      <div className='h-4 w-24 animate-pulse rounded-full bg-neutral-300' />
+      <div className='mb-1 h-7 w-[40%] animate-pulse rounded-full bg-neutral-300' />
+      <div className='h-6 w-26 animate-pulse rounded-full bg-neutral-300' />
+      <div className='h-12 w-[80%] animate-pulse rounded-full bg-neutral-300' />
+    </div>
+  )
+}
+
+StandardProductTile.Skeleton = Skeleton
+
 export default StandardProductTile

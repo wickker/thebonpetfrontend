@@ -26,6 +26,24 @@ const Section5Meals = () => {
       product.title.toLowerCase().includes(selectedTab)
   )
 
+  const renderStandardProducts = () => {
+    if (getProducts.isFetching) {
+      return Array.from({ length: 3 }).map((_, index) => (
+        <StandardProductTile.Skeleton key={index} />
+      ))
+    }
+
+    return standardProducts.map((p) => (
+      <StandardProductTile
+        key={p.id}
+        productTitle={p.title}
+        unitPrice={p.variants.edges[0].node.price.amount}
+        variantId={p.variants.edges[0].node.id}
+        imageUrl={p.featuredImage?.url || ''}
+      />
+    ))
+  }
+
   return (
     <div
       style={{
@@ -63,15 +81,7 @@ const Section5Meals = () => {
         </h1>
 
         <div className='flex w-full flex-wrap items-center justify-around gap-6'>
-          {standardProducts.map((p) => (
-            <StandardProductTile
-              key={p.id}
-              productTitle={p.title}
-              unitPrice={p.variants.edges[0].node.price.amount}
-              variantId={p.variants.edges[0].node.id}
-              imageUrl={p.featuredImage?.url || ''}
-            />
-          ))}
+          {renderStandardProducts()}
         </div>
       </div>
     </div>
