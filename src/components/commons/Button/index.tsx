@@ -48,12 +48,9 @@ const Cta = ({
   return (
     <button
       className={cn(
-        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 px-4 py-2 text-2xl whitespace-nowrap text-white disabled:hover:cursor-not-allowed',
+        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 bg-[linear-gradient(180deg,_#39AB6D_0%,_#10776B_100%)] px-4 py-2 text-2xl whitespace-nowrap text-white transition-all hover:scale-x-102 hover:bg-[linear-gradient(#41A855,_#41A855)] hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] hover:[text-shadow:0_0_8px_#5DDB75] disabled:hover:cursor-not-allowed hover:[&>*]:[filter:drop-shadow(0_0_8px_#5DDB75)]',
         className
       )}
-      style={{
-        background: 'linear-gradient(180deg, #39AB6D 0%, #10776B 100%)',
-      }}
       disabled={disabled || isLoading}
       {...props}
     >
