@@ -1,6 +1,7 @@
 import { InstagramEmbed } from 'react-social-media-embed'
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa6'
 import { FiExternalLink } from 'react-icons/fi'
+import { LINKS } from '@/utils/constants'
 
 const Section6Join = () => {
   return (
@@ -21,7 +22,7 @@ const Section6Join = () => {
 
         <a
           className='flex cursor-pointer items-center gap-x-2 rounded-xl border-[2px] border-white/70 bg-[radial-gradient(100%_100%_at_0%_100%,#F8BA71_22.92%,#F27979_46.35%,#EC69DB_79.35%,#BE5BED_100%)] px-3 py-2 text-white transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]'
-          href='https://www.instagram.com/thebonpet'
+          href={LINKS.INSTAGRAM}
           target='_blank'
           rel='noopener noreferrer'
         >
@@ -38,7 +39,7 @@ const Section6Join = () => {
         style={{
           background: 'linear-gradient(90deg, #4EC465 22.95%, #3CA250 100%)',
         }}
-        href='https://wa.me/6590108515'
+        href={LINKS.WHATSAPP}
         target='_blank'
         rel='noopener noreferrer'
       >

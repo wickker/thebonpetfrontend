@@ -31,3 +31,13 @@ export const ROUTES = {
   SUBMIT_NEW_PASSWORD: '/account/reset/*',
   ACCOUNT: '/account',
 } as const
+
+export const LINKS = {
+  INSTAGRAM: 'https://www.instagram.com/thebonpet',
+  WHATSAPP: 'https://wa.me/6590108515',
+  TELEGRAM: 'https://t.me/thebonpet',
+  MAIL: 'mailto:hello@thebonpet.com',
+  NINJA_COLD: 'https://www.ninjavan.co/en-sg/logistics-solutions/cold-chain',
+  WILDFLOWER_STUDIO: 'https://www.wildflowerstudio.sg/',
+  LUNI: 'https://luni-singapore.com/',
+} as const

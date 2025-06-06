@@ -1,3 +1,5 @@
+import { LINKS } from '@/utils/constants'
+
 const Section4HowItWorks = () => {
   const arrow = (
     <img
@@ -75,11 +77,7 @@ const Section4HowItWorks = () => {
           </h1>
           <p className='text-center leading-[1.8]'>
             Meals stay frozen until they reach your doorstep with{' '}
-            <a
-              className='underline'
-              href='https://www.ninjavan.co/en-sg/logistics-solutions/cold-chain'
-              target='_blank'
-            >
+            <a className='underline' href={LINKS.NINJA_COLD} target='_blank'>
               cold-chain delivery
             </a>
             . You can also pick up for free.

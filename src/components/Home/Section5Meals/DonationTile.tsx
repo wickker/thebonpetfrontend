@@ -1,4 +1,5 @@
 import { Button } from '@/components/commons'
+import { LINKS } from '@/utils/constants'
 import DonationModal from './DonationModal'
 
 const DonationTile = () => {
@@ -38,17 +39,13 @@ const DonationTile = () => {
           100% goes to the charity of your choosing.{' '}
           <a
             className='underline'
-            href='https://www.wildflowerstudio.sg/'
+            href={LINKS.WILDFLOWER_STUDIO}
             target='_blank'
           >
             Wildflower Studio
           </a>{' '}
           or{' '}
-          <a
-            className='underline'
-            href='https://luni-singapore.com/'
-            target='_blank'
-          >
+          <a className='underline' href={LINKS.LUNI} target='_blank'>
             LUNI
           </a>
           .
