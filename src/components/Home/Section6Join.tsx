@@ -1,3 +1,5 @@
+import { InstagramEmbed } from 'react-social-media-embed'
+
 const Section6Join = () => {
   return (
     <div className='bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'>
@@ -7,6 +9,13 @@ const Section6Join = () => {
         <p className='text-beige mt-4 mb-6 text-center text-lg leading-[1.8]'>
           Meet our satisfied paw-rents
         </p>
+
+        <div className='flex flex-wrap items-center justify-around gap-4'>
+          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
+          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
+          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
+          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
+        </div>
       </div>
     </div>
   )

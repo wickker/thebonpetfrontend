@@ -1,7 +1,7 @@
 const CalculatorTile = () => {
   return (
     <div
-      className='flex h-full w-[240px] flex-col items-center justify-center justify-self-center rounded-xl border-[2px] border-black/10 px-4 py-6 lg:w-full'
+      className='flex h-full w-[240px] flex-col items-center justify-center justify-self-center rounded-xl border-[2px] border-black/10 px-4 py-6 transition-all hover:shadow-[0_0_10px_rgba(93,219,117)] lg:w-full'
       style={{
         background:
           'linear-gradient(151.06deg, #4EC465 23.09%, #3CA250 92.96%),linear-gradient(0deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08))',
@@ -18,7 +18,7 @@ const CalculatorTile = () => {
         alt='Pet meals calculator'
         className='w-[54%]'
       />
-      <button className='text-green mt-4 cursor-pointer rounded-xl border-[2px] border-[#E9D9BD] bg-[#FFF3DF] px-3 py-2 text-lg font-bold tracking-widest uppercase'>
+      <button className='text-green mt-4 cursor-pointer rounded-xl border-[2px] border-[#E9D9BD] bg-[#FFF3DF] px-3 py-2 text-lg font-bold tracking-widest uppercase transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]'>
         Try It Now
       </button>
     </div>
