@@ -150,9 +150,10 @@ type WeeksProps = {
   weeks: number
   onMinus: () => void
   onAdd: () => void
+  maxWeeks: number
 }
 
-const Weeks = ({ weeks, onMinus, onAdd }: WeeksProps) => {
+const Weeks = ({ weeks, onMinus, onAdd, maxWeeks }: WeeksProps) => {
   const weeksLabel = weeks === 1 ? 'Week' : 'Weeks'
 
   return (
@@ -172,6 +173,7 @@ const Weeks = ({ weeks, onMinus, onAdd }: WeeksProps) => {
       <button
         className='bg-dark-green mr-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center justify-self-end rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
         onClick={onAdd}
+        disabled={weeks >= maxWeeks}
       >
         <FaPlus className='h-4 w-4' />
       </button>

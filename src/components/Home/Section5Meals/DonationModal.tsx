@@ -10,14 +10,55 @@ import {
 import { motion, AnimatePresence } from 'motion/react'
 import { RxCross2 } from 'react-icons/rx'
 import { Button } from '@/components/commons'
+import useProduct from '@/hooks/queries/useProduct'
+import useAddItemToCart, { AddToCartButton } from '@/hooks/useAddItemToCart'
 
 const DonationModal = ({ children }: PropsWithChildren) => {
   const [open, setOpen] = useState(false)
   const [selectedOrg, setSelectedOrg] = useState<string>('Wildflower')
+  const [quantity, setQuantity] = useState(1)
+  const [weeks, setWeeks] = useState(1)
+  const { addItemToCart, addToCartButtonRef, isLoading } =
+    useAddItemToCart(handleClose)
+  const { useGetProductsQuery } = useProduct()
+  const getProducts = useGetProductsQuery({
+    first: 100,
+  })
+  const products = getProducts.data?.nodes || []
+  const product = products.find((product) =>
+    product.title.includes(selectedOrg)
+  )
 
-  const handleClose = () => setOpen(false)
+  function handleClose() {
+    setOpen(false)
+    setSelectedOrg('Wildflower')
+    setQuantity(1)
+    setWeeks(1)
+  }
 
   const handleSelectOrg = (org: string) => setSelectedOrg(org)
+
+  const handleAddOneMeal = () => {
+    if (!product) return
+    addItemToCart(
+      AddToCartButton.DONATION,
+      product.variants.edges[0].node.id,
+      quantity
+    )
+  }
+
+  const handleAddSubscription = () => {
+    if (!product) return
+    const sellingPlanId =
+      product.variants.edges[0].node.sellingPlanAllocations.nodes[weeks - 1]
+        .sellingPlan.id
+    addItemToCart(
+      AddToCartButton.DONATION_SUBSCRIPTION,
+      product.variants.edges[0].node.id,
+      quantity,
+      sellingPlanId
+    )
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -39,13 +80,13 @@ const DonationModal = ({ children }: PropsWithChildren) => {
                 <RxCross2 className='h-6 w-6' />
               </button>
 
-              <div className='flex w-full flex-col items-center px-4 pb-4'>
+              <div className='flex w-full flex-col items-center px-4 pb-6'>
                 <DialogTitle className='text-dark-brown mb-4 text-center text-4xl font-bold'>
                   How would you like to donate?
                 </DialogTitle>
 
                 <div className='mb-2 flex items-center gap-x-8 text-lg font-bold'>
-                  {['Wildflower', 'Luni'].map((org) => (
+                  {['Wildflower', 'LUNI'].map((org) => (
                     <label className='flex items-center gap-x-2' key={org}>
                       <input
                         type='radio'
@@ -60,9 +101,9 @@ const DonationModal = ({ children }: PropsWithChildren) => {
                 </div>
 
                 <Button.Quantity
-                  quantity={1}
-                  onMinus={() => {}}
-                  onAdd={() => {}}
+                  quantity={quantity}
+                  onMinus={() => setQuantity((prev) => prev - 1)}
+                  onAdd={() => setQuantity((prev) => prev + 1)}
                 />
 
                 <div className='mt-6 grid w-full lg:grid-cols-[1fr_auto_1fr]'>
@@ -79,7 +120,14 @@ const DonationModal = ({ children }: PropsWithChildren) => {
                       Receive photo and video updates when your meal reaches a
                       cat
                     </p>
-                    <Button.Cta className='mt-7'>
+                    <Button.Cta
+                      className='mt-7'
+                      onClick={handleAddOneMeal}
+                      isLoading={
+                        addToCartButtonRef.current ===
+                          AddToCartButton.DONATION && isLoading
+                      }
+                    >
                       <img
                         src='/icons/paw-white.png'
                         alt='Paw icon'
@@ -104,11 +152,22 @@ const DonationModal = ({ children }: PropsWithChildren) => {
                       Set up recurring meals every
                     </p>
                     <Button.Weeks
-                      weeks={1}
-                      onMinus={() => {}}
-                      onAdd={() => {}}
+                      weeks={weeks}
+                      onMinus={() => setWeeks((prev) => prev - 1)}
+                      onAdd={() => setWeeks((prev) => prev + 1)}
+                      maxWeeks={
+                        product?.variants.edges[0].node.sellingPlanAllocations
+                          .nodes.length || 0
+                      }
                     />
-                    <Button.Cta className='mt-4'>
+                    <Button.Cta
+                      className='mt-4'
+                      onClick={handleAddSubscription}
+                      isLoading={
+                        addToCartButtonRef.current ===
+                          AddToCartButton.DONATION_SUBSCRIPTION && isLoading
+                      }
+                    >
                       <img
                         src='/icons/paw-white.png'
                         alt='Paw icon'
@@ -116,6 +175,9 @@ const DonationModal = ({ children }: PropsWithChildren) => {
                       />
                       Subscribe
                     </Button.Cta>
+                    <p className='text-brown mt-1 text-xs'>
+                      Skip or cancel any time
+                    </p>
                   </div>
                 </div>
               </div>
