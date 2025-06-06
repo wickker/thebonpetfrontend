@@ -6,7 +6,7 @@ const PromoBanner = () => {
   const navigate = useNavigate()
 
   return (
-    <div className='flex w-full items-center justify-center bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)] px-6 py-4 text-white'>
+    <div className='flex w-full items-center justify-center bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)] px-6 py-4 text-white transition-all hover:bg-[linear-gradient(90deg,#03453D_0%,#19756A_40%,#19756A_60%,#03453D_100%)] hover:[text-shadow:0_0_20px_#ffffff]'>
       <button
         className='group flex cursor-pointer items-center gap-2 font-bold tracking-widest uppercase'
         onClick={() => navigate(ROUTES.DOGS)}

@@ -2,7 +2,11 @@ const Section6Join = () => {
   return (
     <div className='bg-[linear-gradient(90deg,#03453D_0%,#19756A_50.36%,#03453D_100%)]'>
       <div className='text-cream mx-auto flex w-full max-w-[1650px] flex-col items-center px-4 py-8 lg:w-[90%]'>
-        Hello
+        <h1 className='text-center text-5xl font-bold'>Join the Pack</h1>
+
+        <p className='text-beige mt-4 mb-6 text-center text-lg leading-[1.8]'>
+          Meet our satisfied paw-rents
+        </p>
       </div>
     </div>
   )
