@@ -12,6 +12,7 @@ type TileProps = {
   message: string
   title?: string
   onClose: () => void
+  className?: string
 }
 
 const Tile = ({
@@ -19,6 +20,7 @@ const Tile = ({
   message = '',
   title = '',
   onClose,
+  className,
 }: TileProps) => {
   const getIcon = () => {
     switch (type) {
@@ -36,7 +38,10 @@ const Tile = ({
 
   return (
     <motion.div
-      className='grid h-fit w-full max-w-lg grid-cols-[auto_1fr] overflow-hidden bg-white shadow-lg'
+      className={cn(
+        'grid h-fit w-full max-w-lg grid-cols-[auto_1fr] overflow-hidden bg-white shadow-lg',
+        className
+      )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

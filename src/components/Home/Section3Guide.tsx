@@ -31,7 +31,7 @@ const Section3Guide = () => {
             >
               Feeding Guide
             </Button.Cta>
-            <button className='border-green text-green flex min-w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] px-4 py-2 text-2xl whitespace-nowrap disabled:hover:cursor-not-allowed'>
+            <button className='border-green text-green flex min-w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] px-4 py-2 text-2xl whitespace-nowrap transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] disabled:hover:cursor-not-allowed'>
               <img src='/icons/bowl.png' alt='Bowl icon' className='h-8 w-8' />
               View Meals
             </button>

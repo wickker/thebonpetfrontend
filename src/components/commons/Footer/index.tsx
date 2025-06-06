@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EmailForm, EmailFormSchema } from '@/@types/customers'
+import { LINKS } from '@/utils/constants'
 import { FOOTER_ITEMS } from './utils'
 
 const Footer = () => {
@@ -35,11 +36,7 @@ const Footer = () => {
             <button
               className='cursor-pointer'
               onClick={() =>
-                window.open(
-                  'https://www.instagram.com/thebonpet/',
-                  '_blank',
-                  'noopener,noreferrer'
-                )
+                window.open(LINKS.INSTAGRAM, '_blank', 'noopener,noreferrer')
               }
             >
               <img

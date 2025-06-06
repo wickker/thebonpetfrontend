@@ -1,5 +1,6 @@
 import { FaInstagram, FaTelegram, FaWhatsapp } from 'react-icons/fa'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
+import { LINKS } from '@/utils/constants'
 
 const Contact = () => {
   return (
@@ -27,31 +28,28 @@ const Contact = () => {
             <p>
               <FaInstagram className='mr-2 inline-block text-xl' />
               <span className='font-bold'>Instagram:</span>{' '}
-              <a
-                href='https://www.instagram.com/thebonpet'
-                className='underline'
-              >
+              <a href={LINKS.INSTAGRAM} className='underline'>
                 @thebonpet
               </a>
             </p>
             <p>
               <FaTelegram className='mr-2 inline-block text-xl' />
               <span className='font-bold'>Telegram:</span>{' '}
-              <a href='https://t.me/thebonpet' className='underline'>
+              <a href={LINKS.TELEGRAM} className='underline'>
                 @thebonpet
               </a>
             </p>
             <p>
               <FaWhatsapp className='mr-2 inline-block text-xl' />
               <span className='font-bold'>WhatsApp:</span>{' '}
-              <a href='https://wa.me/6590108515' className='underline'>
+              <a href={LINKS.WHATSAPP} className='underline'>
                 The Bon Pet
               </a>
             </p>
             <p>
               <MdEmail className='mr-2 inline-block text-xl' />
               <span className='font-bold'>Email:</span>{' '}
-              <a href='mailto:hello@thebonpet.com' className='underline'>
+              <a href={LINKS.MAIL} className='underline'>
                 hello@thebonpet.com
               </a>
             </p>

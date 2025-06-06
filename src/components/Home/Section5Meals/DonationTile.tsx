@@ -1,4 +1,5 @@
 import { Button } from '@/components/commons'
+import { LINKS } from '@/utils/constants'
 import DonationModal from './DonationModal'
 
 const DonationTile = () => {
@@ -27,28 +28,24 @@ const DonationTile = () => {
       <div className='flex flex-col items-center text-center'>
         <h1 className='mb-8 text-5xl font-bold'>Paw it Forward</h1>
 
-        <p className='mb-2 text-xl font-bold'>
+        <p className='mb-2 text-2xl font-bold'>
           Help Stay Cats, One Meal at a Time.
         </p>
 
-        <p className='text-brown text-sm'>
+        <p className='text-brown'>
           Opt into kindness by donating to support rescue cats.
         </p>
-        <p className='text-brown mb-8 text-sm'>
+        <p className='text-brown mb-8'>
           100% goes to the charity of your choosing.{' '}
           <a
             className='underline'
-            href='https://www.wildflowerstudio.sg/'
+            href={LINKS.WILDFLOWER_STUDIO}
             target='_blank'
           >
             Wildflower Studio
           </a>{' '}
           or{' '}
-          <a
-            className='underline'
-            href='https://luni-singapore.com/'
-            target='_blank'
-          >
+          <a className='underline' href={LINKS.LUNI} target='_blank'>
             LUNI
           </a>
           .

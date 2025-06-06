@@ -48,12 +48,9 @@ const Cta = ({
   return (
     <button
       className={cn(
-        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 px-4 py-2 text-2xl whitespace-nowrap text-white disabled:hover:cursor-not-allowed',
+        'flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[3px] border-white/60 bg-[linear-gradient(180deg,_#39AB6D_0%,_#10776B_100%)] px-4 py-2 text-2xl whitespace-nowrap text-white transition-all hover:scale-x-102 hover:bg-[linear-gradient(#41A855,_#41A855)] hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] hover:[text-shadow:0_0_8px_#5DDB75] disabled:hover:cursor-not-allowed hover:[&>*]:[filter:drop-shadow(0_0_8px_#5DDB75)]',
         className
       )}
-      style={{
-        background: 'linear-gradient(180deg, #39AB6D 0%, #10776B 100%)',
-      }}
       disabled={disabled || isLoading}
       {...props}
     >
@@ -146,11 +143,47 @@ const Quantity = ({ quantity, onMinus, onAdd }: QuantityProps) => {
   )
 }
 
+type WeeksProps = {
+  weeks: number
+  onMinus: () => void
+  onAdd: () => void
+  maxWeeks: number
+}
+
+const Weeks = ({ weeks, onMinus, onAdd, maxWeeks }: WeeksProps) => {
+  const weeksLabel = weeks === 1 ? 'Week' : 'Weeks'
+
+  return (
+    <div className='bg-cream grid h-[36px] w-fit grid-cols-[36px_140px_36px] items-center rounded-full shadow'>
+      <button
+        className='bg-dark-green ml-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        onClick={onMinus}
+        disabled={weeks <= 1}
+      >
+        <FaMinus className='h-4 w-4' />
+      </button>
+
+      <p className='text-dark-green justify-self-center'>
+        Every <b className='mx-1'>{weeks}</b> {weeksLabel}
+      </p>
+
+      <button
+        className='bg-dark-green mr-[3px] grid h-[30px] w-[30px] cursor-pointer place-items-center justify-self-end rounded-full text-white disabled:opacity-50 disabled:hover:cursor-not-allowed'
+        onClick={onAdd}
+        disabled={weeks >= maxWeeks}
+      >
+        <FaPlus className='h-4 w-4' />
+      </button>
+    </div>
+  )
+}
+
 const Button = {
   Cta,
   Plain,
   CartQuantity,
   Quantity,
+  Weeks,
 }
 
 export default Button

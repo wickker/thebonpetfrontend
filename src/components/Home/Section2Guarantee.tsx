@@ -72,12 +72,12 @@ const Section2Guarantee = () => {
           </p>
         </div>
 
-        <button className='my-8 flex w-fit cursor-pointer items-center gap-x-1 justify-self-center rounded-full border-2 border-white/80 bg-white/24 px-4 py-2 text-white lg:col-start-2'>
+        <button className='group my-8 flex w-fit cursor-pointer items-center gap-x-1 justify-self-center rounded-full border-2 border-white/80 bg-white/24 px-4 py-2 text-white lg:col-start-2'>
           <IoDocumentText className='h-10 w-10' />
           <div>
             <div className='flex items-center gap-x-2 text-lg'>
               Transparency Matters
-              <FaArrowRight />
+              <FaArrowRight className='transition-transform duration-300 group-hover:translate-x-1' />
             </div>
             <p className='mr-1 truncate text-sm'>
               Trace ingredients, supplements & more

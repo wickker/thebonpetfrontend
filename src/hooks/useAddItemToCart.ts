@@ -15,12 +15,14 @@ export const AddToCartButton = {
   TRIAL_PACK: 'Trial Pack',
   CHICKEN: 'Chicken',
   BEEF: 'Beef',
+  DONATION: 'Donation',
+  DONATION_SUBSCRIPTION: 'Donation Subscription',
 } as const
 
 export type AddToCartButton =
   (typeof AddToCartButton)[keyof typeof AddToCartButton]
 
-const useAddItemToCart = () => {
+const useAddItemToCart = (successCb?: () => void) => {
   const queryClient = useQueryClient()
   const { toast } = useToastContext()
   const { openCart } = useCartActions()
@@ -51,6 +53,7 @@ const useAddItemToCart = () => {
     queryClient.invalidateQueries({
       queryKey: ['cart'],
     })
+    successCb?.()
     openCart()
   }
 
@@ -74,6 +77,7 @@ const useAddItemToCart = () => {
           expiresAt,
         })
       )
+      successCb?.()
       openCart()
     }
   }
