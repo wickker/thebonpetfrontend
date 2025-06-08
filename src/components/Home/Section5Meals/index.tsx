@@ -81,7 +81,7 @@ const Section5Meals = () => {
           Complete & Balanced Superfoods
         </h1>
 
-        <div className='mb-6 flex w-full flex-wrap items-center justify-around gap-6'>
+        <div className='mb-6 flex w-full flex-wrap items-center justify-center gap-6 lg:gap-12'>
           {renderStandardProducts()}
         </div>
 

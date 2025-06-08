@@ -1,7 +1,39 @@
-import { InstagramEmbed } from 'react-social-media-embed'
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa6'
 import { FiExternalLink } from 'react-icons/fi'
 import { LINKS } from '@/utils/constants'
+
+const featuredPosts = [
+  {
+    path: '/home-join-1.jpg',
+    caption: 'This is an example of a caption from Instagram',
+    link: 'https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    username: '@username',
+  },
+  {
+    path: '/home-join-2.jpg',
+    caption: 'This is an example of a caption from Instagram',
+    link: 'https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    username: '@username',
+  },
+  {
+    path: '/home-join-3.jpg',
+    caption: 'This is an example of a caption from Instagram',
+    link: 'https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    username: '@username',
+  },
+  {
+    path: '/home-join-4.jpg',
+    caption: 'This is an example of a caption from Instagram',
+    link: 'https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    username: '@username',
+  },
+  {
+    path: '/home-join-5.jpg',
+    caption: 'This is an example of a caption from Instagram',
+    link: 'https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    username: '@username',
+  },
+]
 
 const Section6Join = () => {
   return (
@@ -13,11 +45,26 @@ const Section6Join = () => {
           Meet our satisfied paw-rents
         </p>
 
-        <div className='mb-6 flex flex-wrap items-center justify-around gap-4'>
-          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
-          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
-          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
-          <InstagramEmbed url='https://www.instagram.com/reel/DFZVNdKzQa6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' />
+        <div className='mb-8 flex flex-wrap items-center justify-around gap-6'>
+          {featuredPosts.map((post) => (
+            <a
+              className='group flex w-[258px] flex-col items-center rounded-xl bg-white p-4'
+              href={post.link}
+              target='_blank'
+              rel='noopener noreferrer'
+              key={post.path}
+            >
+              <img
+                src={post.path}
+                alt='Join the pack'
+                className='h-[262px] w-[226px] object-cover transition-all duration-300 group-hover:scale-102'
+              />
+              <p className='text-dark-gray mt-2'>{post.caption}</p>
+              <p className='text-dark-gray/60 mt-2 text-center'>
+                {post.username}
+              </p>
+            </a>
+          ))}
         </div>
 
         <a
