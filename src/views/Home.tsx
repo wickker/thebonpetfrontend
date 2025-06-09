@@ -8,6 +8,7 @@ import {
   Section4HowItWorks,
   Section5Meals,
   Section6Join,
+  Section7Faqs,
 } from '@/components/Home'
 import { useCartActions } from '@/store/useCartStore'
 
@@ -38,6 +39,8 @@ const Home = () => {
       <Section5Meals />
 
       <Section6Join />
+
+      <Section7Faqs />
     </div>
   )
 }

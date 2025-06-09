@@ -18,10 +18,10 @@ export const DESKTOP_NAVIGATION_ITEMS = [
   //   label: 'Pet Food Calculator',
   //   route: ROUTES.PET_FOOD_CALCULATOR,
   // },
-  {
-    label: 'Donate',
-    route: ROUTES.DONATE,
-  },
+  // {
+  //   label: 'Donate',
+  //   route: ROUTES.DONATE,
+  // },
   {
     label: 'Blog',
     route: ROUTES.BLOG,
@@ -29,5 +29,9 @@ export const DESKTOP_NAVIGATION_ITEMS = [
   {
     label: 'Contact',
     route: ROUTES.CONTACT,
+  },
+  {
+    label: 'FAQs',
+    route: ROUTES.FAQS,
   },
 ] as const

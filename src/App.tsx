@@ -7,9 +7,11 @@ import { useToastContext } from '@/contexts/useToastContext/context'
 import { ROUTES } from '@/utils/constants'
 import {
   Account,
+  Blog,
   CancellationPolicy,
   Cats,
   Contact,
+  Faqs,
   FeedingGuide,
   Home,
   Login,
@@ -56,7 +58,7 @@ const App = () => {
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route path={ROUTES.DOGS} element={<></>} />
               <Route path={ROUTES.CATS} element={<Cats />} />
-              <Route path={ROUTES.BLOG} element={<></>} />
+              <Route path={ROUTES.BLOG} element={<Blog />} />
               <Route path={ROUTES.FEEDING_GUIDE} element={<FeedingGuide />} />
               <Route path={ROUTES.CONTACT} element={<Contact />} />
               <Route path={ROUTES.PET_FOOD_CALCULATOR} element={<></>} />
@@ -66,7 +68,7 @@ const App = () => {
                 element={<CancellationPolicy />}
               />
               <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy />} />
-
+              <Route path={ROUTES.FAQS} element={<Faqs />} />
               {/* Shopify route matches */}
               <Route
                 path={ROUTES.CART}

@@ -20,6 +20,7 @@ export const ROUTES = {
   CONTACT: '/contact',
   PRIVACY_POLICY: '/privacy-policy',
   CANCELLATION_POLICY: '/cancellation-policy',
+  FAQS: '/faqs',
 
   // match Shopify urls for smooth redirects
   CART: '/cart',
@@ -40,4 +41,6 @@ export const LINKS = {
   NINJA_COLD: 'https://www.ninjavan.co/en-sg/logistics-solutions/cold-chain',
   WILDFLOWER_STUDIO: 'https://www.wildflowerstudio.sg/',
   LUNI: 'https://luni-singapore.com/',
+  MEAL_RECIPE:
+    'https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?usp=sharing',
 } as const

@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { FaArrowRight } from 'react-icons/fa6'
 import { IoDocumentText } from 'react-icons/io5'
+import { LINKS } from '@/utils/constants'
 
 const computeConicGradient = () => {
   const stripeCount = 50
@@ -72,7 +73,10 @@ const Section2Guarantee = () => {
           </p>
         </div>
 
-        <button className='group my-8 flex w-fit cursor-pointer items-center gap-x-1 justify-self-center rounded-full border-2 border-white/80 bg-white/24 px-4 py-2 text-white lg:col-start-2'>
+        <button
+          className='group my-8 flex w-fit cursor-pointer items-center gap-x-1 justify-self-center rounded-full border-2 border-white/80 bg-white/24 px-4 py-2 text-white lg:col-start-2'
+          onClick={() => window.open(LINKS.MEAL_RECIPE, '_blank')}
+        >
           <IoDocumentText className='h-10 w-10' />
           <div>
             <div className='flex items-center gap-x-2 text-lg'>
