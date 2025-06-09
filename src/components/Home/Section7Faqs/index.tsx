@@ -77,7 +77,40 @@ const Section7Faqs = () => {
             </a>
           </div>
 
-          <div className='col-span-full w-full rounded-xl bg-pink-200 p-6'></div>
+          <div
+            className='col-span-full flex w-full flex-col items-center rounded-xl bg-[#03443C] bg-auto bg-bottom px-4 py-14'
+            style={{
+              backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%), conic-gradient(#02443CCC, #02443CCC), url('/background-feeding-guide.png')`,
+            }}
+          >
+            <h1 className='text-5xl font-bold text-white'>
+              Ready To Elevate your Pet's Diet?
+            </h1>
+
+            <div className='mt-8 flex items-center justify-center gap-10'>
+              <button
+                className='text-dark-brown flex cursor-pointer items-center gap-x-2 rounded-xl border-[2px] border-[#CCBC9E] px-4 py-2 text-xl font-bold transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]'
+                style={{
+                  background:
+                    'linear-gradient(180deg, #FFF3DF 0%, #E9D9BD 100%)',
+                }}
+              >
+                <img src='/icons/dog.png' alt='Dog icon' className='h-7 w-7' />
+                Meals for Dogs
+              </button>
+
+              <button
+                className='text-dark-brown flex cursor-pointer items-center gap-x-2 rounded-xl border-[2px] border-[#CCBC9E] px-4 py-2 text-xl font-bold transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]'
+                style={{
+                  background:
+                    'linear-gradient(180deg, #FFF3DF 0%, #E9D9BD 100%)',
+                }}
+              >
+                <img src='/icons/cat.png' alt='Cat icon' className='h-7 w-7' />
+                Meals for Cats
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
