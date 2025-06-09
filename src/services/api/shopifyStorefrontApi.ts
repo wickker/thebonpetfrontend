@@ -22,6 +22,7 @@ import {
   CartCreatePayload,
   MutationCartLinesAddArgs,
   CartLinesAddPayload,
+  ArticleEdge,
 } from '@shopify/hydrogen-react/storefront-api-types'
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 import {
@@ -29,6 +30,7 @@ import {
   UpdateCartNoteBuyerIdentityAndAttributesResponse,
 } from '@/@types/carts'
 import Config from '@/configs'
+import Blog from '@/graphql/blog'
 import Cart from '@/graphql/cart'
 import Customer from '@/graphql/customer'
 import Product from '@/graphql/product'
@@ -68,6 +70,9 @@ const getProducts = (
       variables: request,
     })
     .then((res) => res.data.products)
+
+const getArticles = (): Promise<Array<ArticleEdge>> =>
+  client.request(Blog.GetArticles).then((res) => res.data.blog.articles.edges)
 
 // Mutations
 const createCustomerAccessToken = (
@@ -187,6 +192,7 @@ export default {
   createCart,
   createCustomer,
   createCustomerAccessToken,
+  getArticles,
   getCart,
   getCustomer,
   getProducts,
