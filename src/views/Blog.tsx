@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Article, ArticlesGrid } from '@/components/Blog'
 import useBlog from '@/hooks/queries/useBlog'
@@ -24,6 +25,10 @@ const Blog = () => {
       <ArticlesGrid articles={articles} isLoading={getArticles.isLoading} />
     )
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [articleId])
 
   return (
     <div className='mx-auto flex max-w-[100dvw] flex-col items-center lg:max-w-6xl'>
