@@ -83,11 +83,11 @@ const Section7Faqs = () => {
               backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%), conic-gradient(#02443CCC, #02443CCC), url('/background-feeding-guide.png')`,
             }}
           >
-            <h1 className='text-5xl font-bold text-white'>
+            <h1 className='text-center text-5xl font-bold text-white'>
               Ready To Elevate your Pet's Diet?
             </h1>
 
-            <div className='mt-8 flex items-center justify-center gap-10'>
+            <div className='mt-8 flex flex-wrap items-center justify-center gap-10'>
               <button
                 className='text-dark-brown flex cursor-pointer items-center gap-x-2 rounded-xl border-[2px] border-[#CCBC9E] px-4 py-2 text-xl font-bold transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]'
                 style={{
