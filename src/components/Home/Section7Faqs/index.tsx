@@ -1,3 +1,7 @@
+import { ROUTES } from '@/utils/constants'
+import Accordian from './Accordian'
+import { FAQS } from './data'
+
 const Section7Faqs = () => {
   return (
     <div
@@ -11,9 +15,29 @@ const Section7Faqs = () => {
             <h1 className='text-dark-brown mt-4 mb-8 text-left text-5xl font-bold'>
               Frequently Asked Questions
             </h1>
+
+            <div className='flex flex-col gap-y-6'>
+              {FAQS.slice(0, 5).map((faq) => (
+                <Accordian
+                  key={faq.question}
+                  question={faq.question}
+                  answer={faq.answer}
+                />
+              ))}
+            </div>
+
+            <p className='text-brown mt-8 text-center text-lg'>
+              Still have questions?{' '}
+              <a
+                className='text-dark-brown font-bold underline'
+                href={ROUTES.FAQS}
+              >
+                Learn More
+              </a>
+            </p>
           </div>
 
-          <div className='w-[2px] rounded-full bg-[#E9D9BD]' />
+          <div className='hidden w-[2px] rounded-full bg-[#E9D9BD] lg:block' />
         </div>
       </div>
     </div>
