@@ -28,21 +28,36 @@ const Contact = () => {
             <p>
               <FaInstagram className='mr-2 inline-block text-xl' />
               <span className='font-bold'>Instagram:</span>{' '}
-              <a href={LINKS.INSTAGRAM} className='underline'>
+              <a
+                href={LINKS.INSTAGRAM}
+                className='underline'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 @thebonpet
               </a>
             </p>
             <p>
               <FaTelegram className='mr-2 inline-block text-xl' />
               <span className='font-bold'>Telegram:</span>{' '}
-              <a href={LINKS.TELEGRAM} className='underline'>
+              <a
+                href={LINKS.TELEGRAM}
+                className='underline'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 @thebonpet
               </a>
             </p>
             <p>
               <FaWhatsapp className='mr-2 inline-block text-xl' />
               <span className='font-bold'>WhatsApp:</span>{' '}
-              <a href={LINKS.WHATSAPP} className='underline'>
+              <a
+                href={LINKS.WHATSAPP}
+                className='underline'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 The Bon Pet
               </a>
             </p>

@@ -10,6 +10,7 @@ import {
   CancellationPolicy,
   Cats,
   Contact,
+  Faqs,
   FeedingGuide,
   Home,
   Login,
@@ -66,7 +67,7 @@ const App = () => {
                 element={<CancellationPolicy />}
               />
               <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy />} />
-
+              <Route path={ROUTES.FAQS} element={<Faqs />} />
               {/* Shopify route matches */}
               <Route
                 path={ROUTES.CART}

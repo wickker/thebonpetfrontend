@@ -19,7 +19,7 @@ const CalculatorTile = () => {
         className='w-[54%]'
       />
       <button className='text-green mt-4 cursor-pointer rounded-xl border-[2px] border-[#E9D9BD] bg-[#FFF3DF] px-3 py-2 text-lg font-bold tracking-widest uppercase transition-all hover:scale-x-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]'>
-        Try It Now
+        Coming Soon
       </button>
     </div>
   )

@@ -1,4 +1,4 @@
-export const faqs = [
+export const FAQS = [
   {
     question: 'How long can your meals be stored in the freezer?',
     answer: (
