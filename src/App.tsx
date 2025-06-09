@@ -7,6 +7,7 @@ import { useToastContext } from '@/contexts/useToastContext/context'
 import { ROUTES } from '@/utils/constants'
 import {
   Account,
+  Blog,
   CancellationPolicy,
   Cats,
   Contact,
@@ -57,7 +58,7 @@ const App = () => {
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route path={ROUTES.DOGS} element={<></>} />
               <Route path={ROUTES.CATS} element={<Cats />} />
-              <Route path={ROUTES.BLOG} element={<></>} />
+              <Route path={ROUTES.BLOG} element={<Blog />} />
               <Route path={ROUTES.FEEDING_GUIDE} element={<FeedingGuide />} />
               <Route path={ROUTES.CONTACT} element={<Contact />} />
               <Route path={ROUTES.PET_FOOD_CALCULATOR} element={<></>} />

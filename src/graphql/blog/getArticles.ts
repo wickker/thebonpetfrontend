@@ -1,7 +1,7 @@
 export default `
 query {
   blog(handle: "news") {
-    articles(first: 100) {
+    articles(first: 50) {
       edges {
         node {
           id

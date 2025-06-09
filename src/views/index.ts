@@ -1,4 +1,5 @@
 export { default as Account } from './Account'
+export { default as Blog } from './Blog'
 export { default as CancellationPolicy } from './CancellationPolicy'
 export { default as Cats } from './Cats'
 export { default as Contact } from './Contact'
