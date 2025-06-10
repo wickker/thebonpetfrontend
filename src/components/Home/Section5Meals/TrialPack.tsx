@@ -3,7 +3,7 @@ import { Product } from '@shopify/hydrogen-react/storefront-api-types'
 import { IoBag } from 'react-icons/io5'
 import { Button } from '@/components/commons'
 import useAddItemToCart, { AddToCartButton } from '@/hooks/useAddItemToCart'
-import { MeatType } from './utils'
+import { MeatType } from '@/utils/enums'
 
 type TrialPackProps = {
   products: Array<Product>

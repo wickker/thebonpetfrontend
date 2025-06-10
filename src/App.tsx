@@ -20,6 +20,7 @@ import {
   SignUp,
   SubmitNewPassword,
   TermsOfService,
+  Dogs,
 } from '@/views'
 
 const App = () => {
@@ -56,7 +57,7 @@ const App = () => {
           <Route element={<CheckAuth />}>
             <Route element={<NavigationBar />}>
               <Route path={ROUTES.HOME} element={<Home />} />
-              <Route path={ROUTES.DOGS} element={<></>} />
+              <Route path={ROUTES.DOGS} element={<Dogs />} />
               <Route path={ROUTES.CATS} element={<Cats />} />
               <Route path={ROUTES.BLOG} element={<Blog />} />
               <Route path={ROUTES.FEEDING_GUIDE} element={<FeedingGuide />} />
@@ -69,6 +70,7 @@ const App = () => {
               />
               <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy />} />
               <Route path={ROUTES.FAQS} element={<Faqs />} />
+
               {/* Shopify route matches */}
               <Route
                 path={ROUTES.CART}

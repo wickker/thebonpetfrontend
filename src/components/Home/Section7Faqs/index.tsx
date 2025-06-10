@@ -84,7 +84,7 @@ const Section7Faqs = () => {
             }}
           >
             <h1 className='text-center text-5xl font-bold text-white'>
-              Ready To Elevate your Pet's Diet?
+              Ready To Elevate Your Pet's Diet?
             </h1>
 
             <div className='mt-8 flex flex-wrap items-center justify-center gap-10'>

@@ -5,6 +5,7 @@ query ($first: Int) {
       id
       title
       description
+      descriptionHtml
       featuredImage {
         url
       }

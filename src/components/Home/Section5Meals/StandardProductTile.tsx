@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { IoBag } from 'react-icons/io5'
 import { Button } from '@/components/commons'
 import useAddItemToCart, { AddToCartButton } from '@/hooks/useAddItemToCart'
+import { MeatType } from '@/utils/enums'
 
 type StandardProductTileProps = {
   productTitle: string
@@ -17,11 +18,11 @@ const StandardProductTile = ({
   imageUrl,
 }: StandardProductTileProps) => {
   const [quantity, setQuantity] = useState(1)
-  const productLabel: AddToCartButton = productTitle
-    .toLowerCase()
-    .includes('chicken')
-    ? 'Chicken'
-    : 'Beef'
+  const productLabel: AddToCartButton = (
+    productTitle.toLowerCase().includes(MeatType.CHICKEN.toLowerCase())
+      ? MeatType.CHICKEN
+      : MeatType.BEEF
+  ) as AddToCartButton
   const { addItemToCart, addToCartButtonRef, isLoading } = useAddItemToCart()
 
   const handleAddToCart = () => addItemToCart(productLabel, variantId, quantity)

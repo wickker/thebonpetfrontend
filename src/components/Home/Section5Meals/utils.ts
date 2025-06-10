@@ -5,13 +5,6 @@ export const Tab = {
 
 export type Tab = (typeof Tab)[keyof typeof Tab]
 
-export const MeatType = {
-  BEEF: 'Beef',
-  CHICKEN: 'Chicken',
-}
-
-export type MeatType = (typeof MeatType)[keyof typeof MeatType]
-
 export const TABS = [
   {
     label: 'Dogs',
