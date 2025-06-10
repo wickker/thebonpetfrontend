@@ -25,8 +25,22 @@ const useGetDisplayProduct = (animal: 'dog' | 'cat') => {
     product = products.find((p) => p.id === productId)
   }
 
+  const isChicken = product?.title.includes(MeatType.CHICKEN)
+
+  const suggestedProduct = products.find(
+    (p) =>
+      (isChicken
+        ? p.title.includes(MeatType.BEEF)
+        : p.title.includes(MeatType.CHICKEN)) &&
+      p.title.toLowerCase().includes(animal) &&
+      !p.title.includes('Trial') &&
+      !p.title.includes('Christmas') &&
+      !p.title.includes('Donation')
+  )
+
   return {
     product,
+    suggestedProduct,
     isLoading: getProducts.isLoading,
   }
 }

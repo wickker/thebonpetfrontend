@@ -16,6 +16,9 @@ query ($first: Int) {
             title
             sku
             availableForSale
+            image {
+              url
+            }
             price {
               amount
               currencyCode

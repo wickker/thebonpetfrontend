@@ -4,14 +4,11 @@ import useGetDisplayProduct from '@/hooks/useGetDisplayProduct'
 const animal = 'dog'
 
 const Dogs = () => {
-  const { product, isLoading } = useGetDisplayProduct(animal)
+  const { product, isLoading, suggestedProduct } = useGetDisplayProduct(animal)
 
   if (isLoading) return <div>Loading...</div>
 
-  if (!product) return null
-
-  // console.log(product.descriptionHtml)
-  // console.log(product.description)
+  if (!product || !suggestedProduct) return null
 
   return (
     <div
@@ -20,7 +17,11 @@ const Dogs = () => {
       }}
     >
       <div className='mx-auto flex w-full max-w-[1650px] flex-col items-center px-4 py-8 lg:w-[90%]'>
-        <ProductPage animal={animal} product={product} />
+        <ProductPage
+          animal={animal}
+          product={product}
+          suggestedProduct={suggestedProduct}
+        />
       </div>
     </div>
   )
