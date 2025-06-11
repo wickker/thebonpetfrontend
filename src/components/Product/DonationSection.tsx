@@ -20,17 +20,21 @@ const DonationSection = () => {
           <p className='text-brown'>
             Opt into kindness by donating to support rescue cats.
           </p>
-          <p className='text-brown mb-8'>
+          <p className='text-brown mt-4 mb-8'>
             100% goes to the charity of your choosing.{' '}
             <a
-              className='underline'
+              className='font-bold underline'
               href={LINKS.WILDFLOWER_STUDIO}
               target='_blank'
             >
               Wildflower Studio
             </a>{' '}
             or{' '}
-            <a className='underline' href={LINKS.LUNI} target='_blank'>
+            <a
+              className='font-bold underline'
+              href={LINKS.LUNI}
+              target='_blank'
+            >
               LUNI
             </a>
             .
