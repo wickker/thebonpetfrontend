@@ -83,7 +83,7 @@ const useAddItemToCart = (successCb?: () => void) => {
   }
 
   const addItemToCart = (
-    buttonRef: AddToCartButton,
+    buttonRef: AddToCartButton | '',
     variantId: string,
     quantity: number,
     sellingPlanId?: string

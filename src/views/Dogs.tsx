@@ -2,9 +2,9 @@ import { EmptyDisplay } from '@/components/commons'
 import { ProductPage, ProductSkeleton } from '@/components/Product'
 import useGetDisplayProduct from '@/hooks/useGetDisplayProduct'
 
-const animal = 'cat'
+const animal = 'dog'
 
-const Cats = () => {
+const Dogs = () => {
   const { product, isLoading, suggestedProduct } = useGetDisplayProduct(animal)
 
   if (isLoading) return <ProductSkeleton />
@@ -35,4 +35,4 @@ const Cats = () => {
   )
 }
 
-export default Cats
+export default Dogs
