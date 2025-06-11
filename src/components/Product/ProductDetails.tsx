@@ -4,7 +4,9 @@ import { BiDish } from 'react-icons/bi'
 import { IoFishOutline } from 'react-icons/io5'
 import { PiCarrot } from 'react-icons/pi'
 import { ROUTES } from '@/utils/constants'
+import { MeatType } from '@/utils/enums'
 import Accordian from './Accordian'
+import { PRODUCT_DETAILS } from './data'
 
 type ProductDetailsProps = {
   animal: 'dog' | 'cat'
@@ -24,47 +26,26 @@ const ProductDetails = ({
     'Gently Cooked Free Range ',
     ''
   )
-
-  // extract details
-  const splits = product.descriptionHtml.split('<h2')
-  const details = splits?.[0] || ''
-
-  // extract ingredients
-  const splits2 = product.descriptionHtml.split('/h2>')
-  const splits3 =
-    splits2?.[1].split('<p dir="ltr"><strong>Supplements:</strong></p>') || ''
-  const splits4 = splits3?.[0].split('<div') || ''
-  const ingredients = splits4?.[0] || ''
-
-  // extract supplements
-  let supplements = ''
-  if (
-    product.descriptionHtml.includes(
-      '<p dir="ltr"><strong>Supplements:</strong></p>'
-    )
-  ) {
-    const splits5 =
-      product.descriptionHtml.split(
-        '<p dir="ltr"><strong>Supplements:</strong></p>'
-      ) || ''
-    supplements =
-      splits5?.[1].replace('<p class="p3"><b>Bon Appétit!</b></p>', '') || ''
-  }
+  const meatType = product.title.includes(MeatType.BEEF)
+    ? MeatType.BEEF
+    : MeatType.CHICKEN
+  const dataKey =
+    `${animal.toUpperCase()}_${meatType.toUpperCase()}` as keyof typeof PRODUCT_DETAILS
 
   const accordianItems = [
     {
       title: 'Supplements',
-      content: supplements,
+      content: PRODUCT_DETAILS[dataKey].supplements,
       icon: IoFishOutline,
     },
     {
       title: 'Ingredients',
-      content: ingredients,
+      content: PRODUCT_DETAILS[dataKey].ingredients,
       icon: BiDish,
     },
     {
       title: 'Nutrition',
-      content: '',
+      content: PRODUCT_DETAILS[dataKey].nutrition,
       icon: PiCarrot,
     },
   ]
@@ -81,7 +62,9 @@ const ProductDetails = ({
       <div className='grid w-full gap-8 lg:grid-cols-[3fr_1.6fr]'>
         <div className='flex flex-col'>
           <div
-            dangerouslySetInnerHTML={{ __html: details }}
+            dangerouslySetInnerHTML={{
+              __html: PRODUCT_DETAILS[dataKey].details,
+            }}
             className='text-dark-brown flex flex-col gap-4'
           />
 
@@ -114,6 +97,7 @@ const ProductDetails = ({
             </div>
             <img
               src={suggestedProduct.featuredImage?.url || ''}
+              className='max-h-7/12 object-cover'
               alt='Suggested product image'
             />
             <p className='text-dark-brown text-xl font-bold'>
