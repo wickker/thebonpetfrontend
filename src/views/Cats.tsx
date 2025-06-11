@@ -1,4 +1,5 @@
-import { ProductPage } from '@/components/Product'
+import { EmptyDisplay } from '@/components/commons'
+import { ProductPage, ProductSkeleton } from '@/components/Product'
 import useGetDisplayProduct from '@/hooks/useGetDisplayProduct'
 
 const animal = 'cat'
@@ -6,9 +7,16 @@ const animal = 'cat'
 const Cats = () => {
   const { product, isLoading, suggestedProduct } = useGetDisplayProduct(animal)
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <ProductSkeleton />
 
-  if (!product || !suggestedProduct) return null
+  if (!product || !suggestedProduct) {
+    return (
+      <EmptyDisplay
+        title={`No ${animal} products found`}
+        description='Please try again later'
+      />
+    )
+  }
 
   return (
     <div

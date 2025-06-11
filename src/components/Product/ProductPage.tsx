@@ -153,11 +153,11 @@ const ProductPage = ({
         </div>
 
         <div className='order-1 flex flex-col gap-4 lg:order-2'>
-          <div className='group grid w-full place-items-center rounded-xl border border-[#CCBC9E] bg-[#F4ECD3] p-4 lg:h-[400px] lg:w-[450px]'>
+          <div className='group grid w-full place-items-center rounded-xl border border-[#CCBC9E] bg-[#F4ECD3] p-4 lg:min-h-[400px] lg:w-[450px]'>
             <img
               alt='Main product image'
               src={product.featuredImage?.url || ''}
-              className='w-full transition-all duration-300 group-hover:scale-102'
+              className='max-h-full object-contain transition-all duration-300 group-hover:scale-102'
             />
           </div>
 
