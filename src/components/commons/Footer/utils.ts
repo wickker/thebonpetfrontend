@@ -8,7 +8,7 @@ export const FOOTER_ITEMS = {
     },
     {
       label: 'FAQs',
-      link: `${ROUTES.HOME}#faqs`,
+      link: ROUTES.FAQS,
     },
     {
       label: 'Blog',

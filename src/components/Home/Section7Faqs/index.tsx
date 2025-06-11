@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { MdOutlineArticle } from 'react-icons/md'
 import useBlog from '@/hooks/queries/useBlog'
 import { ROUTES } from '@/utils/constants'
@@ -9,6 +10,7 @@ const Section7Faqs = () => {
   const { useGetArticlesQuery } = useBlog()
   const getArticles = useGetArticlesQuery()
   const article = getArticles.data?.slice().reverse()?.[0]?.node
+  const navigate = useNavigate()
 
   return (
     <div
@@ -94,6 +96,7 @@ const Section7Faqs = () => {
                   background:
                     'linear-gradient(180deg, #FFF3DF 0%, #E9D9BD 100%)',
                 }}
+                onClick={() => navigate(ROUTES.DOGS)}
               >
                 <img src='/icons/dog.png' alt='Dog icon' className='h-7 w-7' />
                 Meals for Dogs
@@ -105,6 +108,7 @@ const Section7Faqs = () => {
                   background:
                     'linear-gradient(180deg, #FFF3DF 0%, #E9D9BD 100%)',
                 }}
+                onClick={() => navigate(ROUTES.CATS)}
               >
                 <img src='/icons/cat.png' alt='Cat icon' className='h-7 w-7' />
                 Meals for Cats

@@ -1,6 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/commons'
+import { ROUTES } from '@/utils/constants'
 
 const Section1Hero = () => {
+  const navigate = useNavigate()
+
   return (
     <div className='relative h-fit lg:p-14'>
       <div
@@ -19,8 +23,7 @@ const Section1Hero = () => {
           globally-sourced ingredients
         </h1>
 
-        <Button.Cta className='mb-8'>
-          {/* TODO: */}
+        <Button.Cta className='mb-8' onClick={() => navigate(ROUTES.FAQS)}>
           Learn More
         </Button.Cta>
       </div>
