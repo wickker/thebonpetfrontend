@@ -187,7 +187,11 @@ const ProductPage = ({
         </div>
       </div>
 
-      <ProductDetails suggestedProduct={suggestedProduct} product={product} />
+      <ProductDetails
+        suggestedProduct={suggestedProduct}
+        product={product}
+        animal={animal}
+      />
     </>
   )
 }
