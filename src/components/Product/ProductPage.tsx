@@ -161,7 +161,7 @@ const ProductPage = ({
             />
           </div>
 
-          <div className='order-1 flex w-full items-center justify-between gap-x-4'>
+          <div className='order-1 flex w-full items-center justify-between gap-x-4 lg:w-[450px]'>
             <div className='grid aspect-square w-1/3 place-items-center rounded-xl border border-[#CCBC9E] bg-[#F4ECD3] p-4 lg:h-[128px] lg:w-[128px]'>
               <img
                 alt='Product image'
