@@ -1,8 +1,8 @@
 import { Product } from '@shopify/hydrogen-react/storefront-api-types'
 import { BiDish } from 'react-icons/bi'
-import { FaChevronDown } from 'react-icons/fa6'
 import { IoFishOutline } from 'react-icons/io5'
 import { PiCarrot } from 'react-icons/pi'
+import Accordian from './Accordian'
 
 type ProductDetailsProps = {
   product: Product
@@ -17,6 +17,7 @@ const ProductDetails = ({ product, suggestedProduct }: ProductDetailsProps) => {
   const ingredients = splits3?.[0] || ''
 
   console.log(suggestedProduct)
+  // console.log(ingredients)
 
   const accordianItems = [
     {
@@ -55,22 +56,12 @@ const ProductDetails = ({ product, suggestedProduct }: ProductDetailsProps) => {
           <div className='mt-4 h-[1px] w-full bg-[#CCBC9E]' />
 
           {accordianItems.map((item) => (
-            <>
-              <div
-                key={item.title}
-                className='text-dark-brown grid grid-cols-[auto_1fr_auto] items-center gap-x-2 py-4'
-              >
-                <item.icon className='h-6 w-6' />
-                <h3 className='text-dark-brown text-xl font-bold'>
-                  {item.title}
-                </h3>
-                <button>
-                  <FaChevronDown className='h-4 w-4' />
-                </button>
-              </div>
-
-              <div className='h-[1px] w-full bg-[#CCBC9E]' />
-            </>
+            <Accordian
+              key={item.title}
+              title={item.title}
+              Icon={item.icon}
+              content={item.content}
+            />
           ))}
         </div>
       </div>
