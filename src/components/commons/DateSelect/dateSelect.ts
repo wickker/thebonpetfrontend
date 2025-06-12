@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+import Config from '@/configs'
 
 type CellInfo = {
   dateTime: DateTime
@@ -7,6 +8,7 @@ type CellInfo = {
   isMonth: boolean
   isAfterOneWeek: boolean
   isSunday: boolean
+  isPublicHoliday: boolean
 }
 
 type MonthDayCounter = {
@@ -63,6 +65,11 @@ export class DatePickerHandler {
     }
   }
 
+  checkPublicHoliday(date: DateTime) {
+    const publicHolidays = Config.VITE_PUBLIC_HOLIDAYS.split(',')
+    return publicHolidays.includes(date.toFormat(DATE_SELECT_FORMAT))
+  }
+
   getCellDateTime() {
     let cellDateTime: DateTime
 
@@ -113,6 +120,7 @@ export class DatePickerHandler {
           isMonth: cellDateTime.month === this.month,
           isSunday: cellDateTime.weekday === 7,
           isAfterOneWeek: cellDateTime >= this.today.plus({ days: 7 }),
+          isPublicHoliday: this.checkPublicHoliday(cellDateTime),
         })
       }
     }

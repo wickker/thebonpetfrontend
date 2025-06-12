@@ -38,7 +38,9 @@ const CalendarCells = ({
             cell.isToday && 'underline',
             cell.isSelected && 'bg-green rounded-full font-bold text-white'
           )}
-          disabled={cell.isSunday || !cell.isAfterOneWeek}
+          disabled={
+            cell.isSunday || !cell.isAfterOneWeek || cell.isPublicHoliday
+          }
         >
           {cell.dateTime.day}
         </button>
