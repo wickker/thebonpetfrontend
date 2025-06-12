@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_SHOPIFY_STOREFRONT_API_PUBLIC_TOKEN: string
   readonly VITE_SHOPIFY_SHOP_URL: string
   readonly VITE_SHOPIFY_STOREFRONT_API_VERSION: string
+  readonly VITE_PUBLIC_HOLIDAYS: string
 }
 
 interface ImportMeta {

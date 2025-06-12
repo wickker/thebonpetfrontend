@@ -131,11 +131,7 @@ export const composeAttributes = (
   ]
 }
 
-export const TIME_SLOTS = [
-  '9:00 AM - 12:00 PM',
-  '3:00 PM - 6:00 PM',
-  '6:00 PM - 10:00 PM',
-] as const
+export const TIME_SLOTS = ['9:00 AM - 10:00 PM'] as const
 
 export const fixVariantName = (variantName: string) => {
   if (parseInt(variantName) && !variantName.includes('g')) {
