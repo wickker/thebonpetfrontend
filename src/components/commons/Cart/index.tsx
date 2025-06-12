@@ -19,10 +19,8 @@ import { DATE_SELECT_FORMAT } from '@/components/commons/DateSelect/dateSelect'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions, useIsCartOpen } from '@/store/useCartStore'
-import {
-  getCartJsonFromLocalStorage,
-  getTokenJsonFromLocalStorage,
-} from '@/utils/functions'
+import { useLocalStorageCartJson } from '@/store/useLocalStorageCartStore'
+import { getTokenJsonFromLocalStorage } from '@/utils/functions'
 import CheckoutNotice from './CheckoutNotice'
 import Skeleton from './Skeleton'
 import Tile from './Tile'
@@ -37,14 +35,13 @@ const Cart = () => {
   const { toast } = useToastContext()
 
   // cart
-  const cart = getCartJsonFromLocalStorage()
+  const cart = useLocalStorageCartJson()
   const isCartOpen = useIsCartOpen()
   const { closeCart } = useCartActions()
   const { useGetCartQuery } = useCart()
-  const getCart = useGetCartQuery(cart?.cartId)
+  const getCart = useGetCartQuery()
   const hasCart =
     getCart.data &&
-    getCart.isSuccess &&
     getCart.data.lines.edges.length > 0 &&
     DateTime.now() < DateTime.fromISO(cart?.expiresAt || '')
 

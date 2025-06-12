@@ -1,17 +1,17 @@
+import { DateTime } from 'luxon'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions } from '@/store/useCartStore'
-import { getCartJsonFromLocalStorage } from '@/utils/functions'
+import { useLocalStorageCartJson } from '@/store/useLocalStorageCartStore'
 
 const CartButton = () => {
   const { openCart } = useCartActions()
-  const cart = getCartJsonFromLocalStorage()
+  const cart = useLocalStorageCartJson()
   const { useGetCartQuery } = useCart()
-  const getCart = useGetCartQuery(cart?.cartId)
+  const getCart = useGetCartQuery()
   const showCartCount =
-    cart &&
     getCart.data &&
-    getCart.isSuccess &&
-    getCart.data.lines.edges.length > 0
+    getCart.data.lines.edges.length > 0 &&
+    DateTime.now() < DateTime.fromISO(cart?.expiresAt || '')
 
   return (
     <button className='relative cursor-pointer' onClick={openCart}>
