@@ -8,8 +8,10 @@ import { DateTime } from 'luxon'
 import { useToastContext } from '@/contexts/useToastContext/context'
 import useCart from '@/hooks/queries/useCart'
 import { useCartActions } from '@/store/useCartStore'
-import { LOCAL_STORAGE_KEYS } from '@/utils/constants'
-import { getCartJsonFromLocalStorage } from '@/utils/functions'
+import {
+  useLocalStorageCartJson,
+  useSetLocalStorageCart,
+} from '@/store/useLocalStorageCartStore'
 
 export const AddToCartButton = {
   TRIAL_PACK: 'Trial Pack',
@@ -26,15 +28,15 @@ const useAddItemToCart = (successCb?: () => void) => {
   const queryClient = useQueryClient()
   const { toast } = useToastContext()
   const { openCart } = useCartActions()
-  const cart = getCartJsonFromLocalStorage()
+  const cart = useLocalStorageCartJson()
+  const setCart = useSetLocalStorageCart()
   const { useGetCartQuery, useAddItemToCartMutation, useCreateCartMutation } =
     useCart()
-  const getCart = useGetCartQuery(cart?.cartId)
+  const getCart = useGetCartQuery()
   const addToCart = useAddItemToCartMutation(handleAddToCartSuccess)
   const createCart = useCreateCartMutation(handleCreateCartSuccess)
   const addToCartButtonRef = useRef<AddToCartButton | ''>('')
   const cartExistsWithItems =
-    getCart.isSuccess &&
     getCart.data &&
     getCart.data.lines.edges.length > 0 &&
     DateTime.now() < DateTime.fromISO(cart?.expiresAt || '')
@@ -70,8 +72,7 @@ const useAddItemToCart = (successCb?: () => void) => {
 
     if (data.cart?.id) {
       const expiresAt = DateTime.now().plus({ days: 10 }).toISO()
-      localStorage.setItem(
-        LOCAL_STORAGE_KEYS.CART,
+      setCart(
         JSON.stringify({
           cartId: data.cart.id,
           expiresAt,
