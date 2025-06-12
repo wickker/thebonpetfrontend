@@ -35,3 +35,5 @@ export const DESKTOP_NAVIGATION_ITEMS = [
     route: ROUTES.FAQS,
   },
 ] as const
+
+export const MOBILE_NAVIGATION_ITEMS = DESKTOP_NAVIGATION_ITEMS
