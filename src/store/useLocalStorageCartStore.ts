@@ -29,8 +29,8 @@ export const useSetCart = () =>
 
 // Derived hooks
 export const useLocalStorageCartJson = () => {
-  const cart = useLocalStorageCart()
-  return cart ? jsonSafeParse<CartStorage>(cart) : undefined
+  const cartStr = useLocalStorageCart()
+  return cartStr ? jsonSafeParse<CartStorage>(cartStr) : undefined
 }
 
 export default useLocalStorageCartStore
