@@ -24,7 +24,7 @@ const useLocalStorageCartStore = create(
 // Default hooks
 const useLocalStorageCart = () =>
   useLocalStorageCartStore((state) => state.cart)
-export const useSetCart = () =>
+export const useSetLocalStorageCart = () =>
   useLocalStorageCartStore((state) => state.setCart)
 
 // Derived hooks

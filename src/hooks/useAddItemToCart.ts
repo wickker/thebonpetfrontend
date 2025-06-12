@@ -10,7 +10,7 @@ import useCart from '@/hooks/queries/useCart'
 import { useCartActions } from '@/store/useCartStore'
 import {
   useLocalStorageCartJson,
-  useSetCart,
+  useSetLocalStorageCart,
 } from '@/store/useLocalStorageCartStore'
 
 export const AddToCartButton = {
@@ -29,7 +29,7 @@ const useAddItemToCart = (successCb?: () => void) => {
   const { toast } = useToastContext()
   const { openCart } = useCartActions()
   const cart = useLocalStorageCartJson()
-  const setCart = useSetCart()
+  const setCart = useSetLocalStorageCart()
   const { useGetCartQuery, useAddItemToCartMutation, useCreateCartMutation } =
     useCart()
   const getCart = useGetCartQuery()
